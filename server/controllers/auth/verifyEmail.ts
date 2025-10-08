@@ -3,7 +3,8 @@ import { Request, Response } from "express"
 
 export const verifyEmailController = async (req: Request, res: Response) => {
 
-    const { userId, otp } = req.body
+    const { userId } = res.locals
+    const { otp } = req.body
 
     if (!userId || !otp){
         return res.status(400).json({success: false, message: 'Faltam detalhes...'})

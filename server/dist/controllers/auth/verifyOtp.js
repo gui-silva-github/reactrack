@@ -3,7 +3,7 @@ import transporter from "../../templates/nodemailer.js";
 import { EMAIL_VERIFY_TEMPLATE } from "../../templates/email.js";
 export const sendVerifyOtpController = async (req, res) => {
     try {
-        const { userId } = req.body;
+        const { userId } = res.locals;
         const user = await userModel.findById(userId);
         if (!user) {
             return res.status(400).json({ success: false, message: 'Usuário não encontrado!' });

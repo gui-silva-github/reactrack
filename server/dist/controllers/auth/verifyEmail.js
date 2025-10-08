@@ -1,6 +1,7 @@
 import userModel from "../../models/user.js";
 export const verifyEmailController = async (req, res) => {
-    const { userId, otp } = req.body;
+    const { userId } = res.locals;
+    const { otp } = req.body;
     if (!userId || !otp) {
         return res.status(400).json({ success: false, message: 'Faltam detalhes...' });
     }

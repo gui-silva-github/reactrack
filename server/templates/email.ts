@@ -90,7 +90,7 @@ export const EMAIL_VERIFY_TEMPLATE = `
                       </tr>
                       <tr>
                         <td style="padding: 0 0 10px; font-size: 14px; line-height: 150%;">
-                          Este OTP é válido até 24 hours.
+                          Este OTP é válido até 24 horas.
                         </td>
                       </tr>
                     </tbody>

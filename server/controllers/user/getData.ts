@@ -4,7 +4,7 @@ import userModel from "../../models/user"
 export const getDataController = async (req: Request, res: Response) => {
 
     try {
-        const { userId } = req.body
+        const { userId } = res.locals as any
 
         const user = await userModel.findById(userId)
 

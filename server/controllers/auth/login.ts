@@ -16,13 +16,13 @@ export const loginController = async (req: Request, res: Response) => {
         const user = await userModel.findOne({email})
 
         if (!user){
-            return res.status(400).json({success: false, message: 'Email inválido!'})
+            return res.status(400).json({success: false, message: 'Usuário e/ou senha estão incorretos!'})
         }
 
         const isMatch = await bcrypt.compare(password, user.password)
 
         if (!isMatch){
-            return res.status(400).json({success: false, message: 'Senha inválida!'})
+            return res.status(400).json({success: false, message: 'Usuário e/ou senha estão incorretos!'})
         }
 
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET as string, {expiresIn: '7d'})

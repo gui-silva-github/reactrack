@@ -7,7 +7,7 @@ export const sendVerifyOtpController = async (req: Request, res: Response) => {
 
     try{
 
-        const { userId } = req.body
+        const { userId } = res.locals
 
         const user = await userModel.findById(userId);
 
