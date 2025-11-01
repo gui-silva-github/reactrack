@@ -7,7 +7,6 @@ import authRouter from "./routes/auth"
 import userRouter from "./routes/user"
 import errorRouter from "./routes/error"
 import homeRouter from "./routes/home"
-import fitRouter from "./routes/fit"
 import path from "path"
 import { fileURLToPath } from "url"
 
