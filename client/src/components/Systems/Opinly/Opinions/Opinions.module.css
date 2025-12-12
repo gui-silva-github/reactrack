@@ -1,0 +1,33 @@
+.opinions ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.opinions li {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 4px;
+    background-color: #e9decf;
+}
+
+.opinions h3 {
+    font-family: 'Rubik', sans-serif;
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.opinions header p {
+    margin: 0;
+    color: #938c83;
+    font-size: 0.9rem;
+}
+
+.none{
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.opinions p {
+    font-size: 1.5rem;
+}

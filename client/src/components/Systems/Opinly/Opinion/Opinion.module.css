@@ -1,0 +1,7 @@
+.votes {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0;
+    align-items: center;
+    justify-content: flex-end;
+}

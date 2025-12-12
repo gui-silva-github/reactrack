@@ -1,0 +1,14 @@
+.main-header {
+    text-align: center;
+    background-color: #2e2923;
+    color: #d2cdc6;
+    padding: 1.5rem;
+}
+
+.h1{
+    font-size: 2rem;
+}
+
+.p{
+    color: white;
+}
