@@ -132,6 +132,75 @@ The `tsconfig.json` specifies modern standards for the backend:
 
 <img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/home-client.png" />
 
+<hr>
+
+## Fit System
+
+### Home
+
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/fit/home.png" />
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/fit/home2.png" />
+
+### Search
+
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/fit/search.png" />
+
+### Horizontal Scroll
+
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/fit/horizontal.png" />
+
+### Muscle Wiki
+
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/fit/muscleWiki.png" />
+
+### Exercises
+
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/fit/exercises.png" />
+
+### Exercise
+
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/fit/exercise.png" />
+
+### Same Muscles
+
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/fit/sameMuscles.png" />
+
+### Same Equipment
+
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/fit/sameEquipment.png" />
+
+<hr>
+
+## Crypto System
+
+### Home
+
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/crypto/home.png" />
+
+### 10 Coins
+
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/crypto/top10.png" />
+
+### Coin Details
+
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/crypto/coinDetails.png" />
+
+<hr>
+
+## Opinly System
+
+### Home
+
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/opinly/home.png" />
+
+### Server JSON
+
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/opinly/server.png" />
+
+### Coin Details
+
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/opinly/opinions.png" />
+
 
 
 
