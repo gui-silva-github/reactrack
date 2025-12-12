@@ -1,5 +1,5 @@
 export interface HeadingProps {
-    className: string;
+    className?: string;
     text: string;
 }
 

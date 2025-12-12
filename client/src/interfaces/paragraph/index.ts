@@ -1,4 +1,4 @@
 export interface IParagraphProps {
-    className: string;
+    className?: string;
     text: string;
 }
