@@ -1,4 +1,4 @@
-# 🚀 reactrack
+<img width="628" height="258" alt="image" src="https://github.com/user-attachments/assets/a0ea4da0-aeb6-4826-a0aa-7c0428d643d0" /># 🚀 reactrack
 
 `reactrack` is a full-stack web application built using the **MERN** (MongoDB, Express, React, Node.js) stack, designed to be a starting point for **robust, scalable systems**. This project emphasizes a structured API layer, secure user authentication, and comprehensive documentation.
 
@@ -77,6 +77,18 @@ This project uses **TypeScript** and is compiled to the `dist` directory. The `p
 2.  **Access the API Documentation:**
     The API documentation, similar to a Swagger interface, is available via the home route defined in `routes/home.ts`: `http://localhost:4000`.
 
+3.  **Start the client:**
+    ```bash
+    cd client
+    npm run dev
+    ```
+
+4.  **Run 'all' projects that uses JSON:**
+    ```bash
+    cd server
+    npm run all
+    ```
+    
 ---
 
 ## 💻 Detalhes da API do Backend
@@ -134,6 +146,10 @@ The `tsconfig.json` specifies modern standards for the backend:
 
 <hr>
 
+## JSON Systems
+
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/json-systems.png" />
+
 ## Fit System
 
 ### Home
@@ -189,15 +205,15 @@ The `tsconfig.json` specifies modern standards for the backend:
 
 ## Opinly System
 
-### Home
-
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/opinly/home.png" />
-
 ### Server JSON
 
 <img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/opinly/server.png" />
 
-### Coin Details
+### Home
+
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/opinly/home.png" />
+
+### Opinions
 
 <img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/opinly/opinions.png" />
 
@@ -237,33 +253,53 @@ The `tsconfig.json` specifies modern standards for the backend:
 
 ## Talkive System
 
-### Home
+## SignUp
 
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/home.png" />
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/talkive/signup.png"/>
 
-### Upcoming Events
+## Login
 
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/events.png" />
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/talkive/login.png"/>
 
-### Find Events
+## Profile Update
 
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/find.png" />
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/talkive/profile.png"/>
 
-### New Event
+## Profile Completed
 
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/new.png" />
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/talkive/profileU.png" />
 
-### Event Details
+## Chat
 
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/details.png" />
+<img src="https://github.com/gui-silva-github/talknet/blob/main/public/chat.png"/>
 
-### Edit Event
+## Search
 
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/edit.png" />
+<img src="https://github.com/gui-silva-github/talknet/blob/main/public/search.png"/>
 
-### Delete Event
+## Friends
 
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/delete.png" />
+<img src="https://github.com/gui-silva-github/talknet/blob/main/public/friends.png"/>
+
+## ChatBox
+
+<img src="https://github.com/gui-silva-github/talknet/blob/main/public/chatdata.png"/>
+
+## Message
+
+<img src="https://github.com/gui-silva-github/talknet/blob/main/public/messages.png"/>
+
+## Receiving Message
+
+<img src="https://github.com/gui-silva-github/talknet/blob/main/public/messagesr.png"/>
+
+## Online
+
+<img src="https://github.com/gui-silva-github/talknet/blob/main/public/messagesrs.png"/>
+
+## Message Not Seen
+
+<img src="https://github.com/gui-silva-github/talknet/blob/main/public/receivemessages.png"/>
 
 <hr>
 
@@ -271,31 +307,19 @@ The `tsconfig.json` specifies modern standards for the backend:
 
 ### Home
 
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/home.png" />
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/movies/home.png" />
 
-### Upcoming Events
+### Search
 
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/events.png" />
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/movies/search.png" />
 
-### Find Events
+### Movie Details
 
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/find.png" />
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/movies/details.png" />
 
-### New Event
+<br>
 
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/new.png" />
-
-### Event Details
-
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/details.png" />
-
-### Edit Event
-
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/edit.png" />
-
-### Delete Event
-
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/delete.png" />
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/movies/details2.png" />
 
 <hr>
 
@@ -303,31 +327,11 @@ The `tsconfig.json` specifies modern standards for the backend:
 
 ### Home
 
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/home.png" />
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/investments/home.png" />
 
-### Upcoming Events
+### Table Investments
 
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/events.png" />
-
-### Find Events
-
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/find.png" />
-
-### New Event
-
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/new.png" />
-
-### Event Details
-
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/details.png" />
-
-### Edit Event
-
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/edit.png" />
-
-### Delete Event
-
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/delete.png" />
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/investments/table.png" />
 
 <hr>
 
@@ -335,28 +339,10 @@ The `tsconfig.json` specifies modern standards for the backend:
 
 ### Home
 
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/home.png" />
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/projects/home.png" />
 
-### Upcoming Events
+### Search
 
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/events.png" />
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/projects/search.png" />
 
-### Find Events
 
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/find.png" />
-
-### New Event
-
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/new.png" />
-
-### Event Details
-
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/details.png" />
-
-### Edit Event
-
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/edit.png" />
-
-### Delete Event
-
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/systems/convene/delete.png" />
