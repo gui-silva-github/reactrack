@@ -2,7 +2,7 @@
   "opinions": [
     {
       "id": "85bfdcd4-018d-4181-8420-697e76f23bc5",
-      "votes": 6,
+      "votes": 8,
       "userName": "Guilherme Silva",
       "title": "A primeira opinião",
       "body": "Estou construindo esse sistema, mas ele pode ser bem melhorado, como ter 'pageIndex' e 'pageSize' 🚀"

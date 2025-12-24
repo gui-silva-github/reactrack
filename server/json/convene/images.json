@@ -1,0 +1,62 @@
+[
+    {
+        "path": "church.jpg",
+        "caption": "Uma igreja."
+    },
+    {
+        "path": "party.jpg",
+        "caption": "Uma festa."
+    },
+    {
+        "path": "wedding.jpg",
+        "caption": "Um casamento."
+    },
+    {
+        "path": "graduation.jpg",
+        "caption": "Uma formatura."
+    },
+    {
+        "path": "meeting-networking.jpg",
+        "caption": "Um grupo de pessoas em reunião e networking."
+    },
+    {
+        "path": "laptop-on-desk.jpg",
+        "caption": "Um laptop sobre a mesa."
+    },
+    {
+        "path": "women-meeting.jpg",
+        "caption": "Um grupo de mulheres conversando."
+    },
+    {
+        "path": "gym.jpg",
+        "caption": "Treino na academia."
+    },
+    {
+        "path": "run.jpg",
+        "caption": "Corrida esportiva."
+    },
+    {
+        "path": "park.jpg",
+        "caption": "Um parque com lago."
+    },
+    {
+        "path": "market.jpg",
+        "caption": "Um mercado."
+    },
+    {
+        "path": "buzzing-city.jpg",
+        "caption": "Pessoas caminhando em uma cidade movimentada à noite."
+    },
+    {
+        "path": "family.jpg",
+        "caption": "Uma família."
+    },
+    {
+        "path": "barber.jpg",
+        "caption": "Corte de cabelo."
+    },
+    {
+        "path": "show.png",
+        "caption": "Show de um cantor."
+    }
+]
