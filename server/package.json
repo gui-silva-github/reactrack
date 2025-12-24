@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon dist/server.js"
+    "server": "nodemon dist/server.js",
+    "all": "concurrently \"npm run opinly\" \"npm run convene\"",
+    "opinly": "nodemon systems/opinly/app.js",
+    "convene": "nodemon systems/convene/app.js"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +31,7 @@
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/nodemailer": "^7.0.1",
+    "concurrently": "^9.2.1",
     "typescript": "^5.9.2"
   }
 }
