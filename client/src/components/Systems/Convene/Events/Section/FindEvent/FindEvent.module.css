@@ -1,0 +1,36 @@
+.input {
+    font: inherit;
+    padding: 0.5rem 1rem;
+    border-radius: 4px 0 0 4px;
+    border: none;
+    background: white;
+    color: #1d161a;
+}
+
+.button {
+    font: inherit;
+    padding: 0.5rem 1rem;
+    border-radius: 0 4px 4px 0;
+    border: none;
+    background: #b6cad5;
+    color: #1d161a;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.margin{
+    margin-top: -5rem;
+}
+
+.h2{
+    margin-bottom: 1rem;
+}
+
+.find{
+    margin-bottom: 0rem !important;
+}
+
+.p{
+    margin-top: 1rem;
+    font-size: 1em;
+}
