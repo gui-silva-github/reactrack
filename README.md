@@ -1,4 +1,4 @@
-<img width="628" height="258" alt="image" src="https://github.com/user-attachments/assets/a0ea4da0-aeb6-4826-a0aa-7c0428d643d0" /># 🚀 reactrack
+# 🚀 reactrack
 
 `reactrack` is a full-stack web application built using the **MERN** (MongoDB, Express, React, Node.js) stack, designed to be a starting point for **robust, scalable systems**. This project emphasizes a structured API layer, secure user authentication, and comprehensive documentation.
 
@@ -134,6 +134,12 @@ The `tsconfig.json` specifies modern standards for the backend:
 
 <hr>
 
+## JSON Systems
+
+<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/json-systems.png" />
+
+<hr>
+
 ## Client Frontend
 
 <img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/npm-run-dev.png" />
@@ -145,10 +151,6 @@ The `tsconfig.json` specifies modern standards for the backend:
 <img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/home-client.png" />
 
 <hr>
-
-## JSON Systems
-
-<img src="https://github.com/gui-silva-github/reactrack/blob/main/ui-ux/json-systems.png" />
 
 ## Fit System
 
