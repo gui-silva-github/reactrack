@@ -9,17 +9,14 @@ import Div from "../Html/Div/Div";
 import Image from "../Html/Image/Image";
 
 const navLinks = [
-    { name: "TalkNet", path: "/systems/talknet" },
-    { name: "Viagens", path: "/systems/wanderwise" },
+    { name: "Talkive", path: "/systems/talkive" },
     { name: "Opiniões", path: "/systems/opinly" },
     { name: "Eventos", path: "/systems/convene" },
     { name: "Filmes", path: "/systems/movies" },
     { name: "Investimentos", path: "/systems/investments" },
     { name: "Projetos", path: "/systems/projects" },
-    { name: "Orçamentos", path: "/systems/budget" },
     { name: "Academia", path: "/systems/fit" },
     { name: "Criptomoedas", path: "/systems/crypto" },
-    { name: "Ajuda", path: "/help" },
 ];
 
 const NavbarSystems: React.FC = () => {
