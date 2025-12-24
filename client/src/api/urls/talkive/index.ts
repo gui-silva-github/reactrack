@@ -1,0 +1,1 @@
+export const redirectTalkiveUrl: string = '/systems/talkive'
