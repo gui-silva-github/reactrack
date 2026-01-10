@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename)
 const homeRouter = express.Router()
 
 homeRouter.get('/', (req: Request, res: Response, next: NextFunction) => {
-    res.status(404).sendFile(path.join(__dirname, '../', 'views', 'home', 'index.html'))
+    res.status(200).sendFile(path.join(__dirname, '../', 'views', 'home', 'index.html'))
 })
 
 export default homeRouter
