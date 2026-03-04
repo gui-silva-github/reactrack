@@ -1,6 +1,8 @@
 {
   "common": {
     "logo": "Logo",
+    "ingles": "Use in English",
+    "portugues": "Use in Portuguese",
     "logoReactRack": "ReactRack Logo",
     "reactRack": "ReactRack",
     "logout": "Logout",

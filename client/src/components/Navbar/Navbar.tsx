@@ -19,8 +19,11 @@ import ThemeToggle from "../ThemeToggle/ThemeToggle";
 const Navbar: React.FC = () => {
 
     const location = useLocation()
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
     const navigate = useNavigateSPA()
+
+    const isEn = i18n.language === 'en'
+    const toggleLang = () => i18n.changeLanguage(isEn ? 'pt' : 'en')
 
     const { backendUrl } = useGetBackendUrl()
 
@@ -69,27 +72,38 @@ const Navbar: React.FC = () => {
                 <Image src={icon} alt={t('common.logo')} className="w-28 sm:w-32 border border-gray-500 dark:border-gray-400 rounded-full h-32" />
             </div>
             <div className="flex items-center gap-2">
+                <button
+                    type="button"
+                    onClick={toggleLang}
+                    className="text-sm font-medium px-3 py-2 rounded-full px-3 py-2 transition duration-200 text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 min-w-[2.5rem] border border-gray-500 dark:border-gray-400"
+                    title={isEn ? t('common.portugues') : t('common.ingles')}
+                    aria-label={isEn ? t('common.portugues') : t('common.ingles')}
+                >
+                    {isEn ? 'PT' : 'EN'}
+                </button>
                 <ThemeToggle />
             {userData ? (
-                <Div className="w-10 h-10 flex justify-center items-center rounded-full bg-black dark:bg-gray-700 text-white relative group">
-                    <Div>{userData.name[0].toUpperCase()}</Div>
-                    <Div className="absolute hidden group-hover:block top-full right-0 z-10 mt-2 w-40 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 overflow-hidden">
-                        <ul className="py-1 list-none m-0">
-                            {!userData.isAccountVerified ? (
+                <>
+                    <Div className="w-10 h-10 flex justify-center items-center rounded-full bg-black dark:bg-gray-700 text-white relative group">
+                        <Div>{userData.name[0].toUpperCase()}</Div>
+                        <Div className="absolute hidden group-hover:block top-full right-0 z-10 mt-0.8 w-40 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 overflow-hidden">
+                            <ul className="py-1 list-none m-0">
+                                {!userData.isAccountVerified ? (
+                                    <li>
+                                        <button type="button" onClick={sendVerificationOtp} className="w-full text-left py-2 px-3 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                                            {t('common.verifyEmail')}
+                                        </button>
+                                    </li>
+                                ) : null}
                                 <li>
-                                    <button type="button" onClick={sendVerificationOtp} className="w-full text-left py-2 px-3 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                                        {t('common.verifyEmail')}
+                                    <button type="button" onClick={logout} className="w-full text-left py-2 px-3 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                                        {t('common.logout')}
                                     </button>
                                 </li>
-                            ) : null}
-                            <li>
-                                <button type="button" onClick={logout} className="w-full text-left py-2 px-3 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                                    {t('common.logout')}
-                                </button>
-                            </li>
-                        </ul>
+                            </ul>
+                        </Div>
                     </Div>
-                </Div>
+                </>
             ) : (
                 <>
                     {location.pathname === '/' &&  (

@@ -24,8 +24,11 @@ const navLinkKeys: { key: string; path: string }[] = [
 const NavbarSystems: React.FC = () => {
 
     const location = useLocation()
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
     const navigate = useNavigateSPA()
+
+    const isEn = i18n.language === 'en'
+    const toggleLang = () => i18n.changeLanguage(isEn ? 'pt' : 'en')
 
     const context = useContext(AppContext)
 
@@ -57,6 +60,15 @@ const NavbarSystems: React.FC = () => {
                 <span className="text-xl font-bold text-gray-800 dark:text-gray-50 hidden sm:block">{t('common.reactRack')}</span>
             </div>
             <div className="hidden md:flex items-center space-x-1">
+                <button
+                    type="button"
+                    onClick={toggleLang}
+                    className="text-sm font-medium px-3 py-2 rounded-md transition duration-200 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 min-w-[2.5rem]"
+                    title={isEn ? t('common.portugues') : t('common.ingles')}
+                    aria-label={isEn ? t('common.portugues') : t('common.ingles')}
+                >
+                    {isEn ? 'PT' : 'EN'}
+                </button>
                 <ThemeToggle />
                 {filteredNavLinks.map((link) => (
                     <a
