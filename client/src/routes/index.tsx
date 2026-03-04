@@ -6,6 +6,7 @@ import Signup from "../pages/Auth/Signup"
 import EmailVerify from "../pages/Auth/EmailVerify"
 import ResetPassword from "../pages/Auth/ResetPassword"
 import SystemsLayout from "../pages/Systems/SystemsLayout"
+import Dashboard from "../pages/Systems/Dashboard/Dashboard"
 import Fit from "../pages/Fit/Fit";
 import ExerciseDetail from "../pages/Fit/ExerciseDetail";
 import CoinProvider from "../pages/Crypto/Provider/CoinProvider";
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
             {
                 path: 'systems', element: <SystemsLayout />,
                 children: [
-                    // { index: true, element: <Dashboard /> },
+                    { index: true, element: <Dashboard /> },
                     {
                         path: 'fit', children: [
                             { index: true, element: <Fit /> },

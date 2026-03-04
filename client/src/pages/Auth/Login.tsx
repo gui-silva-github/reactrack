@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import useGetBackendUrl from "../../hooks/backend/useGetBackendUrl";
 import useLoginOrSignup from "../../hooks/states/useLoginOrSignup";
@@ -24,6 +25,7 @@ import Navbar from "../../components/Navbar/Navbar";
 const Login: React.FC = () => {
 
     const navigate = useNavigate()
+    const { t } = useTranslation()
 
     const { backendUrl } = useGetBackendUrl()
 
@@ -32,7 +34,7 @@ const Login: React.FC = () => {
     const context = useContext(AppContext)
 
     if (!context) {
-        throw new Error("AppContext não foi provido")
+        throw new Error(t('auth.appContextError'))
     }
 
     const { setIsLoggedIn, getUserData } = context
@@ -44,7 +46,7 @@ const Login: React.FC = () => {
             const data = await loginUser(backendUrl, { email, password })
 
             if (data.success) {
-                toast.success('Usuário logado com sucesso!')
+                toast.success(t('auth.loginSuccess'))
                 setIsLoggedIn(true)
                 getUserData()
                 navigate('/')

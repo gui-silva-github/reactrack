@@ -5,7 +5,7 @@ import Header from "../../components/Header/Header";
 const Home: React.FC = () => {
 
     return (
-        <Div className='flex flex-col items-center justify-center min-h-screen bg-[url("/bg_img.png")] bg-cover bg-center'>
+        <Div className='flex flex-col items-center justify-center min-h-screen bg-[url("/bg_img.png")] bg-cover bg-center bg-gray-50 dark:bg-gray-900'>
             <Navbar />
             <Header />
         </Div>

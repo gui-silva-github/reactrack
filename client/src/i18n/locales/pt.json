@@ -1,0 +1,53 @@
+{
+  "common": {
+    "logo": "Logo",
+    "logoReactRack": "Logo ReactRack",
+    "reactRack": "ReactRack",
+    "logout": "Logout",
+    "verifyEmail": "Verificar email",
+    "login": "Login",
+    "signup": "Cadastro",
+    "headerAlt": "Cabeçalho",
+    "robotAlt": "Robô",
+    "iconAlt": "Ícone",
+    "cadastroAlt": "Cadastro"
+  },
+  "home": {
+    "hello": "Olá {{name}}!",
+    "user": "Usuário",
+    "welcome": "Bem Vindo ao ReactRack",
+    "startUsing": "Vamos começar a usar os sistemas do ReactRack!",
+    "letsGo": "Vamos lá!",
+    "systemsButton": "Sistemas do ReactRack!"
+  },
+  "nav": {
+    "talkive": "Talkive",
+    "opinions": "Opiniões",
+    "events": "Eventos",
+    "movies": "Filmes",
+    "investments": "Investimentos",
+    "projects": "Projetos",
+    "gym": "Academia",
+    "crypto": "Criptomoedas"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Escolha um sistema para começar",
+    "talkive": "Talkive",
+    "opinly": "Opiniões",
+    "convene": "Eventos",
+    "movies": "Filmes",
+    "investments": "Investimentos",
+    "projects": "Projetos",
+    "fit": "Academia",
+    "crypto": "Criptomoedas"
+  },
+  "auth": {
+    "loginSuccess": "Usuário logado com sucesso!",
+    "appContextError": "AppContext não foi provido"
+  },
+  "theme": {
+    "light": "Claro",
+    "dark": "Escuro"
+  }
+}

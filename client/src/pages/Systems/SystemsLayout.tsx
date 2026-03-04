@@ -9,7 +9,7 @@ const SystemsLayout: React.FC = () => {
     const isSystemRoute = location.pathname !== '/systems' && location.pathname.startsWith('/systems/')
 
     return (
-        <Div className={`flex flex-col items-center min-h-screen bg-[url("/bg_img.png")] bg-cover bg-center ${!isSystemRoute ? 'justify-center' : ''}`}>
+        <Div className={`flex flex-col items-center min-h-screen bg-[url("/bg_img.png")] bg-cover bg-center bg-gray-50 ${!isSystemRoute ? 'justify-center' : ''}`}>
             <NavbarSystems />
             {!isSystemRoute && <HeaderSystems />}
             <Div className={isSystemRoute ? 'w-full pt-16' : ''}>
