@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Box, Typography } from "@mui/material"
 
@@ -16,20 +17,20 @@ import type { IBodyPartData } from "../../../../interfaces/systems/fit";
 
 const LeftArrow: React.FC = () => {
     const { scrollPrev } = useContext(VisibilityContext)
-
+    const { t } = useTranslation()
     return (
         <Typography onClick={() => scrollPrev()} className="left-arrow">
-            <Image src={LeftArrowImg} alt="left-arrow" />
+            <Image src={LeftArrowImg} alt={t('fit.leftArrow')} />
         </Typography>
     )
 }
 
 const RightArrow: React.FC = () => {
     const { scrollNext } = useContext(VisibilityContext)
-
+    const { t } = useTranslation()
     return (
         <Typography onClick={() => scrollNext()} className="right-arrow">
-            <Image src={RightArrowImg} alt="right-arrow" />
+            <Image src={RightArrowImg} alt={t('fit.rightArrow')} />
         </Typography>
     )
 }

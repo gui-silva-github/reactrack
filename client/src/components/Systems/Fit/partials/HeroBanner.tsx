@@ -1,4 +1,5 @@
 import { Box, Typography, Button } from "@mui/material"
+import { useTranslation } from "react-i18next"
 
 import Man from "../../../../assets/jpg/fit/man-fit.jpg"
 import Woman from "../../../../assets/jpg/fit/woman-fit.jpg"
@@ -6,6 +7,7 @@ import Woman from "../../../../assets/jpg/fit/woman-fit.jpg"
 import { useState } from "react"
 
 const HeroBanner: React.FC = () => {
+    const { t } = useTranslation()
 
     const [gender, setGender] = useState(false)
 
@@ -23,22 +25,23 @@ const HeroBanner: React.FC = () => {
             p='20px'
         >
             <Typography color="#ff2625" fontWeight='600' fontSize='26px' marginTop='-10rem'>
-                Clube Fitness
+                {t('fit.fitnessClub')}
             </Typography>
             <Typography fontWeight={700}
                 sx={{
-                    fontSize: { lg: '44px', xs: '40px' }
+                    fontSize: { lg: '44px', xs: '40px' },
+                    whiteSpace: 'pre-line'
                 }}
                 mb="23px" mt="30px">
-                Soe, Sorria <br /> e Repita
+                {t('fit.sweatSmileRepeat')}
             </Typography>
             <Typography fontSize="22px" lineHeight="35px" mb={4}>
-                Confira os exercícios mais efetivos
+                {t('fit.checkExercises')}
             </Typography>
             <Button variant='contained' color="error" href="#exercises"
                 sx={{
                     backgroundColor: "#ff2625", padding: "19px"
-                }}>Explorar Exercícios
+                }}>{t('fit.exploreExercises')}
             </Button>
             <Typography
                 fontWeight={600}
@@ -49,9 +52,9 @@ const HeroBanner: React.FC = () => {
                 }}
                 fontSize="200px"
             >
-                Exercite-se
+                {t('fit.exercise')}
             </Typography>
-            <img onClick={handleClick} style={{ borderRadius: "30px", cursor: "pointer" }} src={gender ? Man : Woman} alt="banner"
+            <img onClick={handleClick} style={{ borderRadius: "30px", cursor: "pointer" }} src={gender ? Man : Woman} alt={t('fit.bannerAlt')}
                 className="hero-banner-img" 
             />
         </Box>

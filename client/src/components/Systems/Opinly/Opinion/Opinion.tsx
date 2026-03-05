@@ -1,4 +1,5 @@
 import { useContext, useActionState, useOptimistic } from "react";
+import { useTranslation } from "react-i18next";
 import { OpinionsContext } from "../../../../context/Opinly/OpinlyContext";
 
 import classes from "./Opinion.module.css"
@@ -10,7 +11,7 @@ interface IOpinionProp {
 }
 
 const Opinion: React.FC<IOpinionProp> = ({opinion}) => {
-
+    const { t } = useTranslation()
     const votes = opinion.votes
     const id = opinion.id
 
@@ -47,7 +48,7 @@ const Opinion: React.FC<IOpinionProp> = ({opinion}) => {
         <article>
             <header>
                 <h3>{opinion.title}</h3>
-                <Paragraph text={`Compartilhado por ${opinion.userName}`} />
+                <Paragraph text={t('opinly.sharedBy', { name: opinion.userName })} />
             </header>
             <Paragraph text={opinion.body} />
             <form className={classes.votes}>

@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react";
+import { useTranslation } from "react-i18next";
 
 import { useParams } from "react-router-dom";
 
@@ -21,10 +22,11 @@ const ExerciseDetail: React.FC = () => {
     const [equipmentExercises, setEquipmentExercises] = useState<IExercisesData[]>([])
 
     const { id } = useParams()
+    const { t } = useTranslation()
     
     const context = useContext(AppContext)
     if (!context) {
-        throw new Error("AppContext não foi provido")
+        throw new Error(t('auth.appContextError'))
     }
     const { backendUrl } = context
 

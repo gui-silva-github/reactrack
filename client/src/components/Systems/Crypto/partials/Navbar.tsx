@@ -1,4 +1,5 @@
 import { useContext } from "react"
+import { useTranslation } from "react-i18next"
 import classes from './Navbar.module.css'
 import { CoinContext } from "../../../../context/Coin/CoinContext"
 import { Link } from "react-router-dom"
@@ -6,7 +7,7 @@ import logo from "../../../../assets/png/crypto/logo.png"
 import Image from "../../../Html/Image/Image"
 
 const Navbar: React.FC = () => {
-
+    const { t } = useTranslation()
     const coinContext = useContext(CoinContext);
 
     if (!coinContext) {
@@ -38,7 +39,7 @@ const Navbar: React.FC = () => {
         <div className={classes.navbar}>
             <ul>
                 <Link to="/systems/crypto">
-                    <Image src={logo} alt="Mercado de Crypto" />
+                    <Image src={logo} alt={t('crypto.navbarAlt')} />
                 </Link>
             </ul>
             <div className={classes['nav-right']}>

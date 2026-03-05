@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 import useGetBackendUrl from "../../hooks/backend/useGetBackendUrl";
 import useNavigateSPA from "../../hooks/routes/useNavigateSPA";
@@ -8,6 +9,7 @@ import { sendResetOtp } from "../../api/resetOtp";
 import { sendResetPassword } from "../../api/resetPassword";
 
 import { toast } from "react-toastify";
+import i18n from "../../i18n";
 
 import mail from "../../assets/svg/mail.svg"
 import lock from "../../assets/svg/lock.svg"
@@ -23,6 +25,7 @@ import Navbar from "../../components/Navbar/Navbar";
 const ResetPassword: React.FC = () => {
 
     const navigate = useNavigateSPA()
+    const { t } = useTranslation()
 
     const { backendUrl } = useGetBackendUrl()
 
@@ -74,7 +77,7 @@ const ResetPassword: React.FC = () => {
             e.preventDefault()
 
             if (!email) {
-                toast.error("Por favor, insira um e-mail.");
+                toast.error(i18n.t('auth.insertEmailError'));
                 return;
             }
 
@@ -97,7 +100,7 @@ const ResetPassword: React.FC = () => {
         const submittedOtp = otpArray.join('')
 
         if (submittedOtp.length !== 6) {
-            toast.error("Por favor, preencha o código OTP completo.")
+            toast.error(i18n.t('auth.otpCompleteError'))
             return;
         }
 
@@ -124,23 +127,23 @@ const ResetPassword: React.FC = () => {
             <DivEmailReset>
                 {!isEmailSent &&
                     <form onSubmit={onSubmitEmail} className="bg-slate-900 p-8 rounded-lg shadow-lg w-96 text-sm">
-                        <Header1 className="text-white text-2xl font-semibold text-center mb-4" text="Resetar senha" />
+                        <Header1 className="text-white text-2xl font-semibold text-center mb-4" text={t('auth.resetPassword')} />
 
-                        <Paragraph className="text-center mb-6 text-indigo-300" text="Insira seu e-mail" />
+                        <Paragraph className="text-center mb-6 text-indigo-300" text={t('auth.insertEmail')} />
 
                         <Div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
-                            <Image src={mail} alt="E-mail" className="w-3 h-3" />
-                            <input value={email} onChange={(e) => setEmail(e.target.value)} required type="email" placeholder="E-mail" className="bg-transparent outline-none text-white" />
+                            <Image src={mail} alt={t('auth.email')} className="w-3 h-3" />
+                            <input value={email} onChange={(e) => setEmail(e.target.value)} required type="email" placeholder={t('auth.email')} className="bg-transparent outline-none text-white" />
                         </Div>
-                        <Button className="w-full py-2.5 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full mt-3" text="Enviar" />
+                        <Button className="w-full py-2.5 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full mt-3" text={t('common.send')} />
                     </form>
                 }
 
                 {!isOtpSubmitted && isEmailSent &&
                     <form onSubmit={onSubmitOtp} className="bg-slate-900 p-8 rounded-lg shadow-lg w-96 text-sm">
-                        <Header1 className="text-white text-2xl font-semibold text-center mb-4" text="OTP de Redefinição" />
+                        <Header1 className="text-white text-2xl font-semibold text-center mb-4" text={t('auth.otpTitle')} />
 
-                        <Paragraph className="text-center mb-6 text-indigo-500" text="Insira o código de 6 digítos enviado no seu e-mail." />
+                        <Paragraph className="text-center mb-6 text-indigo-500" text={t('auth.otpSubtitle')} />
 
                         <div className="flex justify-between mb-8" onPaste={handlePaste}>
                             {Array(6).fill(0).map((_, index) => (
@@ -148,22 +151,22 @@ const ResetPassword: React.FC = () => {
 
                             ))}
                         </div>
-                        <Button className="w-full py-2.5 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full" text="Enviar" />
+                        <Button className="w-full py-2.5 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full" text={t('common.send')} />
                     </form>
                 }
 
                 {isOtpSubmitted && isEmailSent &&
                     <form onSubmit={onSubmitNewPassword} className="bg-slate-900 p-8 rounded-lg shadow-lg w-96 text-sm">
-                        <Header1 className="text-white text-2xl font-semibold text-center mb-4" text="Nova senha" />
+                        <Header1 className="text-white text-2xl font-semibold text-center mb-4" text={t('auth.newPassword')} />
 
-                        <Paragraph className="text-center mb-6 text-indigo-300" text="Insira a nova senha abaixo." />
+                        <Paragraph className="text-center mb-6 text-indigo-300" text={t('auth.newPasswordSubtitle')} />
 
                         <Div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
-                            <Image src={lock} alt="Senha" className="w-3 h-3" />
-                            <input value={newPassword} onChange={e => setNewPassword(e.target.value)} required type="password" placeholder="Senha" className="bg-transparent outline-none text-white" />
+                            <Image src={lock} alt={t('auth.password')} className="w-3 h-3" />
+                            <input value={newPassword} onChange={e => setNewPassword(e.target.value)} required type="password" placeholder={t('auth.password')} className="bg-transparent outline-none text-white" />
                         </Div>
 
-                        <Button className="w-full py-2.5 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full mt-3" text="Enviar" />
+                        <Button className="w-full py-2.5 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full mt-3" text={t('common.send')} />
                     </form>
                 }
             </DivEmailReset>

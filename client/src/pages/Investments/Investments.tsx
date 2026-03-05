@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Paragraph from "../../components/Html/Paragraph/Paragraph";
 import type { IUserInput } from "../../interfaces/systems/investments";
 import HeaderInvestments from "../../components/Systems/Investments/Header/Header"
@@ -6,6 +7,7 @@ import UserInput from "../../components/Systems/Investments/UserInput/UserInput"
 import Results from "../../components/Systems/Investments/Results/Results"
 
 const Investments: React.FC = () => {
+    const { t } = useTranslation()
     const [userInput, setUserInput] = useState<IUserInput>({
         initialInvestment: 10000,
         annualInvestment: 1200,
@@ -28,7 +30,7 @@ const Investments: React.FC = () => {
         <>
             <HeaderInvestments />
             <UserInput userInput={userInput} onChange={handleChange} />
-            { !inputIsValid && <Paragraph text="Por favor, coloque uma duração maior ou igual a 1 ano" className="center" /> }
+            { !inputIsValid && <Paragraph text={t('investments.durationError')} className="center" /> }
             { inputIsValid && <Results input={userInput} /> }
         </>
     )

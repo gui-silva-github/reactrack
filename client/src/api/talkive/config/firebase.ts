@@ -3,6 +3,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, si
 import { getFirestore, setDoc, doc, collection, query, getDocs, where } from "firebase/firestore"
 import type { ISignupFirebase, ILoginFirebase, IResetPasswordFirebase } from "./interfaces"
 import { toast } from "react-toastify"
+import i18n from "../../../i18n"
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY || '',
@@ -39,8 +40,7 @@ const signup = async ({username, email, password}: ISignupFirebase) => {
                 chatsData: []
             })
         } catch (firestoreError: any) {
-            console.error('Erro ao criar documentos no Firestore:', firestoreError)
-            toast.error('Erro ao criar perfil. Tente fazer login novamente.')
+            toast.error(i18n.t('talkive.errors.createProfile'))
             await signOut(auth)
             throw firestoreError
         }
@@ -69,7 +69,7 @@ const logout = async () => {
 
 const resetPass = async ({email}: IResetPasswordFirebase) => {
     if (!email){
-        toast.error("Digite seu e-mail")
+        toast.error(i18n.t('talkive.errors.enterEmail'))
         return 
     }
 
@@ -80,9 +80,9 @@ const resetPass = async ({email}: IResetPasswordFirebase) => {
 
         if (!querySnap.empty){
             await sendPasswordResetEmail(auth, email)
-            toast.success("E-mail enviado!")
+            toast.success(i18n.t('talkive.errors.emailSent'))
         } else {
-            toast.error("E-mail não existe!")
+            toast.error(i18n.t('talkive.errors.emailNotExist'))
         }
     } catch (error: any){
         toast.error(error)

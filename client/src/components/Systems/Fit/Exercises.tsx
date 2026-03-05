@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Pagination } from "@mui/material";
 
@@ -19,7 +20,7 @@ interface IExercisesProps {
 }
 
 const Exercises: React.FC<IExercisesProps> = ({ exercises, setExercises, bodyPart }) => {
-
+    const { t } = useTranslation()
     const [currentPage, setCurrentPage] = useState(1)
 
     const exercisesPerPage = 6
@@ -30,7 +31,7 @@ const Exercises: React.FC<IExercisesProps> = ({ exercises, setExercises, bodyPar
 
     const context = useContext(AppContext)
     if (!context) {
-        throw new Error("AppContext não foi provido")
+        throw new Error(t('auth.appContextError'))
     }
     const { backendUrl } = context
 

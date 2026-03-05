@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useMutation } from '@tanstack/react-query'
 import Modal from '../../../../components/Systems/Convene/UI/Modal/Modal'
 import EventForm from "../../../../components/Systems/Convene/Events/Form/EventForm"
@@ -9,6 +10,7 @@ import ConveneEvent from '../../../../models/convene/event'
 import { redirectEvents } from '../../../../api/urls/convene'
 
 const NewEvent: React.FC = () => {
+    const { t } = useTranslation()
     const navigate = useNavigate()
 
     const { mutate, isPending, isError, error } = useMutation({
@@ -26,21 +28,21 @@ const NewEvent: React.FC = () => {
     return (
         <Modal onClose={() => navigate("../")}>
             <EventForm onSubmit={handleSubmit}>
-                {isPending && 'Enviando...'}
+                {isPending && t('convene.sending')}
                 {!isPending && (
                     <>
                         <Link to="../" className="button-text">
-                            Cancelar
+                            {t('convene.cancel')}
                         </Link>
                         <button type="submit" className="button">
-                            Criar
+                            {t('convene.create')}
                         </button>
                     </>
                 )}
             </EventForm>
             {isError && (
                 <ErrorBlock
-                    title="Falha ao criar evento"
+                    title={t('convene.createError')}
                     message={(error as any).info?.message || ""}
                     errors={(error as any).info?.errors || []}
                 />

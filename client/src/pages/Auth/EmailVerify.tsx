@@ -1,10 +1,12 @@
 import { useContext, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import useGetBackendUrl from "../../hooks/backend/useGetBackendUrl";
 import useNavigateSPA from "../../hooks/routes/useNavigateSPA";
 
 import { AppContext } from "../../context/AppContext";
 
 import { toast } from "react-toastify";
+import i18n from "../../i18n";
 
 import DivEmailReset from "../../components/DivEmailReset/DivEmailReset";
 import Header1 from "../../components/Html/Header1/Header1";
@@ -18,13 +20,14 @@ import Navbar from "../../components/Navbar/Navbar";
 const EmailVerify: React.FC = () => {
 
     const navigate = useNavigateSPA()
+    const { t } = useTranslation()
 
     const { backendUrl } = useGetBackendUrl()
 
     const context = useContext(AppContext)
 
     if (!context) {
-        throw new Error("AppContext não foi provido")
+        throw new Error(t('auth.appContextError'))
     }
 
     const { isLoggedIn, userData, getUserData } = context
@@ -78,7 +81,7 @@ const EmailVerify: React.FC = () => {
             const otp = otpArray.join('')
 
             if (otp.length !== 6) {
-                toast.error("Por favor, preencha o código OTP completo.")
+                toast.error(i18n.t('auth.otpCompleteError'))
                 return;
             }
 
@@ -106,15 +109,15 @@ const EmailVerify: React.FC = () => {
             <Navbar />
             <DivEmailReset>
                 <form onSubmit={onSubmitHandler} className="bg-slate-900 p-8 rounded-lg shadow-lg w-96 text-sm">
-                    <Header1 className="text-white text-2xl font-semibold text-center mb-4" text="Verificação de E-mail (OTP)" />
-                    <Paragraph className="text-center mb-6 text-indigo-300" text="Envie o código de 6 digítos enviado para seu e-mail." />
+                    <Header1 className="text-white text-2xl font-semibold text-center mb-4" text={t('auth.verifyEmailTitle')} />
+                    <Paragraph className="text-center mb-6 text-indigo-300" text={t('auth.verifyEmailSubtitle')} />
 
                     <div className="flex justify-between mb-8" onPaste={handlePaste}>
                         {Array(6).fill(0).map((_, index) => (
                             <input type="text" maxLength={1} onKeyDown={(e) => handleKeyDown(e, index)} key={index} ref={(e) => { inputRefs.current[index] = e }} onInput={(e) => handleInput(e, index)} required className='w-12 h-12 bg-[#333A5C] text-white text-center text-xl rounded-md' />
                         ))}
                     </div>
-                    <Button className="w-full py-3 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full" text="Verificar e-mail" />
+                    <Button className="w-full py-3 bg-gradient-to-r from-indigo-500 to-indigo-900 text-white rounded-full" text={t('auth.verifyEmailButton')} />
                 </form>
             </DivEmailReset>
         </Div>

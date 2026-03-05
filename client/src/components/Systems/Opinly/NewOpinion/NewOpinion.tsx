@@ -1,5 +1,6 @@
 import { useActionState, useContext } from "react";
-
+import { useTranslation } from "react-i18next";
+import i18n from "../../../../i18n";
 import { OpinionsContext } from "../../../../context/Opinly/OpinlyContext";
 import Submit from "../partials/Submit";
 import Div from "../../../Html/Div/Div";
@@ -7,6 +8,7 @@ import classes from "./NewOpinion.module.css"
 import type { IFormState } from "../../../../interfaces/systems/opinly";
 
 const NewOpinion: React.FC = () => {
+    const { t } = useTranslation()
 
     const opinionsContext = useContext(OpinionsContext);
 
@@ -24,15 +26,15 @@ const NewOpinion: React.FC = () => {
         let errors = []
 
         if (title.trim().length < 5) {
-            errors.push('O título precisa ter pelo menos 5 caracteres.')
+            errors.push(i18n.t('opinly.titleMinLength'))
         }
 
         if (body.trim().length < 10 || body.trim().length > 300) {
-            errors.push('A opinião deve ter entre 10 e 300 caracteres.')
+            errors.push(i18n.t('opinly.bodyLength'))
         }
 
         if (typeof userName !== "string" || !userName.trim()) {
-            errors.push('Por favor, coloque um nome.')
+            errors.push(i18n.t('opinly.nameRequired'))
         }
 
         if (errors.length > 0) {
@@ -68,7 +70,7 @@ const NewOpinion: React.FC = () => {
             <form action={formAction} className={classes.form}>
                 <Div className={classes['control-row']}>
                     <p className={classes.control}>
-                        <label htmlFor="userName">Seu nome</label>
+                        <label htmlFor="userName">{t('opinly.yourName')}</label>
                         <input
                             type="text"
                             id="userName"
@@ -81,14 +83,14 @@ const NewOpinion: React.FC = () => {
                         />
                     </p>
                     <p className={classes.control}>
-                        <label htmlFor="title">Título</label>
+                        <label htmlFor="title">{t('opinly.titleLabel')}</label>
                         <input type="text" id="title" name="title"
                             defaultValue={formState?.enteredValues?.title}
                         />
                     </p>
                 </Div>
                 <p className={`${classes.control} ${classes.top}`}>
-                    <label htmlFor="body">Sua opinião</label>
+                    <label htmlFor="body">{t('opinly.yourOpinion')}</label>
                     <textarea name="body" id="body" rows={5}
                         defaultValue={formState?.enteredValues?.body}
                     ></textarea>

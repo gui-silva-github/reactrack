@@ -1,4 +1,5 @@
 import { Typography, Stack, Button } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import type { IExercisesData } from "../../../interfaces/systems/fit";
 import { FaDumbbell } from "react-icons/fa";
 import { GiMuscleUp } from "react-icons/gi";
@@ -9,7 +10,7 @@ interface IDetailProps {
 }
 
 const Detail: React.FC<IDetailProps> = ({exerciseDetail}) => {
-
+    const { t } = useTranslation()
     const { bodyParts, gifUrl, name, targetMuscles, equipments } = exerciseDetail
 
     const extraDetail = [
@@ -26,8 +27,8 @@ const Detail: React.FC<IDetailProps> = ({exerciseDetail}) => {
                     {name.charAt(0).toUpperCase() + name.slice(1)}
                 </Typography>
                 <Typography variant="h5">
-                    Exercícios mantém você forte: <span style={{ fontWeight: 'bold' }}>{name}</span> {` `}
-                    é um dos melhores exercícios para {targetMuscles.join(', ')} e {equipments.join(', ')}. Ele ajuda você a melhorar seu modo e ganhar energia
+                    {t('fit.exerciseKeepsStrong')} <span style={{ fontWeight: 'bold' }}>{name}</span> {` `}
+                    {t('fit.bestExerciseFor')} {targetMuscles.join(', ')} {t('fit.and')} {equipments.join(', ')}. {t('fit.helpsImprove')}
                 </Typography>
                 {extraDetail.map((item: { icon: React.ReactNode, name: string }) => (
                     <Stack key={item.name} direction="row" gap="24px" alignItems="center" marginTop={".5rem"}>

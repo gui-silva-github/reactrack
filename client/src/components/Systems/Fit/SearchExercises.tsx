@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Box, Button, Stack, TextField, Typography } from "@mui/material"
 
@@ -9,6 +10,7 @@ import HorizontalScrollBar from "./partials/HorizontalScrollBar"
 import { bodyPartList, searchExercise } from "../../../api/urls/fit";
 import type { IBodyPartData, IBodyPartsDataAPI, IExerciseSearchDataAPI, IExercisesData } from "../../../interfaces/systems/fit";
 import { toast } from "react-toastify";
+import i18n from "../../../i18n";
 
 interface ISearchExercisesProps {
     setExercises: React.Dispatch<React.SetStateAction<IExercisesData[]>>;
@@ -17,12 +19,13 @@ interface ISearchExercisesProps {
 }
 
 const SearchExercises: React.FC<ISearchExercisesProps> = ({ setExercises, bodyPart, setBodyPart }) => {
+    const { t } = useTranslation()
     const [search, setSearch] = useState<string>('')
     const [bodyParts, setBodyParts] = useState<IBodyPartData[]>([])
 
     const context = useContext(AppContext)
     if (!context) {
-        throw new Error("AppContext não foi provido")
+        throw new Error(i18n.t('auth.appContextError'))
     }
 
     useEffect(() => {
@@ -32,7 +35,7 @@ const SearchExercises: React.FC<ISearchExercisesProps> = ({ setExercises, bodyPa
 
                 setBodyParts(bodyPartsData.data);
             } catch (error) {
-                toast.error('Erro ao retornar dados da API ExerciseDB!')
+                toast.error(i18n.t('fit.apiError'))
                 setBodyParts([]);
             }
         }
@@ -70,7 +73,7 @@ const SearchExercises: React.FC<ISearchExercisesProps> = ({ setExercises, bodyPa
                 fontSize: { lg: '44px', xs: '30px' }
             }}
                 mb="50px" textAlign="center">
-                Exercícios Incríveis que <br /> você precisa conhecer
+                {t('fit.amazingExercises')}
             </Typography>
             <Box position="relative" mb="36px">
                 <TextField
@@ -86,7 +89,7 @@ const SearchExercises: React.FC<ISearchExercisesProps> = ({ setExercises, bodyPa
                     }}
                     value={search}
                     onChange={(e) => setSearch(e.target.value.toLowerCase())}
-                    placeholder="Procure Exercícios"
+                    placeholder={t('fit.searchPlaceholder')}
                     type="text"
                 />
                 <Button className="search-btn"
@@ -102,7 +105,7 @@ const SearchExercises: React.FC<ISearchExercisesProps> = ({ setExercises, bodyPa
                     }}
                     onClick={handleSearch}
                 >
-                    Procurar
+                    {t('fit.search')}
                 </Button>
             </Box>
             <Box sx={{ position: 'relative', width: '100%', p: '20px' }}>

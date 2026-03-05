@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import LoadingIndicator from "../../../UI/LoadingIndicator/LoadingIndicator";
 import ErrorBlock from "../../../UI/ErrorBlock/ErrorBlock";
 import EventItem from "../../Item/EventItem";
@@ -7,6 +8,7 @@ import ConveneEvent from "../../../../../../models/convene/event";
 import classes from "./NewEvents.module.css"
 
 const NewEvents: React.FC = () => {
+    const { t } = useTranslation()
     const { data: events, isPending, isError, error } = useQuery<ConveneEvent[], Error>({
         queryKey: ['events', { max: 3 }],
         queryFn: ({ signal, queryKey }) => {
@@ -24,12 +26,12 @@ const NewEvents: React.FC = () => {
 
     if (isError) {
         content = (
-            <ErrorBlock title="Ocorreu um erro" message={(error as any).info?.message || "Falha ao carregar eventos"} />
+            <ErrorBlock title={t('convene.errorOccurred')} message={(error as any).info?.message || t('convene.loadEventsError')} />
         )
     }
 
     if (events && events.length === 0) {
-        content = <p>Nenhum evento foi encontrado!</p>
+        content = <p>{t('convene.noEventsFound')}</p>
     }
 
     if (events && events.length > 0) {
@@ -47,7 +49,7 @@ const NewEvents: React.FC = () => {
     return (
         <section className="content-section" id="new-events-section">
             <header>
-                <h2>Eventos mais próximos</h2>
+                <h2>{t('convene.upcomingEvents')}</h2>
             </header>
             {content}
         </section>

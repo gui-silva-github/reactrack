@@ -57,9 +57,15 @@ const Navbar: React.FC = () => {
         try {
             const data = await logoutAPI(backendUrl)
 
-            data.success && setIsLoggedIn(false)
-            data.success && setUserData(null)
-            navigate('/')
+            if (data.success) {
+                toast.success(t('auth.logoutSuccess'))
+                setIsLoggedIn(false)
+                setUserData(null)
+                // Pequeno atraso para o toast ser pintado antes da navegação (evita toast sumir)
+                setTimeout(() => navigate('/'), 150)
+            } else {
+                toast.error(data.message)
+            }
         } catch (error: any) {
             toast.error(error.message)
         }

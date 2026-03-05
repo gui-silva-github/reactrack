@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import { CoinContext } from "../../context/Coin/CoinContext"
 import classes from "./CoinDetail.module.css"
 import { fetchData } from "../../utils/systems/fit"
@@ -11,7 +12,7 @@ import Div from "../../components/Html/Div/Div"
 import Navbar from "../../components/Systems/Crypto/partials/Navbar"
 
 const CoinDetail: React.FC = () => {
-
+    const { t } = useTranslation()
     const { id } = useParams()
     const [coinData, setCoinData] = useState<ISpecificCoinData>()
     const [historicalData, setHistoricalData] = useState<IPricesCoinData>()
@@ -39,7 +40,7 @@ const CoinDetail: React.FC = () => {
             <Div className={classes.coin}>
                 <Navbar />
                 <Div className={classes['coin-name']}>
-                    <img src={coinData.image.large} alt="Moeda" />
+                    <img src={coinData.image.large} alt={t('crypto.coinAlt')} />
                     <p><strong>{coinData.name} ({coinData.symbol.toUpperCase()})</strong></p>
                 </Div>
                 <Div className={classes['coin-chart']}>
@@ -47,19 +48,19 @@ const CoinDetail: React.FC = () => {
                 </Div>
                 <Div className={classes['coin-info']}>
                     <ul>
-                        <li>Rank no Mercado de Criptomoedas</li>
+                        <li>{t('crypto.marketRank')}</li>
                         <li>{coinData.market_cap_rank}</li>
                     </ul>
                     <ul>
-                        <li>Preço Atual</li>
+                        <li>{t('crypto.currentPrice')}</li>
                         <li>{currency?.symbol} {coinData.market_data.current_price[currency?.name || 'usd']?.toLocaleString()}</li>
                     </ul>
                     <ul>
-                        <li>Maior Preço em 24h</li>
+                        <li>{t('crypto.high24h')}</li>
                         <li>{currency?.symbol} {coinData.market_data.high_24h[currency?.name || 'usd']?.toLocaleString()}</li>
                     </ul>
                     <ul>
-                        <li>Menor Preço em 24h</li>
+                        <li>{t('crypto.low24h')}</li>
                         <li>{currency?.symbol} {coinData.market_data.low_24h[currency?.name || 'usd']?.toLocaleString()}</li>
                     </ul>
                 </Div>

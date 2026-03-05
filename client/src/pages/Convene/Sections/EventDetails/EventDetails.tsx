@@ -1,4 +1,5 @@
 import { Link, Outlet, useNavigate, useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import { useQuery, useMutation } from "@tanstack/react-query"
 import Header from "../../../../components/Systems/Convene/Common/Header/Header"
 import { fetchEvent, deleteEvent, queryClient } from "../../../../utils/systems/queryClient/http"
@@ -12,6 +13,7 @@ import classes from "./EventDetails.module.css"
 
 const EventDetails: React.FC = () => {
     const [isDeleting, setIsDeleting] = useState(false)
+    const { t } = useTranslation()
 
     const params = useParams()
     const navigate = useNavigate()
@@ -45,15 +47,15 @@ const EventDetails: React.FC = () => {
 
     if (isPending) {
         content = <div className={`${classes.eventDetailsContent} center`}>
-            <p>Carregando dados de evento...</p>
+            <p>{t('convene.loadingEvent')}</p>
         </div>
     }
 
     if (isError) {
         content = <div className={`${classes.eventDetailsContent} center`}>
             <ErrorBlock
-                title="Falha ao carregar evento."
-                message={(error as any).info?.message || 'Falha ao carregar dados de evento, tente novamente!'}
+                title={t('convene.loadError')}
+                message={(error as any).info?.message || t('convene.loadErrorMsg')}
             />
         </div>
     }
@@ -66,9 +68,9 @@ const EventDetails: React.FC = () => {
                 <h1>{data.title}</h1>
                 <nav className={classes.nav}>
                     <button className={classes.button} onClick={handleStartDelete}>
-                        Deletar
+                        {t('convene.delete')}
                     </button>
-                    <Link to={`${redirectEvents}/${data.id}/edit`} className={classes.a}>Editar</Link>
+                    <Link to={`${redirectEvents}/${data.id}/edit`} className={classes.a}>{t('convene.edit')}</Link>
                 </nav>
             </header>
             <Div className={classes.eventDetailsContent}>
@@ -88,25 +90,25 @@ const EventDetails: React.FC = () => {
         <Div className={classes.margin}>
             {isDeleting && (
                 <Modal onClose={handleStopDelete}>
-                    <h2 className={classes.h2}>Você tem certeza?</h2>
-                    <p className={classes.h2}>Você realmente quer excluir este evento. <span style={{ color: 'red' }}>Essa ação não pode ser desfeita.</span></p>
+                    <h2 className={classes.h2}>{t('convene.deleteConfirm')}</h2>
+                    <p className={classes.h2}>{t('convene.deleteConfirmMsg')}</p>
                     <div className="form-actions">
-                        {isPendingDeletion && <p>Excluindo, por favor espere...</p>}
+                        {isPendingDeletion && <p>{t('convene.deleting')}</p>}
                         {!isPendingDeletion && (
                             <>
                                 <button onClick={handleStopDelete} className="button-text">
-                                    Cancelar
+                                    {t('convene.cancel')}
                                 </button>
                                 <button onClick={handleDelete} className="button">
-                                    Excluir
+                                    {t('convene.exclude')}
                                 </button>
                             </>
                         )}
                     </div>
                     {isErrorDeleting && (
                         <ErrorBlock
-                            title="Falha ao excluir evento"
-                            message={(deleteError as any).info?.message || 'Falha ao excluir evento, por favor tente novamente mais tarde.'}
+                            title={t('convene.deleteError')}
+                            message={(deleteError as any).info?.message || t('convene.deleteErrorMsg')}
                         />
                     )}
                 </Modal>
@@ -114,7 +116,7 @@ const EventDetails: React.FC = () => {
             <Outlet />
             <Header>
                 <Link to={redirectEvents} className={`${classes.allEvents} nav-item`}>
-                    Ver todos eventos
+                    {t('convene.allEvents')}
                 </Link>
             </Header>
             <article id="event-details" className={classes.marginDetails}>

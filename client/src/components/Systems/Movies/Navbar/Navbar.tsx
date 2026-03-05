@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import { BiCameraMovie, BiSearchAlt2 } from "react-icons/bi"
 import { querySearch, redirectUrl } from '../../../../api/urls/movies'
 import Div from '../../../Html/Div/Div'
 import './Navbar.css'
 
 const Navbar: React.FC = () => {
+    const { t } = useTranslation()
     const [search, setSearch] = useState("")
     const navigate = useNavigate()
 
@@ -22,12 +24,12 @@ const Navbar: React.FC = () => {
         <Div className='margin'>
             <nav id="navbar">
                 <h2>
-                    <Link to={`${redirectUrl}`}><BiCameraMovie />Filmes</Link>
+                    <Link to={`${redirectUrl}`}><BiCameraMovie />{t('movies.title')}</Link>
                 </h2>
                 <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e as unknown as React.FormEvent<HTMLInputElement>)}>
                     <input
                         type="text"
-                        placeholder="Busque um filme"
+                        placeholder={t('movies.searchPlaceholder')}
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                     />

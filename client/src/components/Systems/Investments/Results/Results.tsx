@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../../i18n";
 import { calculateInvestmentResults, formatter } from "../../../../utils/systems/investments";
 import type { IAnnualData, IUserInput } from "../../../../interfaces/systems/investments";
 import Chart from "react-google-charts"
@@ -9,6 +11,7 @@ interface IResultsProps {
 }
 
 const Results: React.FC<IResultsProps> = ({ input }) => {
+    const { t } = useTranslation()
     const resultsData = calculateInvestmentResults(input)
     const initialInvestment = resultsData[0].valueEndOfYear - resultsData[0].interest - resultsData[0].annualInvestment
 
@@ -20,11 +23,11 @@ const Results: React.FC<IResultsProps> = ({ input }) => {
             <table id="result">
                 <thead>
                     <tr>
-                        <th>Ano</th>
-                        <th>Investimento</th>
-                        <th>Interesse (Ano)</th>
-                        <th>Total de Interesse</th>
-                        <th>Capital Investido</th>
+                        <th>{t('investments.year')}</th>
+                        <th>{t('investments.investment')}</th>
+                        <th>{t('investments.interest')}</th>
+                        <th>{t('investments.totalInterest')}</th>
+                        <th>{t('investments.investedCapital')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,10 +58,10 @@ interface ILineChartProps {
 }
 
 const LineChart: React.FC<ILineChartProps> = ({ historicalData }) => {
-    const [data, setData] = useState([['Ano', 'Valor']])
+    const [data, setData] = useState<Array<(string | number)[]>>([[i18n.t('investments.year'), i18n.t('investments.value')]])
 
     useEffect(() => {
-        let dataCopy = [['Ano', 'Valor']]
+        let dataCopy: Array<(string | number)[]> = [[i18n.t('investments.year'), i18n.t('investments.value')]]
 
         if (historicalData.length > 0) {
             historicalData.map((item: any) => {

@@ -1,4 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
+import i18n from "../../../../i18n"
 import { useQuery, useMutation } from "@tanstack/react-query"
 import Modal from "../../../../components/Systems/Convene/UI/Modal/Modal"
 import EventForm from "../../../../components/Systems/Convene/Events/Form/EventForm"
@@ -11,11 +13,12 @@ import ConveneEvent from "../../../../models/convene/event"
 const EditEvent: FC = () => {
     const navigate = useNavigate()
     const params = useParams()
+    const { t } = useTranslation()
 
     const { data, isError, error } = useQuery({
         queryKey: ['events', params.id],
         queryFn: ({signal}) => {
-            if (!params.id) throw new Error("Evento inválido")
+            if (!params.id) throw new Error(i18n.t('convene.invalidEvent'))
             return fetchEvent({signal, id: params.id})
         },
         staleTime: 10000
@@ -23,7 +26,7 @@ const EditEvent: FC = () => {
 
     const { mutate, isPending, isError: isErrorUpdating, error: errorUpdating } = useMutation({
         mutationFn: async (eventData: ConveneEvent) => {
-            if (!params.id) throw new Error("Evento inválido")
+            if (!params.id) throw new Error(i18n.t('convene.invalidEvent'))
             const response = await updateEvent({ id: params.id, event: eventData })
             if (!response.ok) {
                 const data = await response.json()
@@ -50,12 +53,12 @@ const EditEvent: FC = () => {
     if (isError){
         content = <>
             <ErrorBlock 
-                title="Falha ao carregar evento"
-                message={(error as any).info?.message || "Falha ao carregar evento. Por favor, confira seus inputs e tente novamente mais tarde."}
+                title={t('convene.loadError')}
+                message={(error as any).info?.message || t('convene.loadErrorMsg')}
             />
             <div className="form-actions">
                 <Link to="../" className="button">
-                    Ok
+                    {t('convene.ok')}
                 </Link>
             </div>
         </>
@@ -66,21 +69,21 @@ const EditEvent: FC = () => {
             <>
             <EventForm inputData={data} onSubmit={handleSubmit}>
                 {isPending ? (
-                    <p>Enviando dados...</p>
+                    <p>{t('convene.sendingData')}</p>
                 ) : (
                     <>
                         <Link to="../" className="button-text">
-                            Cancelar
+                            {t('convene.cancel')}
                         </Link>
                         <button type="submit" className="button">
-                            Atualizar
+                            {t('convene.update')}
                         </button>
                     </>
                 )}
             </EventForm>
             {isErrorUpdating && (
                 <ErrorBlock
-                    title="Erro ao atualizar evento"
+                    title={t('convene.updateError')}
                     message={(errorUpdating as any)?.message || ""}
                     errors={(errorUpdating as any)?.cause}
                 />
@@ -102,7 +105,7 @@ export function loader({params}: LoaderFunctionArgs){
     return queryClient.fetchQuery({
         queryKey: ['events', params.id],
         queryFn: ({signal}) => {
-            if (!params.id) throw new Response("Evento não encontrado", {status: 404})
+            if (!params.id) throw new Response(i18n.t('convene.eventNotFound'), {status: 404})
             return fetchEvent({signal, id: params.id})     
         }    
     })

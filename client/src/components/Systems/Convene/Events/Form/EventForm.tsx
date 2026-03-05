@@ -1,4 +1,5 @@
 import { useState, type FC, type FormEvent, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import ImagePicker from "../../Common/ImagePicker/ImagePicker";
 import { fetchSelectableImages } from "../../../../../utils/systems/queryClient/http";
@@ -13,6 +14,7 @@ interface IEventFormProps {
 }
 
 const EventForm: FC<IEventFormProps> = ({ inputData, onSubmit, children }) => {
+    const { t } = useTranslation()
     const [selectedImage, setSelectedImage] = useState(inputData?.image ?? '')
 
     const { data, isPending, isError } = useQuery({
@@ -40,7 +42,7 @@ const EventForm: FC<IEventFormProps> = ({ inputData, onSubmit, children }) => {
     return (
         <form id="event-form" onSubmit={handleSubmit}>
             <p className={`control ${classes.margin}`}>
-                <label className={classes.label} htmlFor="title">Título</label>
+                <label className={classes.label} htmlFor="title">{t('convene.title')}</label>
                 <input
                     className={classes.input}
                     type="text"
@@ -50,8 +52,8 @@ const EventForm: FC<IEventFormProps> = ({ inputData, onSubmit, children }) => {
                 />
             </p>
 
-            {isPending && <p>Carregando images selecionáveis...</p>}
-            {isError && <ErrorBlock title="Falha ao carregar imagens selecionáveis" message="Por favor tente novamente mais tarde." />}
+            {isPending && <p>{t('convene.loadingImages')}</p>}
+            {isError && <ErrorBlock title={t('convene.loadImagesError')} message={t('convene.tryAgainLater')} />}
             {data && (
                 <div className={`control ${classes.margin}`}>
                     <ImagePicker
@@ -63,7 +65,7 @@ const EventForm: FC<IEventFormProps> = ({ inputData, onSubmit, children }) => {
             )}
 
             <p className={`control ${classes.margin}`}>
-                <label className={classes.label} htmlFor="description">Descrição</label>
+                <label className={classes.label} htmlFor="description">{t('convene.description')}</label>
                 <textarea
                     className={classes.textarea}
                     name="description"
@@ -74,7 +76,7 @@ const EventForm: FC<IEventFormProps> = ({ inputData, onSubmit, children }) => {
 
             <div className={classes.controlsRow}>
                 <p className="control">
-                    <label className={classes.label} htmlFor="date">Data</label>
+                    <label className={classes.label} htmlFor="date">{t('convene.date')}</label>
                     <input
                         className={classes.input}
                         type="date"
@@ -85,7 +87,7 @@ const EventForm: FC<IEventFormProps> = ({ inputData, onSubmit, children }) => {
                 </p>
 
                 <p className="control">
-                    <label className={classes.label} htmlFor="time">Horário</label>
+                    <label className={classes.label} htmlFor="time">{t('convene.time')}</label>
                     <input
                         className={classes.input}
                         type="time"
@@ -97,7 +99,7 @@ const EventForm: FC<IEventFormProps> = ({ inputData, onSubmit, children }) => {
             </div>
 
             <p className={`control ${classes.margin}`}>
-                <label className={classes.label} htmlFor="location">Local</label>
+                <label className={classes.label} htmlFor="location">{t('convene.location')}</label>
                 <input
                     className={classes.input}
                     type="text"

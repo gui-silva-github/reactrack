@@ -5,6 +5,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore"
 import { db } from '../../../../api/talkive/config/firebase'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import i18n from '../../../../i18n'
 import upload from '../../../../api/talkive/lib/upload'
 import assets from '../../../../assets/talkive/ts/assets'
 import { TalkiveContext } from '../../../../context/Talkive/TalkiveContext'
@@ -29,7 +30,7 @@ const ProfileUpdateTalkive: React.FC = () => {
 
         try {
             if (!prevImage && !image) {
-                toast.error("Atualize a foto de perfil")
+                toast.error(i18n.t('talkive.profile.updatePhoto'))
             }
 
             const docRef = doc(db, "users", uid)
@@ -66,7 +67,7 @@ const ProfileUpdateTalkive: React.FC = () => {
 
                 navigate(`${redirectTalkiveUrl}/chat`);
             } else {
-                toast.error('Erro ao obter dados do usuário atualizados.');
+                toast.error(i18n.t('talkive.profile.errorGetData'));
             }
         } catch (error: any) {
             toast.error(error.message)
@@ -102,7 +103,7 @@ const ProfileUpdateTalkive: React.FC = () => {
             <div className='profile-container'>
                 <form onSubmit={profileUpdate}>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <h3>Detalhes do perfil</h3>
+                        <h3>{i18n.t('talkive.profile.details')}</h3>
                         <FaArrowLeft size={30} style={{ cursor: 'pointer' }} color='#077eff' onClick={() => navigate(`${redirectTalkiveUrl}/chat`)} />
                     </div>
                     <label htmlFor="avatar">
@@ -122,27 +123,27 @@ const ProfileUpdateTalkive: React.FC = () => {
                                 ? URL.createObjectURL(image)
                                 : assets.avatar_icon
                             }
-                            alt='Avatar'
+                            alt={i18n.t('talkive.profileAlt')}
                         />
-                        Upload da imagem
+                        {i18n.t('talkive.profile.uploadImage')}
                     </label>
                     <input
                         onChange={(e) => setName(e.target.value)}
                         value={name}
                         type='text'
-                        placeholder="Seu nome"
+                        placeholder={i18n.t('talkive.profile.yourName')}
                         required
                     />
                     <textarea
                         onChange={(e) => setBio(e.target.value)}
                         value={bio}
-                        placeholder='Escreva sua bio'
+                        placeholder={i18n.t('talkive.profile.writeBio')}
                         required
                         maxLength={300}
                     ></textarea>
-                    <button type='submit'>Salvar</button>
+                    <button type='submit'>{i18n.t('talkive.profile.save')}</button>
                 </form>
-                <img className='profile-pic' src={image ? URL.createObjectURL(image) : prevImage ? prevImage : assets.logo_icon} alt='Logo' />
+                <img className='profile-pic' src={image ? URL.createObjectURL(image) : prevImage ? prevImage : assets.logo_icon} alt={i18n.t('common.logo')} />
             </div>
         </div>
     )

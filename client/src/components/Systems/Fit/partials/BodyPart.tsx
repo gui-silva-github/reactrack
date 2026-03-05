@@ -1,4 +1,5 @@
 import { Stack, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import Icon from "../../../../assets/icons/gym.png"
 
@@ -12,7 +13,8 @@ interface IBodyPart {
 }
 
 const BodyPart: React.FC<IBodyPart> = ({ item, setBodyPart, bodyPart }) => {
-
+    const { t } = useTranslation()
+    
     return (
         <Stack
             component="button"
@@ -62,7 +64,7 @@ const BodyPart: React.FC<IBodyPart> = ({ item, setBodyPart, bodyPart }) => {
                 setBodyPart(item)
             }}
         >
-            <img src={Icon} alt="Halter" style={{ width: '40px', height: '40px' }} />
+            <img src={Icon} alt={t('fit.dumbbellAlt')} style={{ width: '40px', height: '40px' }} />
             <Typography fontSize="24px" fontWeight="bold" color="#3a1212" textTransform="capitalize">
                 {item.name}
             </Typography>

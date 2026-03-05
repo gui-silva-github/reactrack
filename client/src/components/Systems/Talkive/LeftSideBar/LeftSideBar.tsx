@@ -8,6 +8,7 @@ import { redirectTalkiveUrl } from "../../../../api/urls/talkive";
 import { TalkiveContext } from "../../../../context/Talkive/TalkiveContext";
 import type { IUserData, IChatsData } from "../../../../context/Talkive/interfaces";
 import { toast } from "react-toastify";
+import i18n from "../../../../i18n";
 import './LeftSideBar.sass'
 
 type ChatItem = IChatsData & { userData?: IUserData };
@@ -69,7 +70,7 @@ const LeftSideBar: React.FC = () => {
 
     const addChat = async () => {
         if (!user || !userData) {
-            toast.error("Erro: Dados do usuário não disponíveis");
+            toast.error(i18n.t('talkive.errors.userDataNotAvailable'));
             return;
         }
 
@@ -122,7 +123,7 @@ const LeftSideBar: React.FC = () => {
 
     const setChat = async (item: ChatItem) => {
         if (!userData) {
-            toast.error("Erro: Dados do usuário não disponíveis");
+            toast.error(i18n.t('talkive.errors.userDataNotAvailable'));
             return;
         }
 
@@ -189,25 +190,25 @@ const LeftSideBar: React.FC = () => {
         <div className='ls' style={{ display: `${chatVisible ? 'hidden' : ''}` }}>
             <div className="ls-top">
                 <div className="ls-nav">
-                    <img src={assets.logoT} alt="Logo" className="logo" />
+                    <img src={assets.logoT} alt={i18n.t('common.logo')} className="logo" />
                     <div className="menu">
-                        <img src={assets.menu_icon} alt="Ícone de Menu" />
+                        <img src={assets.menu_icon} alt={i18n.t('common.iconAlt')} />
                         <div className="sub-menu">
-                            <p onClick={() => navigate(`${redirectTalkiveUrl}/profile`)}>Editar perfil</p>
+                            <p onClick={() => navigate(`${redirectTalkiveUrl}/profile`)}>{i18n.t('talkive.chat.editProfile')}</p>
                             <hr />
-                            <p onClick={() => logout()}>Logout</p>
+                            <p onClick={() => logout()}>{i18n.t('common.logout')}</p>
                         </div>
                     </div>
                 </div>
                 <div className="ls-search">
-                    <img src={assets.search_icon} alt="Pesquisa" />
-                    <input onChange={inputHandler} type="text" placeholder="Pesquisar" />
+                    <img src={assets.search_icon} alt={i18n.t('talkive.chat.search')} />
+                    <input onChange={inputHandler} type="text" placeholder={i18n.t('talkive.chat.search')} />
                 </div>
             </div>
             <div className="ls-list">
                 {showSearch && user ?
                     <div onClick={addChat} className="friends add-user">
-                        <img src={user.avatar} alt="Usuário" />
+                        <img src={user.avatar} alt={i18n.t('talkive.userAlt')} />
                         <p>{user.name}</p>
                     </div>
                     :
@@ -215,16 +216,16 @@ const LeftSideBar: React.FC = () => {
                         const chatItem = item as ChatItem;
                         return (
                             <div onClick={() => setChat(chatItem)} key={index} className={`friends ${chatItem.messageSeen || chatItem.messageId === messagesId ? "" : "border"}`}>
-                                <img src={chatItem.userData?.avatar || ""} alt="Perfil" />
+                                <img src={chatItem.userData?.avatar || ""} alt={i18n.t('talkive.profileAlt')} />
                                 <div>
                                     <p>{chatItem.userData?.name || ""}</p>
                                     <span>{chatItem.lastMessage}</span>
                                 </div>
                             </div>
                         )
-                    }) : (
+                    }                    ) : (
                         <div className="no-chats">
-                            <p>Nenhuma conversa encontrada</p>
+                            <p>{i18n.t('talkive.chat.noMessageFound')}</p>
                         </div>
                     )
                 }

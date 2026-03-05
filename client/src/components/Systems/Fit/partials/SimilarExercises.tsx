@@ -1,4 +1,5 @@
 import { Box, Stack, Typography } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
 import HorizontalScrollBar from './HorizontalScrollBar'
 import Loader from '../common/Loader'
@@ -10,11 +11,12 @@ interface ISimilarExercisesProps {
 }
 
 const SimilarExercises: React.FC<ISimilarExercisesProps> = ({targetMuscleExercises, equipmentExercises}) => {
+    const { t } = useTranslation()
 
     return (
         <Box sx={{ mt: {lg: '10px', xs: '0'}}}>
             <Typography variant='h3' mb={6} ml={4}>
-                Mesmo grupo muscular
+                {t('fit.sameMuscleGroup')}
             </Typography>
             <Stack direction="row" sx={{p: '2', position: 'relative'}}>
                 {targetMuscleExercises.length ? 
@@ -23,7 +25,7 @@ const SimilarExercises: React.FC<ISimilarExercisesProps> = ({targetMuscleExercis
                 }
             </Stack>
             <Typography variant='h3' mb={6} mt={6} ml={4}>
-                Mesmo equipamento
+                {t('fit.sameEquipment')}
             </Typography>
             <Stack direction="row" sx={{p: '2', position: 'relative'}}>
                 {equipmentExercises.length ?

@@ -1,4 +1,5 @@
 import { useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { useQuery } from "@tanstack/react-query"
 import { fetchEvents } from "../../../../../../utils/systems/queryClient/http"
 import LoadingIndicator from "../../../UI/LoadingIndicator/LoadingIndicator"
@@ -7,6 +8,7 @@ import EventItem from "../../Item/EventItem"
 import classes from "./FindEvent.module.css"
 
 const FindEvent: React.FC = () => {
+    const { t } = useTranslation()
     const searchElement = useRef<HTMLInputElement>(null)
     const [searchTerm, setSearchTerm] = useState<string | undefined>(undefined)
 
@@ -23,18 +25,18 @@ const FindEvent: React.FC = () => {
         }
     }
 
-    let content = <p className={classes.p}>Por favor insira um termo de busca para encontrar eventos.</p>
+    let content = <p className={classes.p}>{t('convene.insertSearchTerm')}</p>
 
     if (isLoading) {
         content = <LoadingIndicator />
     }
 
     if (isError) {
-        content = <ErrorBlock title="Ocorreu um erro" message={(error as any).info?.message || "Falha ao carregar eventos."} />
+        content = <ErrorBlock title={t('convene.errorOccurred')} message={(error as any).info?.message || t('convene.loadEventsError')} />
     }
 
     if (data && data.length === 0) {
-        content = <p className={classes.p}>Nenhum evento foi encontrado!</p>
+        content = <p className={classes.p}>{t('convene.noEventsFound')}</p>
     }
 
     if (data && data.length > 0) {
@@ -52,15 +54,15 @@ const FindEvent: React.FC = () => {
     return (
         <section className={`content-section ${classes.find}`} id="all-events-section">
             <header className={classes.margin}>
-                <h2 className={classes.h2}>Encontre seu próximo evento!</h2>
+                <h2 className={classes.h2}>{t('convene.findNextEvent')}</h2>
                 <form onSubmit={handleSubmit}>
                     <input
                         className={classes.input}
                         type="search"
-                        placeholder="Procurar eventos"
+                        placeholder={t('convene.searchPlaceholder')}
                         ref={searchElement}
                     />
-                    <button className={classes.button}>Procurar</button>
+                    <button className={classes.button}>{t('convene.search')}</button>
                 </form>
             </header>
             {content}

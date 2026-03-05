@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 import classes from "./Crypto.module.css"
 import { CoinContext } from "../../context/Coin/CoinContext"
 import { Link } from "react-router-dom"
@@ -9,7 +10,7 @@ import Paragraph from "../../components/Html/Paragraph/Paragraph"
 import Navbar from "../../components/Systems/Crypto/partials/Navbar"
 
 const Crypto: React.FC = () => {
-
+    const { t } = useTranslation()
     const coinContext = useContext(CoinContext)
 
     const allCoin = coinContext?.allCoin;
@@ -42,10 +43,10 @@ const Crypto: React.FC = () => {
         <Div className={classes.home}>
             <Navbar />
             <Div className={classes.hero}>
-                <Header1 text="Mercado de Criptomoeda" />
-                <Paragraph text="Bem-vindo ao Mercado de Criptomoeda. Explore todas as criptomoedas!" />
+                <Header1 text={t('crypto.title')} />
+                <Paragraph text={t('crypto.subtitle')} />
                 <form onSubmit={searchHandler}>
-                    <input onChange={inputHandler} list="coinlist" value={input} type="text" placeholder="Procure pelas criptomoedas..." required />
+                    <input onChange={inputHandler} list="coinlist" value={input} type="text" placeholder={t('crypto.searchPlaceholder')} required />
 
                     <datalist id="coinlist">
                         {allCoin?.map((item: ICoinData, index: number) => (
@@ -53,24 +54,24 @@ const Crypto: React.FC = () => {
                         ))}
                     </datalist>
 
-                    <button type="submit">Procurar</button>
+                    <button type="submit">{t('crypto.search')}</button>
                 </form>
             </Div>
 
             <Div className={classes['crypto-table']}>
                 <Div className={classes['table-layout']}>
-                    <p>#</p>
-                    <p>Moedas</p>
-                    <p>Preço</p>
-                    <p style={{textAlign: 'center'}}>24H Change</p>
-                    <p className={classes['market-cap']}>Market Cap</p>
+                    <p>{t('crypto.rank')}</p>
+                    <p>{t('crypto.coins')}</p>
+                    <p>{t('crypto.price')}</p>
+                    <p style={{textAlign: 'center'}}>{t('crypto.change24h')}</p>
+                    <p className={classes['market-cap']}>{t('crypto.marketCap')}</p>
                 </Div>
                 {
                     displayCoin.slice(0, 10).map((item: ICoinData, index: number) => (
                         <Link to={`/systems/crypto/coin/${item.id}`} className={classes['table-layout']} key={index}>
                             <p>{item.market_cap_rank}</p>
                             <Div>
-                                <img src={item.image} alt="Logo" />
+                                <img src={item.image} alt={t('crypto.logoAlt')} />
                                 <p>{item.name + ' - ' + item.symbol}</p>
                             </Div>
                             <p>{currency?.symbol} {item.current_price.toLocaleString()}</p>

@@ -1,4 +1,5 @@
 import { MdLocationPin } from "react-icons/md"
+import { useTranslation } from "react-i18next"
 import type { IUserProps } from "../../../../api/projects"
 import { Link } from 'react-router-dom'
 import Div from "../../../Html/Div/Div"
@@ -11,6 +12,7 @@ const User: React.FC<IUserProps> = ({
     followers,
     following,
     location }) => {
+    const { t } = useTranslation()
     return (
         <Div className={classes.user}>
             <img src={avatar_url} alt={login} />
@@ -23,15 +25,15 @@ const User: React.FC<IUserProps> = ({
             )}
             <Div className={classes.stats}>
                 <Div>
-                    <p>Seguidores:</p>
+                    <p>{t('projects.followers')}</p>
                     <p className={classes.number}>{followers}</p>
                 </Div>
                 <Div>
-                    <p>Seguindo:</p>
+                    <p>{t('projects.following')}</p>
                     <p className={classes.number}>{following}</p>
                 </Div>
             </Div>
-            <Link to={`${github}${login}?tab=repositories`} target="_blank">Veja os projetos!</Link>
+            <Link to={`${github}${login}?tab=repositories`} target="_blank">{t('projects.seeProjects')}</Link>
         </Div>
     )
 }

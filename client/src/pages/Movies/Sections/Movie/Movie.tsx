@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
     BsGraphUp,
     BsWallet2,
@@ -15,6 +16,7 @@ import type { ISpecificMovieData } from "../../../../interfaces/systems/movies";
 import './Movie.css';
 
 const Movie: React.FC = () => {
+    const { t } = useTranslation()
     const { id } = useParams();
     const [movie, setMovie] = useState<ISpecificMovieData | null>(null)
 
@@ -47,31 +49,31 @@ const Movie: React.FC = () => {
 
                         <Div className="info">
                             <h3>
-                                <BsWallet2 /> Orçamento:
+                                <BsWallet2 /> {t('movies.budget')}
                             </h3>
                             <Paragraph text={formatCurrency(movie.budget)} />
                         </Div>
                         <Div className="info">
                             <h3>
-                                <BsGraphUp /> Receita:
+                                <BsGraphUp /> {t('movies.revenue')}
                             </h3>
                             <Paragraph text={formatCurrency(movie.revenue)} />
                         </Div>
                         <Div className="info">
                             <h3>
-                                <BsHourglassSplit /> Duração:
+                                <BsHourglassSplit /> {t('movies.duration')}
                             </h3>
-                            <Paragraph text={`${movie.runtime} minutos`} />
+                            <Paragraph text={`${movie.runtime} ${t('movies.minutes')}`} />
                         </Div>
                         <Div className="info">
                             <h3>
-                                <BsCalendar2Check /> Data de Lançamento:
+                                <BsCalendar2Check /> {t('movies.releaseDate')}
                             </h3>
                             <Paragraph text={movie.release_date} />
                         </Div>
                         <Div className="info description">
                             <h3>
-                                <BsFillFileEarmarkTextFill /> Descrição:
+                                <BsFillFileEarmarkTextFill /> {t('movies.description')}
                             </h3>
                             <Paragraph text={movie.overview} />
                         </Div>

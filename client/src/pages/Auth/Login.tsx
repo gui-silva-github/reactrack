@@ -10,6 +10,7 @@ import { loginUser } from "../../api/login";
 import { AppContext } from "../../context/AppContext";
 
 import { toast } from "react-toastify";
+import i18n from "../../i18n";
 
 import mail from "../../assets/svg/mail.svg"
 import lock from "../../assets/svg/lock.svg"
@@ -46,10 +47,10 @@ const Login: React.FC = () => {
             const data = await loginUser(backendUrl, { email, password })
 
             if (data.success) {
-                toast.success(t('auth.loginSuccess'))
+                toast.success(i18n.t('auth.loginSuccess'))
                 setIsLoggedIn(true)
                 getUserData()
-                navigate('/')
+                setTimeout(() => navigate('/'), 150)
             } else {
                 toast.error(data.message)
             }
@@ -63,27 +64,27 @@ const Login: React.FC = () => {
             <Navbar />
             <DivLoginSignUp>
                 <Div className="bg-slate-900 p-10 rounded-lg shadow-lg w-full sm:w-96 text-indigo-300 text-sm">
-                    <Header2 className="text-3xl font-semibold text-white text-center mb-3" text="Login" />
-                    <Paragraph className="text-center text-sm mb-6" text="Logue na sua conta" />
+                    <Header2 className="text-3xl font-semibold text-white text-center mb-3" text={t('auth.login')} />
+                    <Paragraph className="text-center text-sm mb-6" text={t('auth.loginSubtitle')} />
 
                     <form onSubmit={onSubmitHandler}>
                         <Div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
-                            <Image src={mail} alt="Email" />
-                            <input onChange={e => setEmail(e.target.value)} value={email} className="bg-transparent outline-none" type="email" placeholder="E-mail" required />
+                            <Image src={mail} alt={t('auth.email')} />
+                            <input onChange={e => setEmail(e.target.value)} value={email} className="bg-transparent outline-none" type="email" placeholder={t('auth.email')} required />
                         </Div>
 
                         <Div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
-                            <Image src={lock} alt="Senha" />
-                            <input onChange={e => setPassword(e.target.value)} value={password} className="bg-transparent outline-none" type="password" placeholder="Senha" required />
+                            <Image src={lock} alt={t('auth.password')} />
+                            <input onChange={e => setPassword(e.target.value)} value={password} className="bg-transparent outline-none" type="password" placeholder={t('auth.password')} required />
                         </Div>
 
-                        <p onClick={() => navigate('/reset-password')} className="mb-4 text-indigo-500 cursor-pointer">Esqueceu sua senha?</p>
+                        <p onClick={() => navigate('/reset-password')} className="mb-4 text-indigo-500 cursor-pointer">{t('auth.forgotPassword')}</p>
 
-                        <Button className="w-full py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-900 text-white font-medium" text="Login" />
+                        <Button className="w-full py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-900 text-white font-medium" text={t('auth.login')} />
                     </form>
 
-                    <Paragraph className="text-gray-400 text-center text-xs mt-4" text="Não tem uma conta?" />
-                    <span onClick={() => navigate('/signup')} className="text-blue-400 cursor-pointer"> Cadastre-se</span>
+                    <Paragraph className="text-gray-400 text-center text-xs mt-4" text={t('auth.noAccount')} />
+                    <span onClick={() => navigate('/signup')} className="text-blue-400 cursor-pointer"> {t('auth.signupLink')}</span>
                 </Div>
             </DivLoginSignUp>
         </Div>

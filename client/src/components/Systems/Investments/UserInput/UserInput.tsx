@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import type { IUserInput } from "../../../../interfaces/systems/investments"
 import Div from "../../../Html/Div/Div";
 
@@ -9,11 +10,12 @@ interface IUserInputProps {
 }
 
 const UserInput: React.FC<IUserInputProps> = ({ userInput, onChange }) => {
+    const { t } = useTranslation()
     return (
         <section id="user-input">
             <Div className="input-group">
                 <p>
-                    <label htmlFor="investment">Investimento Inicial</label>
+                    <label htmlFor="investment">{t('investments.initialInvestment')}</label>
                     <input
                         type="number" id="investment" required
                         value={userInput.initialInvestment} onChange={(e) => onChange('initialInvestment', e.target.value)}
@@ -28,14 +30,14 @@ const UserInput: React.FC<IUserInputProps> = ({ userInput, onChange }) => {
             </Div>
             <div className="input-group" style={{ marginTop: '1rem' }}>
                 <p>
-                    <label htmlFor="return">Retorno Esperado</label>
+                    <label htmlFor="return">{t('investments.expectedReturn')}</label>
                     <input id="return" type="number" required
                         value={userInput.expectedReturn}
                         onChange={(e) => onChange('expectedReturn', e.target.value)}
                     />
                 </p>
                 <p>
-                    <label htmlFor="duration">Duração</label>
+                    <label htmlFor="duration">{t('investments.duration')}</label>
                     <input id="duration" type="number" required
                         value={userInput.duration}
                         onChange={(e) => onChange('duration', e.target.value)}

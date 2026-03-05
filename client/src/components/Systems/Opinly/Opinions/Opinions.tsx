@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { OpinionsContext } from "../../../../context/Opinly/OpinlyContext";
 import Div from "../../../Html/Div/Div";
 import Opinion from "../Opinion/Opinion"
@@ -8,6 +9,7 @@ import type { IOpinionData } from "../../../../interfaces/systems/opinly";
 import Paragraph from "../../../Html/Paragraph/Paragraph";
 
 const Opinions: React.FC = () => {
+    const { t } = useTranslation()
     const context = useContext(OpinionsContext);
     const opinions = context && 'opinions' in context ? context.opinions : null;
 
@@ -25,7 +27,7 @@ const Opinions: React.FC = () => {
                 )
             }
             {opinions && Array.isArray(opinions) && opinions.length === 0 && (
-                <Paragraph className={classes.none} text="Nenhuma opinião encontrada. Deseja compartilhar sua opinião sobre algo?" />
+                <Paragraph className={classes.none} text={t('opinly.noOpinions')} />
             )}
         </Div>
     )

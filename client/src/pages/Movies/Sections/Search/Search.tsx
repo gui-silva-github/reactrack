@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import MovieCard from "../../../../components/Systems/Movies/MovieCard/MovieCard"
 import type { IMovieData, IMoviesResponse } from "../../../../interfaces/systems/movies"
 import Div from "../../../../components/Html/Div/Div"
@@ -9,6 +10,7 @@ import { apiKey, searchApi } from "../../../../api/urls/movies"
 
 const SearchMovie: React.FC = () => {
     const [searchParams] = useSearchParams()
+    const { t } = useTranslation()
 
     const [movies, setMovies] = useState<IMovieData[] | []>([])
     const query = searchParams.get('q')
@@ -28,9 +30,9 @@ const SearchMovie: React.FC = () => {
     return (
         <Div className="align">
             <Div className="container">
-                <h2 className="title">Resultados para: <span className="query-text">{query}</span></h2>
+                <h2 className="title">{t('movies.resultsFor')} <span className="query-text">{query}</span></h2>
                 <Div className="movies-container">
-                    {movies.length === 0 && <Paragraph text="Carregando..." />}
+                    {movies.length === 0 && <Paragraph text={t('movies.loading')} />}
                     {movies.length > 0 && 
                     movies.map((movie: IMovieData) => <MovieCard key={movie.id} movie={movie} />)}
                 </Div>
