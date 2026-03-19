@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import assets from "../../../../assets/talkive/ts/assets";
-import { logout } from "../../../../api/talkive/config/firebase";
-import { TalkiveContext } from "../../../../context/Talkive/TalkiveContext";
+import assets from "@/assets/talkive/ts/assets";
+import { logout } from "@/api/talkive/config/firebase";
+import { TalkiveContext } from "@/context/Talkive/TalkiveContext";
 import './RightSideBar.sass'
 
 const RightSideBar: React.FC = () => {

@@ -1,4 +1,4 @@
-import type { IUserData } from "../../interfaces/userData"
+import type { IUserData } from "@/interfaces/userData"
 
 export type ThemeMode = 'light' | 'dark'
 

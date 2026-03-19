@@ -1,10 +1,10 @@
 import { useState, type FC, type FormEvent, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
-import ImagePicker from "../../Common/ImagePicker/ImagePicker";
-import { fetchSelectableImages } from "../../../../../utils/systems/queryClient/http";
-import ErrorBlock from "../../UI/ErrorBlock/ErrorBlock";
-import ConveneEvent from "../../../../../models/convene/event";
+import ImagePicker from "@/components/Systems/Convene/Common/ImagePicker/ImagePicker";
+import { fetchSelectableImages } from "@/utils/systems/queryClient/http";
+import ErrorBlock from "@/components/Systems/Convene/UI/ErrorBlock/ErrorBlock";
+import ConveneEvent from "@/models/convene/event";
 import classes from './EventForm.module.css'
 
 interface IEventFormProps {

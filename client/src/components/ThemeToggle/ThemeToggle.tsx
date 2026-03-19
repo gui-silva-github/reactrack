@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { BsSun, BsMoon } from 'react-icons/bs'
-import { AppContext } from '../../context/AppContext'
+import { AppContext } from "@/context/AppContext"
 
 const iconClass = 'w-5 h-5'
 

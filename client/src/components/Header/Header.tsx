@@ -1,19 +1,15 @@
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
-
-import { AppContext } from "../../context/AppContext";
-
-import useNavigateSPA from "../../hooks/routes/useNavigateSPA";
-
-import Image from "../Html/Image/Image"
-import Header2 from "../Html/Header2/Header2";
-import Div from "../Html/Div/Div";
-import Button from "../Html/Button/Button"
-import Paragraph from "../Html/Paragraph/Paragraph";
-import HeaderImg from "../Html/HeaderImg/HeaderImg";
-
-import header from "../../assets/png/header.png"
-import hand from "../../assets/png/hand.png"
+import { AppContext } from "@/context/AppContext";
+import useNavigateSPA from "@/hooks/routes/useNavigateSPA";
+import Image from "@/components/Html/Image/Image";
+import Header2 from "@/components/Html/Header2/Header2";
+import Div from "@/components/Html/Div/Div";
+import Button from "@/components/Html/Button/Button"
+import Paragraph from "@/components/Html/Paragraph/Paragraph";
+import HeaderImg from "@/components/Html/HeaderImg/HeaderImg";
+import header from "@/assets/png/header.png"
+import hand from "@/assets/png/hand.png"
 
 const Header: React.FC = () => {
 

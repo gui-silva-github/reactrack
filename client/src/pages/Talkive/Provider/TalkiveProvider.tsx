@@ -1,10 +1,10 @@
 import { useEffect, useContext, useRef } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../../api/talkive/config/firebase";
-import TalkiveContextProvider, { TalkiveContext } from "../../../context/Talkive/TalkiveContext";
+import { auth } from "@/api/talkive/config/firebase";
+import TalkiveContextProvider, { TalkiveContext } from "@/context/Talkive/TalkiveContext";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { redirectTalkiveUrl } from "../../../api/urls/talkive";
+import { redirectTalkiveUrl } from "@/api/urls/talkive";
 import './index.sass'
 
 const TalkiveProvider: React.FC = () => {
@@ -27,7 +27,6 @@ const TalkiveProviderContent: React.FC = () => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user: any) => {
             if (user) {
-                // Evitar múltiplas chamadas simultâneas
                 if (!dataLoadedRef.current && !isLoadingRef.current && loadUserData) {
                     isLoadingRef.current = true;
                     dataLoadedRef.current = true;
@@ -40,7 +39,6 @@ const TalkiveProviderContent: React.FC = () => {
             } else {
                 dataLoadedRef.current = false;
                 isLoadingRef.current = false;
-                // Só navegar se não estiver já na página de login
                 if (location.pathname !== redirectTalkiveUrl) {
                     navigate(redirectTalkiveUrl);
                 }

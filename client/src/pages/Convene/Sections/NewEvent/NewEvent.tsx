@@ -1,13 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useMutation } from '@tanstack/react-query'
-import Modal from '../../../../components/Systems/Convene/UI/Modal/Modal'
-import EventForm from "../../../../components/Systems/Convene/Events/Form/EventForm"
-import { createNewEvent } from '../../../../utils/systems/queryClient/http'
-import ErrorBlock from '../../../../components/Systems/Convene/UI/ErrorBlock/ErrorBlock'
-import { queryClient } from '../../../../utils/systems/queryClient/http'
-import ConveneEvent from '../../../../models/convene/event'
-import { redirectEvents } from '../../../../api/urls/convene'
+import Modal from '@/components/Systems/Convene/UI/Modal/Modal'
+import EventForm from '@/components/Systems/Convene/Events/Form/EventForm'
+import { createNewEvent } from '@/utils/systems/queryClient/http'
+import ErrorBlock from '@/components/Systems/Convene/UI/ErrorBlock/ErrorBlock'
+import { queryClient } from '@/utils/systems/queryClient/http'
+import ConveneEvent from '@/models/convene/event'
+import { redirectEvents } from '@/api/urls/convene'
 
 const NewEvent: React.FC = () => {
     const { t } = useTranslation()

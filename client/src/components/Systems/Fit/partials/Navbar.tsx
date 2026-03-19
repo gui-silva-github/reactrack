@@ -1,10 +1,11 @@
-import {Link} from 'react-router-dom'
-import {Stack} from '@mui/material'
-
-import Logo from '../assets/images/Logo.png'
-import { urlSystems } from '../../../../api/urls/geral'
+import { useTranslation } from "react-i18next"
+import { Link } from 'react-router-dom'
+import { Stack } from '@mui/material'
+import Logo from '@/assets/images/Logo.png'
+import { urlSystems } from '@/api/urls/geral'
 
 const Navbar: React.FC = () => {
+  const { t } = useTranslation()
   return (
     <div>
         <Stack direction="row" justifyContent="space-around" sx={{gap: {sm: '122px', xs: '40px'}, mt: { sm: '32px', xs: '20px'}, justifyContent: 'none'}} px="20px">
@@ -18,9 +19,9 @@ const Navbar: React.FC = () => {
                 alignItems="flex-end"
             >
                 <Link to="/" style={{textDecoration: "none", color: "#3A1212", borderBottom: "3px solid #ff2625"}}>
-                  Home
+                  {t('fit.home')}
                 </Link>
-                <a href="#exercises" style={{textDecoration: 'none', color: "#3a1212"}}>Exercícios</a>
+                <a href="#exercises" style={{textDecoration: 'none', color: "#3a1212"}}>{t('fit.exercises')}</a>
             </Stack>
         </Stack>
     </div>

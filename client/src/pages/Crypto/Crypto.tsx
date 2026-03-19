@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import classes from "./Crypto.module.css"
-import { CoinContext } from "../../context/Coin/CoinContext"
+import { CoinContext } from "@/context/Coin/CoinContext"
 import { Link } from "react-router-dom"
-import type { ICoinData } from "../../interfaces/systems/crypto"
-import Div from "../../components/Html/Div/Div"
-import Header1 from "../../components/Html/Header1/Header1"
-import Paragraph from "../../components/Html/Paragraph/Paragraph"
-import Navbar from "../../components/Systems/Crypto/partials/Navbar"
+import type { ICoinData } from "@/interfaces/systems/crypto"
+import Div from "@/components/Html/Div/Div"
+import Header1 from "@/components/Html/Header1/Header1"
+import Paragraph from "@/components/Html/Paragraph/Paragraph"
+import Navbar from "@/components/Systems/Crypto/partials/Navbar/Navbar"
 
 const Crypto: React.FC = () => {
     const { t } = useTranslation()

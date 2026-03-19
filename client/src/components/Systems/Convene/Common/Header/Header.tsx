@@ -1,9 +1,11 @@
 import { useIsFetching } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import type { ReactNode } from "react";
-import Div from "../../../../Html/Div/Div";
+import Div from "@/components/Html/Div/Div";
 import classes from "./Header.module.css"
 
 const Header: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const { t } = useTranslation()
     const fetching = useIsFetching()
 
     return (
@@ -13,7 +15,7 @@ const Header: React.FC<{ children: ReactNode }> = ({ children }) => {
             </Div>
             <header className={classes.mainHeader} id="header-title">
                 <Div className={classes.headerTitle}>
-                    <h1>Convene Eventos</h1>
+                    <h1>{t('convene.headerTitle')}</h1>
                 </Div>
                 <nav className={classes.nav}>{children}</nav>
             </header>

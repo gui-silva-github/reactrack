@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState } from "react";
-import { fetchData } from "../../utils/systems/fit";
-import { getCurrency } from "../../api/urls/coin";
-import type { ICurrency } from "../../interfaces/systems/crypto";
-import type { ICoinContext } from "../../interfaces/context/coin";
+import { fetchData } from "@/utils/systems/fit";
+import { getCurrency } from "@/api/urls/coin";
+import type { ICurrency } from "@/interfaces/systems/crypto";
+import type { ICoinContext } from "@/interfaces/context/coin";
 
 export const CoinContext = createContext<ICoinContext | null>(null)
 

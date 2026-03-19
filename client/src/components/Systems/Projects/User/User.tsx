@@ -1,9 +1,9 @@
 import { MdLocationPin } from "react-icons/md"
 import { useTranslation } from "react-i18next"
-import type { IUserProps } from "../../../../api/projects"
+import type { IUserProps } from "@/api/projects"
 import { Link } from 'react-router-dom'
-import Div from "../../../Html/Div/Div"
-import { github } from "../../../../api/urls/projects"
+import Div from "@/components/Html/Div/Div"
+import { github } from "@/api/urls/projects"
 import classes from './User.module.css'
 
 const User: React.FC<IUserProps> = ({

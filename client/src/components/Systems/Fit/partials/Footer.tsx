@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import Logo from '../assets/images/Logo-1.png'
+import Logo from '@/assets/images/Logo-1.png'
 
 const Footer: React.FC = () => {
   const { t } = useTranslation()

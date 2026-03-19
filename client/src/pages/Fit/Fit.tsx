@@ -1,11 +1,9 @@
 import { useState } from "react"
 import { Box } from "@mui/material"
-
-import HeroBanner from "../../components/Systems/Fit/partials/HeroBanner"
-import SearchExercises from "../../components/Systems/Fit/SearchExercises"
-import Exercises from "../../components/Systems/Fit/Exercises"
-
-import type { IBodyPartData, IExercisesData } from "../../interfaces/systems/fit"
+import HeroBanner from "@/components/Systems/Fit/partials/HeroBanner"
+import SearchExercises from "@/components/Systems/Fit/SearchExercises"
+import Exercises from "@/components/Systems/Fit/Exercises"
+import type { IBodyPartData, IExercisesData } from "@/interfaces/systems/fit"
 
 const Fit: React.FC = () => {
 

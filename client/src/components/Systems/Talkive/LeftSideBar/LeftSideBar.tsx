@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from "react";
-import assets from "../../../../assets/talkive/ts/assets";
+import assets from "@/assets/talkive/ts/assets";
 import { useNavigate } from "react-router-dom";
 import { arrayUnion, collection, getDocs, query, serverTimestamp, setDoc, updateDoc, where, doc, getDoc } from "firebase/firestore";
-import { db } from "../../../../api/talkive/config/firebase";
-import { logout } from "../../../../api/talkive/config/firebase";
-import { redirectTalkiveUrl } from "../../../../api/urls/talkive";
-import { TalkiveContext } from "../../../../context/Talkive/TalkiveContext";
-import type { IUserData, IChatsData } from "../../../../context/Talkive/interfaces";
+import { db } from "@/api/talkive/config/firebase";
+import { logout } from "@/api/talkive/config/firebase";
+import { redirectTalkiveUrl } from "@/api/urls/talkive";
+import { TalkiveContext } from "@/context/Talkive/TalkiveContext";
+import type { IUserData, IChatsData } from "@/context/Talkive/interfaces";
 import { toast } from "react-toastify";
-import i18n from "../../../../i18n";
+import i18n from "@/i18n";
 import './LeftSideBar.sass'
 
 type ChatItem = IChatsData & { userData?: IUserData };
@@ -154,7 +154,7 @@ const LeftSideBar: React.FC = () => {
                 }
             }
         } catch (error: any) {
-            console.error('Erro ao atualizar messageSeen:', error)
+            console.error('Error updating messageSeen:', error)
         }
     }
 

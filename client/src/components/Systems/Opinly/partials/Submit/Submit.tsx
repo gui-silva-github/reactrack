@@ -1,5 +1,5 @@
 import { useFormStatus } from "react-dom"
-import i18n from "../../../../i18n"
+import i18n from "@/i18n"
 import classes from "./Submit.module.css"
 
 const Submit: React.FC = () => {

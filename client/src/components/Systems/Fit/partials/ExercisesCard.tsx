@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-
 import { Button, Stack, Typography } from "@mui/material";
-import type { IExercisesData } from "../../../../interfaces/systems/fit";
+import type { IExercisesData } from "@/interfaces/systems/fit";
 
 interface IExerciseCard {
     exercise: IExercisesData

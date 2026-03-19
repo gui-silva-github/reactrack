@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
-import type { IUserInput } from "../../../../interfaces/systems/investments"
-import Div from "../../../Html/Div/Div";
+import type { IUserInput } from "@/interfaces/systems/investments"
+import Div from "@/components/Html/Div/Div";
 
 type InputIdentifier = 'initialInvestment' | 'annualInvestment' | 'expectedReturn' | 'duration'
 
@@ -22,7 +22,7 @@ const UserInput: React.FC<IUserInputProps> = ({ userInput, onChange }) => {
                     />
                 </p>
                 <p>
-                    <label htmlFor="investmentA">Investimento Anual</label>
+                    <label htmlFor="investmentA">{t('investments.annualInvestment')}</label>
                     <input id="investmentA" type="number" required
                         value={userInput.annualInvestment}
                         onChange={(e) => onChange('annualInvestment', e.target.value)} />

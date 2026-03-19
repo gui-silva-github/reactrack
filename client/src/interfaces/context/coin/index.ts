@@ -1,4 +1,4 @@
-import type { ICoinData, ICurrency } from "../../systems/crypto";
+import type { ICoinData, ICurrency } from "@/interfaces/systems/crypto";
 
 export interface ICoinContext {
     allCoin: ICoinData[];

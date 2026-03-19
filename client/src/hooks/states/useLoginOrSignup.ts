@@ -1,5 +1,5 @@
-import type { LoginSignupReturn } from "../../interfaces/loginSignupReturn"
-import type { IMethodSign } from "../../interfaces/methodSign"
+import type { LoginSignupReturn } from "@/interfaces/loginSignupReturn"
+import type { IMethodSign } from "@/interfaces/methodSign"
 import { useState } from "react"
 
 const useLoginOrSignup = (state: IMethodSign): LoginSignupReturn => {

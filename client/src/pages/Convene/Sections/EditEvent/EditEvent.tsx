@@ -1,14 +1,14 @@
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import i18n from "../../../../i18n"
+import i18n from "@/i18n"
 import { useQuery, useMutation } from "@tanstack/react-query"
-import Modal from "../../../../components/Systems/Convene/UI/Modal/Modal"
-import EventForm from "../../../../components/Systems/Convene/Events/Form/EventForm"
-import { fetchEvent, updateEvent, queryClient } from "../../../../utils/systems/queryClient/http"
-import ErrorBlock from "../../../../components/Systems/Convene/UI/ErrorBlock/ErrorBlock"
+import Modal from "@/components/Systems/Convene/UI/Modal/Modal"
+import EventForm from "@/components/Systems/Convene/Events/Form/EventForm"
+import { fetchEvent, updateEvent, queryClient } from "@/utils/systems/queryClient/http"
+import ErrorBlock from "@/components/Systems/Convene/UI/ErrorBlock/ErrorBlock"
 import type { FC } from "react"
 import type { LoaderFunctionArgs } from "react-router-dom"
-import ConveneEvent from "../../../../models/convene/event"
+import ConveneEvent from "@/models/convene/event"
 
 const EditEvent: FC = () => {
     const navigate = useNavigate()

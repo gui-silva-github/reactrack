@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom"
-import Div from "../../components/Html/Div/Div"
-import NavbarSystems from "../../components/NavbarSystems/NavbarSystems"
-import HeaderSystems from "../../components/HeaderSystems/HeaderSystems"
+import Div from "@/components/Html/Div/Div"
+import NavbarSystems from "@/components/NavbarSystems/NavbarSystems"
+import HeaderSystems from "@/components/HeaderSystems/HeaderSystems"
 
 const SystemsLayout: React.FC = () => {
 

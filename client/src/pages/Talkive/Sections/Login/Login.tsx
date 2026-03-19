@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { signup, login, resetPass } from '../../../../api/talkive/config/firebase'
-import { TalkiveContext } from '../../../../context/Talkive/TalkiveContext'
+import { signup, login, resetPass } from '@/api/talkive/config/firebase'
+import { TalkiveContext } from '@/context/Talkive/TalkiveContext'
 import './Login.sass'
 
 type ICurrentState = 'Cadastrar-se' | 'Login'

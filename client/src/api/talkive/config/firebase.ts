@@ -3,7 +3,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, si
 import { getFirestore, setDoc, doc, collection, query, getDocs, where } from "firebase/firestore"
 import type { ISignupFirebase, ILoginFirebase, IResetPasswordFirebase } from "./interfaces"
 import { toast } from "react-toastify"
-import i18n from "../../../i18n"
+import i18n from "@/i18n"
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY || '',

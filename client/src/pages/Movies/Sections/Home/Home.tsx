@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import MovieCard from "../../../../components/Systems/Movies/MovieCard/MovieCard";
-import { api, apiKey } from "../../../../api/urls/movies";
-import type { IMovieData, IMoviesResponse } from "../../../../interfaces/systems/movies";
-import Div from "../../../../components/Html/Div/Div";
-import Header2 from "../../../../components/Html/Header2/Header2";
-import Paragraph from "../../../../components/Html/Paragraph/Paragraph";
+import MovieCard from "@/components/Systems/Movies/MovieCard/MovieCard";
+import { api, apiKey } from "@/api/urls/movies";
+import type { IMovieData, IMoviesResponse } from "@/interfaces/systems/movies";
+import Div from "@/components/Html/Div/Div";
+import Header2 from "@/components/Html/Header2/Header2";
+import Paragraph from "@/components/Html/Paragraph/Paragraph";
 import './Home.css'
 
 const HomeMovie: React.FC = () => {

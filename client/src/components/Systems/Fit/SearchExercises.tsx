@@ -1,16 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useTranslation } from "react-i18next";
-
 import { Box, Button, Stack, TextField, Typography } from "@mui/material"
-
-import { fetchData } from "../../../utils/systems/fit";
-import { AppContext } from "../../../context/AppContext";
-
+import { fetchData } from "@/utils/systems/fit";
+import { AppContext } from "@/context/AppContext";
 import HorizontalScrollBar from "./partials/HorizontalScrollBar"
-import { bodyPartList, searchExercise } from "../../../api/urls/fit";
-import type { IBodyPartData, IBodyPartsDataAPI, IExerciseSearchDataAPI, IExercisesData } from "../../../interfaces/systems/fit";
+import { bodyPartList, searchExercise } from "@/api/urls/fit";
+import type { IBodyPartData, IBodyPartsDataAPI, IExerciseSearchDataAPI, IExercisesData } from "@/interfaces/systems/fit";
 import { toast } from "react-toastify";
-import i18n from "../../../i18n";
+import i18n from "@/i18n";
 
 interface ISearchExercisesProps {
     setExercises: React.Dispatch<React.SetStateAction<IExercisesData[]>>;

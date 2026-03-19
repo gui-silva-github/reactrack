@@ -1,4 +1,4 @@
-import type { IParagraphProps } from "../../../interfaces/paragraph"
+import type { IParagraphProps } from "@/interfaces/paragraph"
 
 const Paragraph: React.FC<IParagraphProps> = ({className, text}) => {
     return (

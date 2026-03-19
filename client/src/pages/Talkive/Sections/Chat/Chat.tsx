@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import LeftSideBar from "../../../../components/Systems/Talkive/LeftSideBar/LeftSideBar"
-import ChatBox from "../../../../components/Systems/Talkive/ChatBox/ChatBox"
-import RightSideBar from "../../../../components/Systems/Talkive/RightSideBar/RightSideBar"
-import { TalkiveContext } from "../../../../context/Talkive/TalkiveContext"
+import LeftSideBar from "@/components/Systems/Talkive/LeftSideBar/LeftSideBar"
+import ChatBox from "@/components/Systems/Talkive/ChatBox/ChatBox"
+import RightSideBar from "@/components/Systems/Talkive/RightSideBar/RightSideBar"
+import { TalkiveContext } from "@/context/Talkive/TalkiveContext"
 import './Chat.sass'
 
 const ChatTalkive: React.FC = () => {

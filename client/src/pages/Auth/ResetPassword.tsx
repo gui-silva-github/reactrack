@@ -1,26 +1,21 @@
 import { useState, useRef } from "react";
-import { useTranslation } from "react-i18next";
-
-import useGetBackendUrl from "../../hooks/backend/useGetBackendUrl";
-import useNavigateSPA from "../../hooks/routes/useNavigateSPA";
-import useResetPassword from "../../hooks/states/useResetPassword";
-
-import { sendResetOtp } from "../../api/resetOtp";
-import { sendResetPassword } from "../../api/resetPassword";
-
+import { useTranslation } from "react-i18next"; 
+import useGetBackendUrl from "@/hooks/backend/useGetBackendUrl";
+import useNavigateSPA from "@/hooks/routes/useNavigateSPA";
+import useResetPassword from "@/hooks/states/useResetPassword";
+import { sendResetOtp } from "@/api/resetOtp";
+import { sendResetPassword } from "@/api/resetPassword";
 import { toast } from "react-toastify";
-import i18n from "../../i18n";
-
-import mail from "../../assets/svg/mail.svg"
-import lock from "../../assets/svg/lock.svg"
-
-import DivEmailReset from "../../components/DivEmailReset/DivEmailReset";
-import Header1 from "../../components/Html/Header1/Header1";
-import Paragraph from "../../components/Html/Paragraph/Paragraph";
-import Div from "../../components/Html/Div/Div";
-import Image from "../../components/Html/Image/Image";
-import Button from "../../components/Html/Button/Button";
-import Navbar from "../../components/Navbar/Navbar";
+import i18n from "@/i18n";
+import mail from "@/assets/svg/mail.svg"
+import lock from "@/assets/svg/lock.svg"
+import DivEmailReset from "@/components/DivEmailReset/DivEmailReset";
+import Header1 from "@/components/Html/Header1/Header1";
+import Paragraph from "@/components/Html/Paragraph/Paragraph";
+import Div from "@/components/Html/Div/Div";
+import Image from "@/components/Html/Image/Image";
+import Button from "@/components/Html/Button/Button";
+import Navbar from "@/components/Navbar/Navbar";
 
 const ResetPassword: React.FC = () => {
 

@@ -8,11 +8,11 @@ import {
     BsFillFileEarmarkTextFill,
     BsCalendar2Check
 } from 'react-icons/bs';
-import MovieCard from "../../../../components/Systems/Movies/MovieCard/MovieCard";
-import Div from "../../../../components/Html/Div/Div";
-import Paragraph from "../../../../components/Html/Paragraph/Paragraph";
-import { api, apiKey } from "../../../../api/urls/movies";
-import type { ISpecificMovieData } from "../../../../interfaces/systems/movies";
+import MovieCard from "@/components/Systems/Movies/MovieCard/MovieCard";
+import Div from "@/components/Html/Div/Div";
+import Paragraph from "@/components/Html/Paragraph/Paragraph";
+import { api, apiKey } from "@/api/urls/movies";
+import type { ISpecificMovieData } from "@/interfaces/systems/movies";
 import './Movie.css';
 
 const Movie: React.FC = () => {

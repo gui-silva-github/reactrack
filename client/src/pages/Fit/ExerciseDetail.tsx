@@ -1,19 +1,14 @@
 import { useEffect, useState, useContext } from "react";
 import { useTranslation } from "react-i18next";
-
 import { useParams } from "react-router-dom";
-
-import { fetchData } from "../../utils/systems/fit";
-import { AppContext } from "../../context/AppContext";
-
-import Detail from "../../components/Systems/Fit/Detail"
-import SimilarExercises from "../../components/Systems/Fit/partials/SimilarExercises"
-
+import { fetchData } from "@/utils/systems/fit";
+import { AppContext } from "@/context/AppContext";
+import Detail from "@/components/Systems/Fit/Detail"
+import SimilarExercises from "@/components/Systems/Fit/partials/SimilarExercises"
 import { Box } from "@mui/material";
-
-import { exerciseSpecific, similarExercises } from "../../api/urls/fit";
-import type { IExercisesData } from "../../interfaces/systems/fit";
-import Loader from "../../components/Systems/Fit/common/Loader";
+import { exerciseSpecific, similarExercises } from "@/api/urls/fit";
+import type { IExercisesData } from "@/interfaces/systems/fit";
+import Loader from "@/components/Systems/Fit/common/Loader";
 
 const ExerciseDetail: React.FC = () => {
 

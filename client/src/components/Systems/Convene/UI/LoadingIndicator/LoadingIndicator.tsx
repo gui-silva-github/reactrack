@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import Div from "../../../../Html/Div/Div"
+import Div from "@/components/Html/Div/Div"
 import classes from "./LoadingIndicator.module.css"
 
 const LoadingIndicator: FC = () => {

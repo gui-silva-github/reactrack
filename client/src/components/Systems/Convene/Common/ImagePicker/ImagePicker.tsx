@@ -1,4 +1,5 @@
-import { conveneImagesEndpoint } from "../../../../../api/urls/convene";
+import { useTranslation } from "react-i18next";
+import { conveneImagesEndpoint } from "@/api/urls/convene";
 import classes from "./ImagePicker.module.css"
 
 type Image = {
@@ -13,9 +14,10 @@ interface IImagePickerProps {
 }
 
 const ImagePicker: React.FC<IImagePickerProps> = ({ images, selectedImage, onSelect}) => {
+    const { t } = useTranslation()
     return (
         <div id="image-picker">
-            <p className={classes.p}>Selecione uma imagem</p>
+            <p className={classes.p}>{t('convene.selectImage')}</p>
             <ul className={classes.ul}>
                 {images.map((image) => (
                     <li

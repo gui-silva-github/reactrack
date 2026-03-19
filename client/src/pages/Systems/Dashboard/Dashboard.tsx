@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
-import useNavigateSPA from '../../../hooks/routes/useNavigateSPA'
-import Div from '../../../components/Html/Div/Div'
+import useNavigateSPA from '@/hooks/routes/useNavigateSPA'
+import Div from '@/components/Html/Div/Div'
 
 const sections = [
   { key: 'talkive', path: '/systems/talkive' },

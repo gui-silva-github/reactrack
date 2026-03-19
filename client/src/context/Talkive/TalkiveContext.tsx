@@ -2,8 +2,8 @@ import React, { createContext, useEffect, useState, useRef, useMemo, useCallback
 import type { TalkiveContextProviderProps, TalkiveContextType } from "./interfaces";
 import type { IUserData, IChatsData, IMessage } from "./interfaces";
 import { doc, getDoc, onSnapshot, updateDoc, setDoc } from "firebase/firestore"
-import { redirectTalkiveUrl } from "../../api/urls/talkive";
-import { auth, db } from "../../api/talkive/config/firebase";
+import { redirectTalkiveUrl } from "@/api/urls/talkive";
+import { auth, db } from "@/api/talkive/config/firebase";
 import { useNavigate } from "react-router-dom";
 
 export const TalkiveContext = createContext<TalkiveContextType | null>(null);
@@ -51,7 +51,7 @@ const TalkiveContextProvider: React.FC<TalkiveContextProviderProps> = ({ childre
             }
 
             if (!userData) {
-                console.error('Erro: Não foi possível obter dados do usuário')
+                console.error('Error: Unable to get user data')
                 return
             }
 
@@ -86,12 +86,12 @@ const TalkiveContextProvider: React.FC<TalkiveContextProviderProps> = ({ childre
                             lastSeen: Date.now()
                         })
                     } catch (error) {
-                        console.error('Erro ao atualizar lastSeen:', error)
+                        console.error('Error updating lastSeen:', error)
                     }
                 }
             }, 60000)
         } catch (error){
-            console.error('Erro ao carregar dados do usuário:', error)
+            console.error('Error loading user data:', error)
         }
     }, [navigate])
 
@@ -118,7 +118,7 @@ const TalkiveContextProvider: React.FC<TalkiveContextProviderProps> = ({ childre
                                 userCacheRef.current.set(userId, userData)
                             }
                         } catch (error) {
-                            console.error('Erro ao buscar dados do usuário no chat:', error)
+                            console.error('Error fetching user data in chat:', error)
                         }
                     })
                     

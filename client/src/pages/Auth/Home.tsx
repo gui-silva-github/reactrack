@@ -1,6 +1,6 @@
-import Div from "../../components/Html/Div/Div";
-import Navbar from "../../components/Navbar/Navbar";
-import Header from "../../components/Header/Header";
+import Div from "@/components/Html/Div/Div";
+import Navbar from "@/components/Navbar/Navbar";
+import Header from "@/components/Header/Header";
 
 const Home: React.FC = () => {
 

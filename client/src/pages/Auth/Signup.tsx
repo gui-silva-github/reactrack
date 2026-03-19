@@ -1,28 +1,22 @@
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
-
-import { AppContext } from "../../context/AppContext";
-
-import useGetBackendUrl from "../../hooks/backend/useGetBackendUrl";
-import useNavigateSPA from "../../hooks/routes/useNavigateSPA";
-import useLoginOrSignup from "../../hooks/states/useLoginOrSignup";
-
+import { AppContext } from "@/context/AppContext";
+import useGetBackendUrl from "@/hooks/backend/useGetBackendUrl";
+import useNavigateSPA from "@/hooks/routes/useNavigateSPA";
+import useLoginOrSignup from "@/hooks/states/useLoginOrSignup";
 import { toast } from "react-toastify";
-import i18n from "../../i18n";
-
-import { registerUser } from "../../api/register";
-
-import person from "../../assets/svg/person.svg"
-import mail from "../../assets/svg/mail.svg"
-import lock from "../../assets/svg/lock.svg"
-
-import DivLoginSignUp from "../../components/DivLoginSignUp/DivLoginSignUp";
-import Div from "../../components/Html/Div/Div";
-import Header2 from "../../components/Html/Header2/Header2";
-import Paragraph from "../../components/Html/Paragraph/Paragraph";
-import Image from "../../components/Html/Image/Image";
-import Button from "../../components/Html/Button/Button";
-import Navbar from "../../components/Navbar/Navbar";
+import i18n from "@/i18n";
+import { registerUser } from "@/api/register";
+import person from "@/assets/svg/person.svg"
+import mail from "@/assets/svg/mail.svg"
+import lock from "@/assets/svg/lock.svg"
+import DivLoginSignUp from "@/components/DivLoginSignUp/DivLoginSignUp";
+import Div from "@/components/Html/Div/Div";
+import Header2 from "@/components/Html/Header2/Header2";
+import Paragraph from "@/components/Html/Paragraph/Paragraph";
+import Image from "@/components/Html/Image/Image";
+import Button from "@/components/Html/Button/Button";
+import Navbar from "@/components/Navbar/Navbar";
 
 const Signup: React.FC = () => {
 

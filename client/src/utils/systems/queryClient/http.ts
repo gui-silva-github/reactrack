@@ -1,8 +1,8 @@
 import { QueryClient } from "@tanstack/react-query"
-import ConveneEvent from "../../../models/convene/event"
-import ConveneImage from "../../../models/convene/images"
-import type { HttpError } from "../../../interfaces/httpError"
-import { conveneEndpoint } from "../../../api/urls/convene"
+import ConveneEvent from "@/models/convene/event"
+import ConveneImage from "@/models/convene/images"
+import type { HttpError } from "@/interfaces/httpError"
+import { conveneEndpoint } from "@/api/urls/convene"
 
 export const queryClient = new QueryClient()
 

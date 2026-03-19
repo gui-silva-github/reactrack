@@ -1,10 +1,10 @@
-import Search from '../../components/Systems/Projects/Search/Search'
-import User from '../../components/Systems/Projects/User/User'
-import Error from '../../components/Systems/Projects/Error/Error'
-import Div from '../../components/Html/Div/Div'
+import Search from "@/components/Systems/Projects/Search/Search"
+import User from "@/components/Systems/Projects/User/User"
+import Error from "@/components/Systems/Projects/Error/Error"
+import Div from "@/components/Html/Div/Div"
 import { useState } from 'react'
-import type { IUserProps } from '../../api/projects'
-import { projectsGitHubEndpoint } from '../../api/urls/projects'
+import type { IUserProps } from "@/api/projects"
+import { projectsGitHubEndpoint } from "@/api/urls/projects"
 
 const HomeProjects: React.FC = () => {
 

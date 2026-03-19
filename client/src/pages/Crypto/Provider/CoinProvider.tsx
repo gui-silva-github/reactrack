@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import CoinContextProvider from "../../../context/Coin/CoinContext"
+import CoinContextProvider from "@/context/Coin/CoinContext"
 
 const CoinProvider: React.FC = () => {
 

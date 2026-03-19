@@ -1,4 +1,4 @@
-import Div from "../../../../Html/Div/Div"
+import Div from "@/components/Html/Div/Div"
 import classes from "./ErrorBlock.module.css"
 
 const ErrorBlock: React.FC<{title: string, message: string, errors?: any[]}> = ({title, message, errors}) => {

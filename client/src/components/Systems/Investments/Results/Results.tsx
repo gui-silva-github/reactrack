@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import i18n from "../../../../i18n";
-import { calculateInvestmentResults, formatter } from "../../../../utils/systems/investments";
-import type { IAnnualData, IUserInput } from "../../../../interfaces/systems/investments";
+import i18n from "@/i18n";
+import { calculateInvestmentResults, formatter } from "@/utils/systems/investments";
+import type { IAnnualData, IUserInput } from "@/interfaces/systems/investments";
 import Chart from "react-google-charts"
-import Div from "../../../Html/Div/Div";
+import Div from "@/components/Html/Div/Div";
 
 interface IResultsProps {
     input: IUserInput

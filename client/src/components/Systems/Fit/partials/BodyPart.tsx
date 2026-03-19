@@ -1,10 +1,8 @@
 import { Stack, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
-
-import Icon from "../../../../assets/icons/gym.png"
-
-import { abdominals, biceps, calves, foreArms, lats, muscleWikiUrl, quads } from "../../../../api/urls/fit";
-import type { IBodyPartData } from "../../../../interfaces/systems/fit";
+import Icon from "@/assets/icons/gym.png"
+import { abdominals, biceps, calves, foreArms, lats, muscleWikiUrl, quads } from "@/api/urls/fit";
+import type { IBodyPartData } from "@/interfaces/systems/fit";
 
 interface IBodyPart {
     item: IBodyPartData;

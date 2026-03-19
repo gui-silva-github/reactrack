@@ -1,10 +1,10 @@
 import { useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useQuery } from "@tanstack/react-query"
-import { fetchEvents } from "../../../../../../utils/systems/queryClient/http"
-import LoadingIndicator from "../../../UI/LoadingIndicator/LoadingIndicator"
-import ErrorBlock from "../../../UI/ErrorBlock/ErrorBlock"
-import EventItem from "../../Item/EventItem"
+import { fetchEvents } from "@/utils/systems/queryClient/http"
+import LoadingIndicator from "@/components/Systems/Convene/UI/LoadingIndicator/LoadingIndicator"
+import ErrorBlock from "@/components/Systems/Convene/UI/ErrorBlock/ErrorBlock"
+import EventItem from "@/components/Systems/Convene/Events/Item/EventItem"
 import classes from "./FindEvent.module.css"
 
 const FindEvent: React.FC = () => {

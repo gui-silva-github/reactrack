@@ -1,6 +1,6 @@
 import { Typography, Stack, Button } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import type { IExercisesData } from "../../../interfaces/systems/fit";
+import type { IExercisesData } from "@/interfaces/systems/fit";
 import { FaDumbbell } from "react-icons/fa";
 import { GiMuscleUp } from "react-icons/gi";
 import { FaWeight } from "react-icons/fa";

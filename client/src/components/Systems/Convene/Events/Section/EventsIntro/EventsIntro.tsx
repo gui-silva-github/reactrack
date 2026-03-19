@@ -1,18 +1,20 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom"
 import classes from "./EventsIntro.module.css"
 
 const EventsIntro: React.FC = () => {
+    const { t } = useTranslation()
 
     return (
         <section className={`${classes.overviewSection} content-section`}>
             <h2 className={classes.overh2}>
-                Conecte-se com pessoas incríveis <br /> ou
-                <strong className={classes.overStrong}> descubra uma nova paixão</strong>
+                {t('convene.introConnect')} <br /> {t('convene.introOr')}{' '}
+                <strong className={classes.overStrong}> {t('convene.introDiscover')}</strong>
             </h2>
-            <p className={classes.overP}>Qualquer um pode organizar e gerenciar eventos no Convene</p>
+            <p className={classes.overP}>{t('convene.introDescription')}</p>
             <p className={classes.overP}>
                 <Link to="/systems/convene/events/new" className="button">
-                    Crie seu primeiro evento
+                    {t('convene.createFirstEvent')}
                 </Link>
             </p>
         </section>

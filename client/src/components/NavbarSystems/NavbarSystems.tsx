@@ -1,14 +1,12 @@
 import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import useNavigateSPA from "../../hooks/routes/useNavigateSPA";
-
-import { AppContext } from "../../context/AppContext";
-
-import icon from "../../assets/jpg/icon.jpg"
-import Div from "../Html/Div/Div";
-import Image from "../Html/Image/Image";
-import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import useNavigateSPA from "@/hooks/routes/useNavigateSPA";
+import { AppContext } from "@/context/AppContext";
+import icon from "@/assets/jpg/icon.jpg"
+import Div from "@/components/Html/Div/Div";
+import Image from "@/components/Html/Image/Image";
+import ThemeToggle from "@/components/ThemeToggle/ThemeToggle";
 
 const navLinkKeys: { key: string; path: string }[] = [
     { key: "talkive", path: "/systems/talkive" },

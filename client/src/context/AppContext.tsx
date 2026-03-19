@@ -1,10 +1,10 @@
 import axios from "axios"
 import { createContext, useEffect, useState } from "react"
 import { toast } from "react-toastify"
-import type { IAppContext, ThemeMode } from "../interfaces/context"
-import type { IUserData } from "../interfaces/userData"
-import { getUserDataAPI } from "../api/userData"
-import { getAuthStateAPI } from "../api/authState"
+import type { IAppContext, ThemeMode } from "@/interfaces/context"
+import type { IUserData } from "@/interfaces/userData"
+import { getUserDataAPI } from "@/api/userData"
+import { getAuthStateAPI } from "@/api/authState"
 
 const THEME_STORAGE_KEY = 'reactrack-theme'
 

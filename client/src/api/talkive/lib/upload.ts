@@ -1,4 +1,4 @@
-import { cloudinaryConfig, CLOUDINARY_UPLOAD_URL } from "../config/cloudinary"
+import { cloudinaryConfig, CLOUDINARY_UPLOAD_URL } from "@/api/talkive/config/cloudinary"
 
 const upload = async (file: File): Promise<string> => {
     try {

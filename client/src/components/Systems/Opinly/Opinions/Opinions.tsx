@@ -1,12 +1,11 @@
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { OpinionsContext } from "../../../../context/Opinly/OpinlyContext";
-import Div from "../../../Html/Div/Div";
+import { OpinionsContext } from "@/context/Opinly/OpinlyContext";
+import Div from "@/components/Html/Div/Div";
 import Opinion from "../Opinion/Opinion"
-
 import classes from "./Opinions.module.css"
-import type { IOpinionData } from "../../../../interfaces/systems/opinly";
-import Paragraph from "../../../Html/Paragraph/Paragraph";
+import type { IOpinionData } from "@/interfaces/systems/opinly";
+import Paragraph from "@/components/Html/Paragraph/Paragraph";
 
 const Opinions: React.FC = () => {
     const { t } = useTranslation()

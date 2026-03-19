@@ -1,17 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import { useTranslation } from "react-i18next";
-
 import { Pagination } from "@mui/material";
-
 import { Box, Stack } from "@mui/material"
-
-import { fetchData } from "../../../utils/systems/fit";
-import { AppContext } from "../../../context/AppContext";
-
+import { fetchData } from "@/utils/systems/fit";
+import { AppContext } from "@/context/AppContext";
 import ExercisesCard from "./partials/ExercisesCard"
-import { bodyPartSpecific } from "../../../api/urls/fit";
-
-import type { IBodyPartData, IExercisesData, IExercisesDataAPI } from "../../../interfaces/systems/fit";
+import { bodyPartSpecific } from "@/api/urls/fit";
+import type { IBodyPartData, IExercisesData, IExercisesDataAPI } from "@/interfaces/systems/fit";
 
 interface IExercisesProps {
     exercises: IExercisesData[];

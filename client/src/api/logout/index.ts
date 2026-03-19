@@ -1,8 +1,6 @@
 import axios from "axios"
-
-import { commonAxiosConfig } from "../../utils/commonAxios"
-
-import type { IPostResponse } from "../interfaces/responses/post"
+import { commonAxiosConfig } from "@/utils/commonAxios"
+import type { IPostResponse } from "@/api/interfaces/responses/post"
 
 export const logoutAPI = async (backendUrl: string): Promise<IPostResponse> => {
     commonAxiosConfig()

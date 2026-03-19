@@ -1,8 +1,8 @@
 import { useState, type KeyboardEvent } from "react"
 import { useTranslation } from "react-i18next"
 import { BsSearch } from "react-icons/bs"
-import Div from "../../../Html/Div/Div"
-import Paragraph from "../../../Html/Paragraph/Paragraph"
+import Div from "@/components/Html/Div/Div"
+import Paragraph from "@/components/Html/Paragraph/Paragraph"
 import Spinner from "../Spinner/Spinner"
 import classes from './Search.module.css'
 

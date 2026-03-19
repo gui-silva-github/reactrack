@@ -1,20 +1,17 @@
 import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import useGetBackendUrl from "../../hooks/backend/useGetBackendUrl";
-import { logoutAPI } from "../../api/logout";
-import { sendVerifyOtp } from "../../api/verifyEmail";
-import useNavigateSPA from "../../hooks/routes/useNavigateSPA";
-
-import { AppContext } from "../../context/AppContext";
-
+import useGetBackendUrl from "@/hooks/backend/useGetBackendUrl";
+import { logoutAPI } from "@/api/logout";
+import { sendVerifyOtp } from "@/api/verifyEmail";
+import useNavigateSPA from "@/hooks/routes/useNavigateSPA";
+import { AppContext } from "@/context/AppContext";
 import { toast } from "react-toastify"
-
-import icon from "../../assets/jpg/icon.jpg"
-import arrow from "../../assets/svg/arrow.svg"
-import Div from "../Html/Div/Div";
-import Image from "../Html/Image/Image";
-import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import icon from "@/assets/jpg/icon.jpg"
+import arrow from "@/assets/svg/arrow.svg"
+import Div from "@/components/Html/Div/Div";
+import Image from "@/components/Html/Image/Image";
+import ThemeToggle from "@/components/ThemeToggle/ThemeToggle";
 
 const Navbar: React.FC = () => {
 
@@ -61,7 +58,6 @@ const Navbar: React.FC = () => {
                 toast.success(t('auth.logoutSuccess'))
                 setIsLoggedIn(false)
                 setUserData(null)
-                // Pequeno atraso para o toast ser pintado antes da navegação (evita toast sumir)
                 setTimeout(() => navigate('/'), 150)
             } else {
                 toast.error(data.message)

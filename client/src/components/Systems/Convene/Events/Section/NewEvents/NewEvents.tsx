@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import LoadingIndicator from "../../../UI/LoadingIndicator/LoadingIndicator";
-import ErrorBlock from "../../../UI/ErrorBlock/ErrorBlock";
-import EventItem from "../../Item/EventItem";
-import { fetchEvents } from "../../../../../../utils/systems/queryClient/http";
-import ConveneEvent from "../../../../../../models/convene/event";
+import LoadingIndicator from "@/components/Systems/Convene/UI/LoadingIndicator/LoadingIndicator";
+import ErrorBlock from "@/components/Systems/Convene/UI/ErrorBlock/ErrorBlock";
+import EventItem from "@/components/Systems/Convene/Events/Item/EventItem";
+import { fetchEvents } from "@/utils/systems/queryClient/http";
+import ConveneEvent from "@/models/convene/event";
 import classes from "./NewEvents.module.css"
 
 const NewEvents: React.FC = () => {

@@ -1,9 +1,7 @@
 import { Box, Typography, Button } from "@mui/material"
 import { useTranslation } from "react-i18next"
-
-import Man from "../../../../assets/jpg/fit/man-fit.jpg"
-import Woman from "../../../../assets/jpg/fit/woman-fit.jpg"
-
+import Man from "@/assets/jpg/fit/man-fit.jpg"
+import Woman from "@/assets/jpg/fit/woman-fit.jpg"
 import { useState } from "react"
 
 const HeroBanner: React.FC = () => {

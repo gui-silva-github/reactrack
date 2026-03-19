@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import MovieCard from "../../../../components/Systems/Movies/MovieCard/MovieCard"
-import type { IMovieData, IMoviesResponse } from "../../../../interfaces/systems/movies"
-import Div from "../../../../components/Html/Div/Div"
-import Paragraph from "../../../../components/Html/Paragraph/Paragraph"
+import MovieCard from "@/components/Systems/Movies/MovieCard/MovieCard"
+import type { IMovieData, IMoviesResponse } from "@/interfaces/systems/movies"
+import Div from "@/components/Html/Div/Div"
+import Paragraph from "@/components/Html/Paragraph/Paragraph"
 import "../Home/Home.css"
-import { apiKey, searchApi } from "../../../../api/urls/movies"
+import { apiKey, searchApi } from "@/api/urls/movies"
 
 const SearchMovie: React.FC = () => {
     const [searchParams] = useSearchParams()

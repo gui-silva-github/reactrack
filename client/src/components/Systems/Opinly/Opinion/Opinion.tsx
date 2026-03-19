@@ -1,10 +1,9 @@
 import { useContext, useActionState, useOptimistic } from "react";
 import { useTranslation } from "react-i18next";
-import { OpinionsContext } from "../../../../context/Opinly/OpinlyContext";
-
+import { OpinionsContext } from "@/context/Opinly/OpinlyContext";
 import classes from "./Opinion.module.css"
-import type { IOpinionData } from "../../../../interfaces/systems/opinly";
-import Paragraph from "../../../Html/Paragraph/Paragraph";
+import type { IOpinionData } from "@/interfaces/systems/opinly";
+import Paragraph from "@/components/Html/Paragraph/Paragraph";
 
 interface IOpinionProp {
     opinion: IOpinionData

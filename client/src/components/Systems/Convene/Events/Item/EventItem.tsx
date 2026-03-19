@@ -1,10 +1,12 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom"
-import ConveneEvent from "../../../../../models/convene/event"
-import addDay from "../../../../../utils/systems/convene"
+import ConveneEvent from "@/models/convene/event"
+import addDay from "@/utils/systems/convene"
 import classes from "./EventItem.module.css"
-import { conveneImagesEndpoint } from "../../../../../api/urls/convene"
+import { conveneImagesEndpoint } from "@/api/urls/convene"
 
 const EventItem: React.FC<{ event: ConveneEvent }> = ({ event }) => {
+    const { t } = useTranslation()
     const date = addDay(event.date)
 
     return (
@@ -18,7 +20,7 @@ const EventItem: React.FC<{ event: ConveneEvent }> = ({ event }) => {
                 </div>
                 <p className={classes.button}>
                     <Link to={`/systems/convene/events/${event.id}`} className="button">
-                        Ver detalhes
+                        {t('convene.viewDetails')}
                     </Link>
                 </p>
             </div>

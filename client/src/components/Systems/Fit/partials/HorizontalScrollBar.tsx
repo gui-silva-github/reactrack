@@ -1,19 +1,13 @@
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
-
 import { Box, Typography } from "@mui/material"
-
 import BodyPart from "./BodyPart"
-
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu"
-
-import RightArrowImg from "../../../../assets/icons/right-arrow.png"
-import LeftArrowImg from '../../../../assets/icons/left-arrow.png'
-
-import Image from "../../../Html/Image/Image";
-
+import RightArrowImg from "@/assets/icons/right-arrow.png"
+import LeftArrowImg from "@/assets/icons/left-arrow.png"
+import Image from "@/components/Html/Image/Image";
 import ExercisesCard from "./ExercisesCard"
-import type { IBodyPartData } from "../../../../interfaces/systems/fit";
+import type { IBodyPartData } from "@/interfaces/systems/fit";
 
 const LeftArrow: React.FC = () => {
     const { scrollPrev } = useContext(VisibilityContext)

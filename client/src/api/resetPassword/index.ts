@@ -1,9 +1,7 @@
 import axios from "axios"
-
-import { commonAxiosConfig } from "../../utils/commonAxios"
-
-import type { ISendResetPasswordRequest } from "../interfaces/requests/post/resetPassword"
-import type { IPostResponse } from "../interfaces/responses/post"
+import { commonAxiosConfig } from "@/utils/commonAxios"
+import type { ISendResetPasswordRequest } from "@/api/interfaces/requests/post/resetPassword"
+import type { IPostResponse } from "@/api/interfaces/responses/post"
 
 export const sendResetPassword = async (backendUrl: string, payload: ISendResetPasswordRequest): Promise<IPostResponse> => {
     commonAxiosConfig()

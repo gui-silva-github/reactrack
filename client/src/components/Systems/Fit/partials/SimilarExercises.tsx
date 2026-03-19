@@ -1,9 +1,8 @@
 import { Box, Stack, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-
 import HorizontalScrollBar from './HorizontalScrollBar'
-import Loader from '../common/Loader'
-import type { IExercisesData } from '../../../../interfaces/systems/fit'
+import Loader from '@/components/Systems/Fit/common/Loader'
+import type { IExercisesData } from '@/interfaces/systems/fit'
 
 interface ISimilarExercisesProps {
     targetMuscleExercises: IExercisesData[];

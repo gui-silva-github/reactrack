@@ -1,8 +1,8 @@
 import React, { createContext, useEffect, useState } from "react"
-import { loadOpinionsUrl, opinionsUrl, saveOpinions, downvoteOpinionUrl, upvoteOpinionUrl } from "../../api/urls/opinly"
-import { fetchData } from "../../utils/systems/fit"
-import type { IOpinionData } from "../../interfaces/systems/opinly";
-import { postData } from "../../utils/systems/opinly";
+import { loadOpinionsUrl, opinionsUrl, saveOpinions, downvoteOpinionUrl, upvoteOpinionUrl } from "@/api/urls/opinly"
+import { fetchData } from "@/utils/systems/fit"
+import type { IOpinionData } from "@/interfaces/systems/opinly";
+import { postData } from "@/utils/systems/opinly";
 
 interface IOpinionContext {
     opinions: IOpinionData,

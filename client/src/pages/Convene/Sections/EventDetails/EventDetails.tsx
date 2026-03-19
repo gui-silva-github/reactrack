@@ -1,14 +1,14 @@
 import { Link, Outlet, useNavigate, useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { useQuery, useMutation } from "@tanstack/react-query"
-import Header from "../../../../components/Systems/Convene/Common/Header/Header"
-import { fetchEvent, deleteEvent, queryClient } from "../../../../utils/systems/queryClient/http"
-import ErrorBlock from "../../../../components/Systems/Convene/UI/ErrorBlock/ErrorBlock"
+import Header from '@/components/Systems/Convene/Common/Header/Header'
+import { fetchEvent, deleteEvent, queryClient } from "@/utils/systems/queryClient/http"
+import ErrorBlock from "@/components/Systems/Convene/UI/ErrorBlock/ErrorBlock"
 import { useState } from "react"
-import Modal from "../../../../components/Systems/Convene/UI/Modal/Modal"
-import addDay from "../../../../utils/systems/convene"
-import { conveneImagesEndpoint, redirectEvents } from "../../../../api/urls/convene"
-import Div from "../../../../components/Html/Div/Div"
+import Modal from "@/components/Systems/Convene/UI/Modal/Modal"
+import addDay from "@/utils/systems/convene"
+import { conveneImagesEndpoint, redirectEvents } from "@/api/urls/convene"
+import Div from "@/components/Html/Div/Div"
 import classes from "./EventDetails.module.css"
 
 const EventDetails: React.FC = () => {

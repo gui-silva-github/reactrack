@@ -1,4 +1,4 @@
-import type { IUserInput } from "../../../interfaces/systems/investments";
+import type { IUserInput } from "@/interfaces/systems/investments";
 
 export const calculateInvestmentResults = ({
     initialInvestment,

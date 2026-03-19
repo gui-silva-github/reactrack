@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import { CoinContext } from "../../context/Coin/CoinContext"
+import { CoinContext } from "@/context/Coin/CoinContext"
 import classes from "./CoinDetail.module.css"
-import { fetchData } from "../../utils/systems/fit"
-import { getCoin, getDays, getMarketChart } from "../../api/urls/coin"
-import type { IPricesCoinData, ISpecificCoinData } from "../../interfaces/systems/crypto"
-import { options } from "../../api/urls/geral"
-import LineChart from "../../components/Systems/Crypto/common/LineChart"
-import Div from "../../components/Html/Div/Div"
-import Navbar from "../../components/Systems/Crypto/partials/Navbar"
+import { fetchData } from "@/utils/systems/fit"
+import { getCoin, getDays, getMarketChart } from "@/api/urls/coin"
+import type { IPricesCoinData, ISpecificCoinData } from "@/interfaces/systems/crypto"
+import { options } from "@/api/urls/geral"
+import LineChart from "@/components/Systems/Crypto/common/LineChart"
+import Div from "@/components/Html/Div/Div"
+import Navbar from "@/components/Systems/Crypto/partials/Navbar/Navbar"
 
 const CoinDetail: React.FC = () => {
     const { t } = useTranslation()

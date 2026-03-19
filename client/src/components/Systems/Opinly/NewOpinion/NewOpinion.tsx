@@ -1,11 +1,11 @@
 import { useActionState, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import i18n from "../../../../i18n";
-import { OpinionsContext } from "../../../../context/Opinly/OpinlyContext";
-import Submit from "../partials/Submit";
-import Div from "../../../Html/Div/Div";
+import i18n from "@/i18n";
+import { OpinionsContext } from "@/context/Opinly/OpinlyContext";
+import Submit from "../partials/Submit/Submit";
+import Div from "@/components/Html/Div/Div";
 import classes from "./NewOpinion.module.css"
-import type { IFormState } from "../../../../interfaces/systems/opinly";
+import type { IFormState } from "@/interfaces/systems/opinly";
 
 const NewOpinion: React.FC = () => {
     const { t } = useTranslation()

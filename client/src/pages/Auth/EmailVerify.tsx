@@ -1,21 +1,17 @@
 import { useContext, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import useGetBackendUrl from "../../hooks/backend/useGetBackendUrl";
-import useNavigateSPA from "../../hooks/routes/useNavigateSPA";
-
-import { AppContext } from "../../context/AppContext";
-
+import useGetBackendUrl from "@/hooks/backend/useGetBackendUrl";
+import useNavigateSPA from "@/hooks/routes/useNavigateSPA";
+import { AppContext } from "@/context/AppContext";
 import { toast } from "react-toastify";
-import i18n from "../../i18n";
-
-import DivEmailReset from "../../components/DivEmailReset/DivEmailReset";
-import Header1 from "../../components/Html/Header1/Header1";
-import Paragraph from "../../components/Html/Paragraph/Paragraph";
-import Button from "../../components/Html/Button/Button";
-import Div from "../../components/Html/Div/Div";
-
-import { verifyAccount } from "../../api/verifyAccount";
-import Navbar from "../../components/Navbar/Navbar";
+import i18n from "@/i18n";
+import DivEmailReset from "@/components/DivEmailReset/DivEmailReset";
+import Header1 from "@/components/Html/Header1/Header1";
+import Paragraph from "@/components/Html/Paragraph/Paragraph";
+import Button from "@/components/Html/Button/Button";
+import Div from "@/components/Html/Div/Div";
+import { verifyAccount } from "@/api/verifyAccount";
+import Navbar from "@/components/Navbar/Navbar";
 
 const EmailVerify: React.FC = () => {
 

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
-import Div from "../../../Html/Div/Div"
-import Paragraph from "../../../Html/Paragraph/Paragraph"
+import Div from "@/components/Html/Div/Div"
+import Paragraph from "@/components/Html/Paragraph/Paragraph"
 import styles from "./Error.module.css"
 
 const Error: React.FC = () => {

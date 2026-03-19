@@ -1,15 +1,16 @@
 import { useContext, useEffect, useState } from "react";
-import assets from "../../../../assets/talkive/ts/assets";
-import { TalkiveContext } from "../../../../context/Talkive/TalkiveContext";
+import { useTranslation } from "react-i18next";
+import assets from "@/assets/talkive/ts/assets";
+import { TalkiveContext } from "@/context/Talkive/TalkiveContext";
 import { onSnapshot, doc, updateDoc, arrayUnion, getDoc, Timestamp } from "firebase/firestore";
-import { db } from "../../../../api/talkive/config/firebase";
+import { db } from "@/api/talkive/config/firebase";
 import { toast } from "react-toastify";
-import upload from "../../../../api/talkive/lib/upload";
-import type { IMessage } from "../../../../context/Talkive/interfaces";
+import upload from "@/api/talkive/lib/upload";
+import type { IMessage } from "@/context/Talkive/interfaces";
 import './ChatBox.sass'
 
 const ChatBox: React.FC = () => {
-
+    const { t } = useTranslation()
     const talkiveContext = useContext(TalkiveContext)
     const userData = talkiveContext?.userData;
     const messagesId = talkiveContext?.messagesId;
@@ -97,7 +98,7 @@ const ChatBox: React.FC = () => {
                     const userChatData = userChatsSnapshot.data()
                     const chatIndex = userChatData.chatsData.findIndex((c: any) => c.messageId === messagesId)
                     if (chatIndex !== -1) {
-                        userChatData.chatsData[chatIndex].lastMessage = "Imagem"
+                        userChatData.chatsData[chatIndex].lastMessage = t('talkive.chat.lastMessageImage')
                         userChatData.chatsData[chatIndex].updateAt = Date.now()
 
                         if (userChatData.chatsData[chatIndex].rId === userData.id) {
@@ -157,19 +158,19 @@ const ChatBox: React.FC = () => {
     return chatUser && userData ? (
         <div className='chat-box' style={{ display: `${chatVisible ? '' : ''}`}}>
             <div className="chat-user">
-                <img src={chatUser.avatar} alt="Usuário" />
+                <img src={chatUser.avatar} alt={t('talkive.chat.userAlt')} />
                 <p>{chatUser.name} {Date.now() - chatUser.lastSeen <= 70000 ? <img src={assets.green_dot} alt="Nome" className="dot" /> : null}</p>
-                <img src={assets.help_icon} className="help" alt="Ajuda" />
-                <img onClick={() => setChatVisible && setChatVisible(false)} src={assets.arrow_icon} className="arrow" alt="Seta" />
+                <img src={assets.help_icon} className="help" alt={t('talkive.chat.help')} />
+                <img onClick={() => setChatVisible && setChatVisible(false)} src={assets.arrow_icon} className="arrow" alt={t('talkive.chat.arrow')} />
             </div>
 
             <div className="chat-msg">
                 {messages?.map((msg, index) => (
                     <div key={index} className={msg.sId === userData.id ? "s-msg" : "r-msg"}>
                         {msg.image ?
-                            <img className="msg-img" src={msg.image} alt="Imagem" /> : <p className="msg">{msg.text}</p>}
+                            <img className="msg-img" src={msg.image} alt={t('talkive.chat.imageAlt')} /> : <p className="msg">{msg.text}</p>}
                         <div>
-                            <img src={msg.sId === userData.id ? userData.avatar : chatUser.avatar} alt="Imagem" />
+                            <img src={msg.sId === userData.id ? userData.avatar : chatUser.avatar} alt={t('talkive.chat.imageAlt')} />
                             <p>{convertTimestamp(msg.createdAt)}</p>
                         </div>
                     </div>
@@ -177,18 +178,18 @@ const ChatBox: React.FC = () => {
             </div>
 
             <div className="chat-input">
-                <input onChange={(e) => setInput(e.target.value)} value={input} type="text" placeholder="Enviar mensagem" onKeyDown={handleKeyDown} />
+                <input onChange={(e) => setInput(e.target.value)} value={input} type="text" placeholder={t('talkive.chat.sendMessagePlaceholder')} onKeyDown={handleKeyDown} />
                 <input onChange={sendImage} type="file" id="image" accept="image/png, image/jpeg" hidden />
                 <label htmlFor="image">
-                    <img src={assets.gallery_icon} alt="Galeria" />
+                    <img src={assets.gallery_icon} alt={t('talkive.chat.gallery')} />
                 </label>
-                <img onClick={sendMessage} src={assets.send_button} alt="Enviar" />
+                <img onClick={sendMessage} src={assets.send_button} alt={t('talkive.chat.send')} />
             </div>
         </div>
     ) : (
         <div className={`chat-welcome ${chatVisible ? "" : "hidden"}`}>
             <img src={assets.logo_icon} alt="Logo" />
-            <p>Converse qualquer hora, em qualquer lugar!</p>
+            <p>{t('talkive.chat.welcomeMessage')}</p>
         </div>
     )
 

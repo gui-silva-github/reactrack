@@ -1,10 +1,10 @@
 import { useContext } from "react"
 import { useTranslation } from "react-i18next"
 import classes from './Navbar.module.css'
-import { CoinContext } from "../../../../context/Coin/CoinContext"
+import { CoinContext } from "@/context/Coin/CoinContext"
 import { Link } from "react-router-dom"
-import logo from "../../../../assets/png/crypto/logo.png"
-import Image from "../../../Html/Image/Image"
+import logo from "@/assets/png/crypto/logo.png"
+import Image from "@/components/Html/Image/Image"
 
 const Navbar: React.FC = () => {
     const { t } = useTranslation()

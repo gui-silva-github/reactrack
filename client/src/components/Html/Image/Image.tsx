@@ -1,4 +1,4 @@
-import type { IImageProps } from "../../../interfaces/image"
+import type { IImageProps } from "@/interfaces/image"
 
 const Image: React.FC<IImageProps> = ({src, className, alt}) => {
     return (
