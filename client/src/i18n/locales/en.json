@@ -1,5 +1,6 @@
 {
   "common": {
+    "footerCopyright": "© 2025 ReactRack by Gui Silva. All rights reserved.",
     "logo": "Logo",
     "ingles": "Use in English",
     "portugues": "Use in Portuguese",
@@ -101,6 +102,15 @@
       "resetPassword": "Reset here"
     },
     "chat": {
+      "userAlt": "User",
+      "help": "Help",
+      "arrow": "Arrow",
+      "imageAlt": "Image",
+      "gallery": "Gallery",
+      "send": "Send",
+      "sendMessagePlaceholder": "Send message",
+      "lastMessageImage": "Image",
+      "welcomeMessage": "Chat anytime, anywhere!",
       "search": "Search",
       "newChat": "New chat",
       "editProfile": "Edit profile",
@@ -109,7 +119,6 @@
       "noMessageFound": "No message found",
       "logout": "Logout",
       "settings": "Settings",
-      "help": "Help",
       "feedback": "Feedback",
       "about": "About",
       "terms": "Terms of use",
@@ -137,6 +146,14 @@
     "imageAlt": "Image"
   },
   "convene": {
+    "headerTitle": "Convene Events",
+    "selectImage": "Select an image",
+    "viewDetails": "View details",
+    "introConnect": "Connect with amazing people",
+    "introOr": "or",
+    "introDiscover": "discover a new passion",
+    "introDescription": "Anyone can organize and manage events on Convene",
+    "createFirstEvent": "Create your first event",
     "newEvent": "New Event",
     "sending": "Sending...",
     "create": "Create",
@@ -178,6 +195,9 @@
     "location": "Location"
   },
   "crypto": {
+    "chartTitle": "Cryptocurrency Prices",
+    "chartDataLabel": "Date",
+    "chartPriceLabel": "Prices",
     "title": "Cryptocurrency Market",
     "subtitle": "Welcome to the Cryptocurrency Market. Explore all cryptocurrencies!",
     "searchPlaceholder": "Search for cryptocurrencies...",
@@ -196,6 +216,8 @@
     "navbarAlt": "Crypto Market"
   },
   "fit": {
+    "home": "Home",
+    "exercises": "Exercises",
     "fitnessClub": "Fitness Club",
     "sweatSmileRepeat": "Sweat, Smile\n and Repeat",
     "checkExercises": "Check out the most effective exercises",
@@ -219,6 +241,7 @@
     "dumbbellAlt": "Dumbbell"
   },
   "movies": {
+    "details": "Details",
     "title": "Movies",
     "topMovies": "Top Movies",
     "loading": "Loading...",
@@ -259,6 +282,7 @@
     "value": "Value"
   },
   "projects": {
+    "searchProjects": "Search for projects on GitHub",
     "searchPlaceholder": "Enter username",
     "exploreRepos": "Explore their best repositories",
     "followers": "Followers:",

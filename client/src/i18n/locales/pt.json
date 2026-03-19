@@ -1,5 +1,6 @@
 {
   "common": {
+    "footerCopyright": "© 2025 ReactRack by Gui Silva. Todos os direitos reservados.",
     "logo": "Logo",
     "ingles": "Usar em inglês",
     "portugues": "Usar em português",
@@ -100,6 +101,15 @@
       "resetPassword": "Resete aqui"
     },
     "chat": {
+      "userAlt": "Usuário",
+      "help": "Ajuda",
+      "arrow": "Seta",
+      "imageAlt": "Imagem",
+      "gallery": "Galeria",
+      "send": "Enviar",
+      "sendMessagePlaceholder": "Enviar mensagem",
+      "lastMessageImage": "Imagem",
+      "welcomeMessage": "Converse qualquer hora, em qualquer lugar!",
       "search": "Pesquisar",
       "newChat": "Nova conversa",
       "editProfile": "Editar perfil",
@@ -108,7 +118,6 @@
       "noMessageFound": "Nenhuma mensagem encontrada",
       "logout": "Sair",
       "settings": "Configurações",
-      "help": "Ajuda",
       "feedback": "Feedback",
       "about": "Sobre",
       "terms": "Termos de uso",
@@ -136,6 +145,14 @@
     "imageAlt": "Imagem"
   },
   "convene": {
+    "headerTitle": "Convene Eventos",
+    "selectImage": "Selecione uma imagem",
+    "viewDetails": "Ver detalhes",
+    "introConnect": "Conecte-se com pessoas incríveis",
+    "introOr": "ou",
+    "introDiscover": "descubra uma nova paixão",
+    "introDescription": "Qualquer um pode organizar e gerenciar eventos no Convene",
+    "createFirstEvent": "Crie seu primeiro evento",
     "newEvent": "Novo Evento",
     "sending": "Enviando...",
     "create": "Criar",
@@ -177,6 +194,9 @@
     "location": "Local"
   },
   "crypto": {
+    "chartTitle": "Preços da Criptomoeda",
+    "chartDataLabel": "Data",
+    "chartPriceLabel": "Preços",
     "title": "Mercado de Criptomoeda",
     "subtitle": "Bem-vindo ao Mercado de Criptomoeda. Explore todas as criptomoedas!",
     "searchPlaceholder": "Procure pelas criptomoedas...",
@@ -195,6 +215,8 @@
     "navbarAlt": "Mercado de Crypto"
   },
   "fit": {
+    "home": "Home",
+    "exercises": "Exercícios",
     "fitnessClub": "Clube Fitness",
     "sweatSmileRepeat": "Soe, Sorria\n e Repita",
     "checkExercises": "Confira os exercícios mais efetivos",
@@ -218,6 +240,7 @@
     "dumbbellAlt": "Halter"
   },
   "movies": {
+    "details": "Detalhes",
     "title": "Filmes",
     "topMovies": "Top Filmes",
     "loading": "Carregando...",
@@ -258,6 +281,7 @@
     "value": "Valor"
   },
   "projects": {
+    "searchProjects": "Procure pelos projetos no GitHub",
     "searchPlaceholder": "Digite o nome do usuário",
     "exploreRepos": "Explore os melhores repositórios dele(a)",
     "followers": "Seguidores:",
