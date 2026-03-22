@@ -49,7 +49,7 @@ const Signup: React.FC = () => {
             if (data.success) {
                 toast.success(i18n.t('auth.signupSuccess'))
                 setIsLoggedIn(true)
-                getUserData()
+                await getUserData()
                 setTimeout(() => navigate('/'), 150)
             } else {
                 toast.error(data.message)

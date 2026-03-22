@@ -52,7 +52,7 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
             if (data.success) {
                 setIsLoggedIn(true)
-                getUserData()
+                await getUserData()
             }
         } catch (error: any) {
             toast.error(error.message)

@@ -4,6 +4,7 @@ import useGetBackendUrl from "@/hooks/backend/useGetBackendUrl";
 import useNavigateSPA from "@/hooks/routes/useNavigateSPA";
 import useResetPassword from "@/hooks/states/useResetPassword";
 import { sendResetOtp } from "@/api/resetOtp";
+import { validateResetOtp } from "@/api/validateResetOtp";
 import { sendResetPassword } from "@/api/resetPassword";
 import { toast } from "react-toastify";
 import i18n from "@/i18n";
@@ -99,8 +100,19 @@ const ResetPassword: React.FC = () => {
             return;
         }
 
-        setOtp(submittedOtp)
-        setIsOtpSubmitted(true)
+        try {
+            const data = await validateResetOtp(backendUrl, { email, otp: submittedOtp })
+
+            if (data.success) {
+                setOtp(submittedOtp)
+                setIsOtpSubmitted(true)
+                toast.success(data.message)
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error: any) {
+            toast.error(error.response?.data?.message ?? error.message)
+        }
     }
 
     const onSubmitNewPassword = async (e: React.FormEvent<HTMLFormElement>) => {

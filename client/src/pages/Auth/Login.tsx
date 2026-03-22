@@ -43,7 +43,7 @@ const Login: React.FC = () => {
             if (data.success) {
                 toast.success(i18n.t('auth.loginSuccess'))
                 setIsLoggedIn(true)
-                getUserData()
+                await getUserData()
                 setTimeout(() => navigate('/'), 150)
             } else {
                 toast.error(data.message)
