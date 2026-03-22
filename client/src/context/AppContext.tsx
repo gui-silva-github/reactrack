@@ -23,7 +23,7 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
     axios.defaults.withCredentials = true
 
-    const backendUrl = import.meta.env.VITE_BACKEND_URL
+    const backendUrl = import.meta.env.VITE_BACKEND_URL_NODEJS
 
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
