@@ -22,7 +22,7 @@ const Header: React.FC = () => {
         throw new Error(t('auth.appContextError'))
     }
 
-    const { userData } = context
+    const { userData, isLoggedIn } = context
     const name = userData ? userData.name : t('home.user')
 
     return (
@@ -34,7 +34,7 @@ const Header: React.FC = () => {
             <Header2 className="text-3xl sm:text-5xl font-semibold mb-4 text-gray-800" text={t('home.welcome')} />
             <Paragraph className="mb-8 max-w-md text-gray-700" text={t('home.startUsing')} />
             {
-                !userData?.isAccountVerified ?
+                !isLoggedIn ?
                     <div onClick={() => navigate('/login')}>
                         <Button className="border border-gray-500 rounded-full px-8 py-2.5 hover:bg-gray-100 transition-all" text={t('home.letsGo')} />
                     </div>
