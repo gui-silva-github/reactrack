@@ -1,3 +1,9 @@
 node_modules
 angular-client
-server-dotnet
+server-csharp/ReactRack/bin
+server-csharp/ReactRack/obj
+server-csharp/ReactRack/.vs
+server-csharp/Communication/bin
+server-csharp/Communication/obj
+server-csharp/Exceptions/bin
+server-csharp/Exceptions/obj
