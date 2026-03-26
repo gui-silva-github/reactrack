@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: reactrack-server
+    runtime: node
+    rootDir: server
+    plan: free
+    autoDeploy: true
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URL
+        sync: false
+      - key: MONGODB_DB_NAME
+        value: reactrack
+      - key: JWT_SECRET
+        sync: false
+      - key: SENDER_EMAIL
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
