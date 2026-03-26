@@ -14,7 +14,7 @@ services:
       - key: MONGODB_URL
         sync: false
       - key: MONGODB_DB_NAME
-        value: reactrack
+        sync: false
       - key: JWT_SECRET
         sync: false
       - key: SENDER_EMAIL

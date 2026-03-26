@@ -2,14 +2,16 @@
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "dev-server": "nodemon --exec tsx server.ts",
     "opinly": "nodemon --exec tsx systems/opinly/app.js",
     "convene": "nodemon --exec tsx systems/convene/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon --exec node dist/server.cjs",
-    "build-server": "tsup && cp -r ./public  dist/public && cp -r views dist/views && cp .env dist/",
+    "test": "mocha --config tests/.mocharc.json",
+    "start": "node dist/server.js",
+    "build": "npm run build-server",
+    "heroku-postbuild": "npm run build-server",
+    "server": "nodemon --exec node dist/server.js",
+    "build-server": "tsup && node -e \"const fs=require('fs'); const copy=(src,dst,opts={recursive:true})=>{ if(fs.existsSync(src)) fs.cpSync(src,dst,opts); }; copy('public','dist/public'); copy('views','dist/views');\"",
     "all": "concurrently \"npm run opinly\" \"npm run convene\""
   },
   "keywords": [],
@@ -24,18 +26,34 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.1",
+    "morgan": "^1.10.1",
     "nodemailer": "^7.0.6",
     "nodemon": "^3.1.10"
   },
   "devDependencies": {
+    "@types/chai": "^5.2.3",
     "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/mocha": "^10.0.10",
+    "@types/morgan": "^1.9.10",
     "@types/nodemailer": "^7.0.1",
+    "@types/sinon": "^21.0.0",
+    "@types/supertest": "^7.2.0",
+    "chai": "^6.2.2",
     "concurrently": "^9.2.1",
+    "mocha": "^11.7.5",
+    "sinon": "^21.0.3",
+    "supertest": "^7.2.2",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "tsup": "^8.5.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.2"
+  },
+  "engines": {
+    "node": "22.x",
+    "npm": "10.x"
   }
 }
