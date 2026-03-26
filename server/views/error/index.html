@@ -4,20 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Erro 404 - Página Não Encontrada</title>
-    <link rel="shortcut icon" href="../favicon.jpg" type="image/x-icon">
-    <link rel="stylesheet" href="../../public/error.css"> <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/error.css">
 </head>
 <body>
-    <div class="error-container">
-        <h1 class="error-code">404</h1>
-        <h2 class="error-message">Página Não Encontrada</h2>
-        <p class="error-description">Ops! Parece que a página que você está procurando não existe ou foi movida.</p>
-        <a href="../home/index.html" class="home-button">Voltar para a Página Inicial</a>
-        <div class="illustration">
-            <img src="../favicon.jpg" />
-        </div>
+    <div class="error-page">
+        <header class="error-header">
+            <a href="/" class="error-logo">ReactRack</a>
+        </header>
+        <main class="error-container">
+            <p class="error-label">Erro</p>
+            <h1 class="error-code">404</h1>
+            <h2 class="error-message">Página não encontrada</h2>
+            <p class="error-description">A rota que você acessou não existe ou foi movida. Verifique o endereço ou volte para a página inicial.</p>
+            <a href="/" class="home-button">Voltar para a página inicial</a>
+            <div class="illustration" aria-hidden="true">
+                <img src="/public/favicon.jpg" />
+            </div>
+        </main>
     </div>
-    <script src="../../public/js/error.js"></script> </body>
+    <script src="/public/js/error.js"></script>
+</body>
 </html>
