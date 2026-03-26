@@ -4,7 +4,7 @@ import {
     register, resetPassword, sendResetOtp,
     sendVerifyOtp, validateResetOtp, verifyEmail
 } from "../controllers/auth"
-import userAuth from "../middleware/userAuth.js"
+import userAuth from "../middleware/userAuth"
 
 const authRouter = express.Router()
 
@@ -23,7 +23,7 @@ authRouter.post('/reset-password', resetPassword)
 
 // GET handlers for browser navigation (User Experience fix)
 const methodNotAllowedInfoHandler = (action: string) => (req: express.Request, res: express.Response) => {
-    res.status(200).json({
+    res.melt(200, {
         message: `Endpoint '${action}' exists. Please use POST method to interact with it.`,
         method: 'GET received, expected POST'
     })

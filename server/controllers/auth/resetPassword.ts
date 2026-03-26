@@ -7,7 +7,8 @@ export const resetPasswordController = async (req: Request, res: Response) => {
     const { email, otp, newPassword } = req.body
 
     if (!email || !otp || !newPassword){
-        return res.status(400).json({success: false, message: 'Email, OTP e Nova Senha são requeridos!'})
+        res.melt(400, {success: false, message: 'Email, OTP e Nova Senha são requeridos!'})
+        return
     }
 
     try{
@@ -15,15 +16,18 @@ export const resetPasswordController = async (req: Request, res: Response) => {
         const user = await userModel.findOne({email})
 
         if (!user){
-            return res.status(400).json({success: false, message: 'Usuário não encontrado!'})
+            res.melt(400, {success: false, message: 'Usuário não encontrado!'})
+            return
         }
 
         if (user.resetOtp === '' || user.resetOtp !== otp){
-            return res.status(401).json({success: false, message: 'OTP inválida!'})
+            res.melt(401, {success: false, message: 'OTP inválida!'})
+            return
         }
 
         if (!user.resetOtpExpireAt || user.resetOtpExpireAt < Date.now()){
-            return res.status(401).json({success: false, message: 'OTP expirada!'})
+            res.melt(401, {success: false, message: 'OTP expirada!'})
+            return
         }
 
         const hashedPassword = await bcrypt.hash(newPassword, 10)
@@ -34,9 +38,11 @@ export const resetPasswordController = async (req: Request, res: Response) => {
 
         await user.save()
 
-        return res.status(200).json({success: true, message: 'Senha redefinida com sucesso!!!'})
+        res.melt(200, {success: true, message: 'Senha redefinida com sucesso!!!'})
+        return
     } catch (error: any){
-        return res.status(500).json({success: false, message: error.message})
+        res.melt(500, {success: false, message: error.message})
+        return
     }
 
 }

@@ -7,7 +7,8 @@ export const verifyEmailController = async (req: Request, res: Response) => {
     const { otp } = req.body
 
     if (!userId || !otp){
-        return res.status(400).json({success: false, message: 'Faltam detalhes...'})
+        res.melt(400, {success: false, message: 'Faltam detalhes...'})
+        return
     }
 
     try{
@@ -15,15 +16,18 @@ export const verifyEmailController = async (req: Request, res: Response) => {
         const user = await userModel.findById(userId)
         
         if (!user){
-            return res.status(400).json({success: false, message: 'Usuário não encontrado!'})
+            res.melt(400, {success: false, message: 'Usuário não encontrado!'})
+            return
         }
 
         if (user.verifyOtp === '' || user.verifyOtp !== otp){
-            return res.status(401).json({success: false, message: 'OTP inválida!'})
+            res.melt(401, {success: false, message: 'OTP inválida!'})
+            return
         }
 
         if (!user.verifyOtpExpireAt || user.verifyOtpExpireAt < Date.now()){
-            return res.status(401).json({success: false, message: 'OTP expirada!'})
+            res.melt(401, {success: false, message: 'OTP expirada!'})
+            return
         }
 
         user.isAccountVerified = true
@@ -32,10 +36,12 @@ export const verifyEmailController = async (req: Request, res: Response) => {
 
         await user.save()
 
-        return res.status(200).json({success: true, message: 'Email verificado com sucesso!'})
+        res.melt(200, {success: true, message: 'Email verificado com sucesso!'})
+        return
     
     } catch (error: any){
-        return res.status(500).json({success: false, message: error.message})
+        res.melt(500, {success: false, message: error.message})
+        return
     }
 
 }

@@ -3,8 +3,9 @@ import { Request, Response } from "express"
 export const isAuthController = async (req: Request, res: Response) => {
     
     try{
-        return res.status(200).json({success: true})
+        res.melt(200, {success: true})
+        return
     } catch (error: any){
-        res.status(500).json({success: false, message: error.message})
+        res.melt(500, {success: false, message: error.message})
     }
 }

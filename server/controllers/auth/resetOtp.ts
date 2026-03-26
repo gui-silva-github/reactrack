@@ -8,7 +8,8 @@ export const resetOtpController = async (req: Request, res: Response) => {
     const { email } = req.body 
 
     if (!email){
-        return res.json({success: false, message: 'Email é requerido!'})
+        res.melt(400, {success: false, message: 'Email é requerido!'})
+        return
     }
 
     try{
@@ -16,7 +17,8 @@ export const resetOtpController = async (req: Request, res: Response) => {
         const user = await userModel.findOne({email})
 
         if (!user){
-            return res.json({success: false, message: 'Usuário não encontrado!'})
+            res.melt(404, {success: false, message: 'Usuário não encontrado!'})
+            return
         }
 
         const otp = String(Math.floor(100000 + Math.random() * 900000))
@@ -35,9 +37,10 @@ export const resetOtpController = async (req: Request, res: Response) => {
 
         await transporter.sendMail(mailOption)
 
-        res.json({success: true, message: 'OTP enviada no seu email...'})
+        res.melt(200, {success: true, message: 'OTP enviada no seu email...'})
     } catch (error: any){
-        return res.json({success: false, message: error.message})
+        res.melt(500, {success: false, message: error.message})
+        return
     }
 
 }

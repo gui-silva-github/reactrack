@@ -11,10 +11,12 @@ export const logoutController = async (req: Request, res: Response) => {
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
 
-        return res.status(200).json({success: true, message: 'Deslogado!!!'})
+        res.melt(200, {success: true, message: 'Deslogado!!!'})
+        return
 
     } catch (error: any){
-        return res.status(200).json({success: false, message: error.message})
+        res.melt(200, {success: false, message: error.message})
+        return
     }
 
 }

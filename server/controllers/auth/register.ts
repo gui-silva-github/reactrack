@@ -9,14 +9,16 @@ export const registerController = async (req: Request, res: Response) => {
     const { name, email, password } = req.body
 
     if (!name || !email || !password){
-        return res.status(400).json({success: false, message: "Está faltando detalhes!"})
+        res.melt(400, {success: false, message: "Está faltando detalhes!"})
+        return
     }
 
     try{
         const existingUser = await userModel.findOne({email})
 
         if (existingUser){
-            return res.status(400).json({success: false, message: "Usuário já existe!"})
+            res.melt(400, {success: false, message: "Usuário já existe!"})
+            return
         }
 
         const hashedPassword = await bcrypt.hash(password, 10)
@@ -45,9 +47,17 @@ export const registerController = async (req: Request, res: Response) => {
 
         await transporter.sendMail(mailOptions)
 
-        return res.status(201).json({success: true})
+        res.melt(201, {
+            success: true,
+            user: {
+                id: String(user._id),
+                name: user.name,
+                email: user.email,
+            },
+        })
+        return
     } catch (error: any){
-        res.status(500).json({success: false, message: error.message})
+        res.melt(500, {success: false, message: error.message})
     }
 
 }

@@ -5,41 +5,47 @@ export const validateResetOtpController = async (req: Request, res: Response) =>
     const { email, otp } = req.body
 
     if (!email?.trim() || !otp?.trim()) {
-        return res.status(400).json({
+        res.melt(400, {
             success: false,
             message: "E-mail e OTP são obrigatórios.",
         })
+        return
     }
 
     try {
         const user = await userModel.findOne({ email: email.trim() })
 
         if (!user) {
-            return res.status(404).json({
+            res.melt(404, {
                 success: false,
                 message: "Usuário não encontrado.",
             })
+            return
         }
 
         if (user.resetOtp === "" || user.resetOtp !== String(otp).trim()) {
-            return res.status(401).json({
+            res.melt(401, {
                 success: false,
                 message: "OTP inválida.",
             })
+            return
         }
 
         if (!user.resetOtpExpireAt || user.resetOtpExpireAt < Date.now()) {
-            return res.status(401).json({
+            res.melt(401, {
                 success: false,
                 message: "OTP expirada.",
             })
+            return
         }
 
-        return res.status(200).json({
+        res.melt(200, {
             success: true,
             message: "OTP válida. Informe a nova senha.",
         })
+        return
     } catch (error: any) {
-        return res.status(500).json({ success: false, message: error.message })
+        res.melt(500, { success: false, message: error.message })
+        return
     }
 }

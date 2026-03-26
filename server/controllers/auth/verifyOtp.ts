@@ -12,11 +12,13 @@ export const sendVerifyOtpController = async (req: Request, res: Response) => {
         const user = await userModel.findById(userId);
 
         if (!user) {
-            return res.status(400).json({success: false, message: 'Usuário não encontrado!'});
+            res.melt(400, {success: false, message: 'Usuário não encontrado!'});
+            return
         }
 
         if (user.isAccountVerified){
-            return res.status(200).json({success: false, message: 'Conta já verificada!'})
+            res.melt(200, {success: false, message: 'Conta já verificada!'})
+            return
         }
 
         const otp = String(Math.floor(100000 + Math.random() * 900000))
@@ -35,10 +37,10 @@ export const sendVerifyOtpController = async (req: Request, res: Response) => {
 
         await transporter.sendMail(mailOption)
 
-        res.status(200).json({success: true, message: 'Verificação OTP enviada no Email'})
+        res.melt(200, {success: true, message: 'Verificação OTP enviada no Email'})
 
     } catch (error: any){
-        res.status(500).json({success: false, message: error.message})
+        res.melt(500, {success: false, message: error.message})
     }
 
 }
