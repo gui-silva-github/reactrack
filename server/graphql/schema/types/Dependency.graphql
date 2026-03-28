@@ -1,0 +1,11 @@
+type Dependency {
+  name: String!
+  version: String!
+  kind: String!
+}
+
+input DependencyInput {
+  name: String!
+  version: String!
+  kind: String!
+}

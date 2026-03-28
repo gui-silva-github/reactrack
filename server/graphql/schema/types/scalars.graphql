@@ -1,0 +1,7 @@
+# Escalares usados pelo schema (tipos custom URL / DateTime / JSON).
+
+scalar URL
+scalar DateTime
+scalar JSON
+
+directive @auth on FIELD_DEFINITION

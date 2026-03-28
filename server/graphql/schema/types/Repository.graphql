@@ -1,0 +1,5 @@
+type Repository {
+  url: URL!
+  provider: String!
+  defaultBranch: String!
+}

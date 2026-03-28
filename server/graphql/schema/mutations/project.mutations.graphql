@@ -1,0 +1,6 @@
+extend type Mutation {
+  createProject(input: CreateProjectInput!): ProjectPayload! @auth
+  updateProject(id: ID!, input: UpdateProjectInput!): ProjectPayload! @auth
+  deleteProject(id: ID!): DeletePayload! @auth
+  linkRepository(projectId: ID!, repositoryUrl: String!): ProjectPayload! @auth
+}

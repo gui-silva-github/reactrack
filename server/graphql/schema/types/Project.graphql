@@ -1,0 +1,64 @@
+type Project {
+  id: ID!
+  name: String!
+  description: String
+  repositoryUrl: String
+  framework: String
+  version: String
+  stars: Int
+  isActive: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  tags: [String!]!
+  dependencies: [Dependency!]!
+  repository: Repository
+}
+
+type ProjectStats {
+  totalProjects: Int!
+  activeProjects: Int!
+  totalStars: Int!
+  frameworks: [String!]!
+}
+
+input ProjectFilterInput {
+  isActive: Boolean
+  framework: String
+  tag: String
+}
+
+input CreateProjectInput {
+  name: String!
+  description: String
+  repositoryUrl: String
+  framework: String
+  version: String
+  stars: Int
+  isActive: Boolean
+  tags: [String!]
+  dependencies: [DependencyInput!]
+}
+
+input UpdateProjectInput {
+  name: String
+  description: String
+  repositoryUrl: String
+  framework: String
+  version: String
+  stars: Int
+  isActive: Boolean
+  tags: [String!]
+  dependencies: [DependencyInput!]
+}
+
+type ProjectPayload {
+  success: Boolean!
+  message: String
+  project: Project
+}
+
+type DeletePayload {
+  success: Boolean!
+  message: String
+  deletedId: ID
+}

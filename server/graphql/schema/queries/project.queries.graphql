@@ -1,0 +1,6 @@
+extend type Query {
+  projects(limit: Int, offset: Int, filter: ProjectFilterInput): ProjectConnection!
+  project(id: ID!): Project
+  searchProjects(query: String!): [Project!]!
+  projectStats: ProjectStats!
+}

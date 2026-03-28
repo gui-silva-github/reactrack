@@ -1,0 +1,10 @@
+extend type Query {
+  """Sessão atual: cookie `token` + documento no MongoDB."""
+  me: AuthUser
+
+  """GET /user/data — dados do perfil (requer cookie JWT)."""
+  userData: UserDataPayload!
+
+  """GET /auth/is-auth — verifica se o cookie JWT é válido e o utilizador existe."""
+  isAuth: IsAuthPayload!
+}

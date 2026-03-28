@@ -1,0 +1,56 @@
+# Autenticação alinhada ao REST: JWT em cookie + usuário Mongoose (usertk).
+# Payloads espelham `success` / `message` dos controllers em controllers/auth.
+
+type AuthUser {
+  id: ID!
+  name: String!
+  email: String!
+  isAccountVerified: Boolean!
+}
+
+type LoginPayload {
+  success: Boolean!
+  message: String
+  userId: ID
+}
+
+type RegisterPayload {
+  success: Boolean!
+  message: String
+  user: AuthUser
+}
+
+type LogoutPayload {
+  success: Boolean!
+  message: String
+}
+
+input RegisterInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+# Resposta genérica igual aos `res.melt` com success + message (send-verify-otp, verify-account, reset, etc.)
+type AuthSuccessPayload {
+  success: Boolean!
+  message: String
+}
+
+type UserData {
+  name: String!
+  isAccountVerified: Boolean!
+}
+
+# GET /user/data — mesmo formato de corpo
+type UserDataPayload {
+  success: Boolean!
+  message: String
+  userData: UserData
+}
+
+# GET /auth/is-auth — com token no cookie
+type IsAuthPayload {
+  success: Boolean!
+  message: String
+}

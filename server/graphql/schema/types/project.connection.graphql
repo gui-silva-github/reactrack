@@ -1,0 +1,18 @@
+# Paginação de projetos — separado de `Project.graphql` para manter ficheiros por conceito.
+
+type ProjectEdge {
+  cursor: String!
+  node: Project!
+}
+
+type ProjectPageInfo {
+  totalCount: Int!
+  limit: Int!
+  offset: Int!
+  hasNextPage: Boolean!
+}
+
+type ProjectConnection {
+  edges: [ProjectEdge!]!
+  pageInfo: ProjectPageInfo!
+}

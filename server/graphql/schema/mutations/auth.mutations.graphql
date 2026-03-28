@@ -1,0 +1,20 @@
+extend type Mutation {
+  login(email: String!, password: String!): LoginPayload!
+  register(input: RegisterInput!): RegisterPayload!
+  logout: LogoutPayload!
+
+  """POST /auth/send-verify-otp — requer JWT (mesmo que userAuth no REST)."""
+  sendVerifyOtp: AuthSuccessPayload! @auth
+
+  """POST /auth/verify-account — OTP + JWT."""
+  verifyAccount(otp: String!): AuthSuccessPayload! @auth
+
+  """POST /auth/send-reset-otp"""
+  sendResetOtp(email: String!): AuthSuccessPayload!
+
+  """POST /auth/validate-reset-otp"""
+  validateResetOtp(email: String!, otp: String!): AuthSuccessPayload!
+
+  """POST /auth/reset-password"""
+  resetPassword(email: String!, otp: String!, newPassword: String!): AuthSuccessPayload!
+}

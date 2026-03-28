@@ -1,0 +1,10 @@
+# Tipos raiz exigidos para `extend type Query/Mutation` nos outros ficheiros SDL.
+# Campos placeholder — os resolvers reais vêm dos ficheiros `auth.*.graphql`.
+
+type Query {
+  _schemaRoot: Boolean
+}
+
+type Mutation {
+  _schemaRoot: Boolean
+}
