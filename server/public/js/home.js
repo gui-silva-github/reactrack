@@ -4,49 +4,49 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "CADASTRAR",
             description: "Cria uma nova conta de usuário. Um email de boas-vindas é enviado e um token de autenticação é retornado nos cookies.",
             requests: ["name", "email", "password"],
-            link: "http://localhost:4000/auth/register"
+            link: "/auth/register"
         },
         {
             title: "LOGIN",
             description: "Autentica um usuário existente e retorna um token de autenticação nos cookies.",
             requests: ["email", "password"],
-            link: "http://localhost:4000/auth/login"
+            link: "/auth/login"
         },
         {
             title: "LOGOUT",
             description: "Desloga o usuário, removendo o token de autenticação dos cookies.",
             requests: ["(Nenhum corpo de requisição)"],
-            link: "http://localhost:4000/auth/logout"
+            link: "/auth/logout"
         },
         {
             title: "ENVIAR OTP (VERIFICAÇÃO)",
             description: "Envia um código OTP (One-Time Password) para o email do usuário, usado para verificação da conta.",
             requests: ["userId"],
-            link: "http://localhost:4000/auth/send-verify-otp"
+            link: "/auth/send-verify-otp"
         },
         {
             title: "VERIFICAR CONTA",
             description: "Verifica a conta do usuário usando o código OTP recebido por email.",
             requests: ["userId", "otp"],
-            link: "http://localhost:4000/auth/verify-account"
+            link: "/auth/verify-account"
         },
         {
             title: "ENVIAR OTP (REDEFINIÇÃO)",
             description: "Envia um código OTP para o email do usuário para redefinição de senha.",
             requests: ["email"],
-            link: "http://localhost:4000/auth/send-reset-otp"
+            link: "/auth/send-reset-otp"
         },
         {
             title: "REDEFINIR SENHA",
             description: "Redefine a senha do usuário usando o email, o código OTP e a nova senha.",
             requests: ["email", "otp", "newPassword"],
-            link: "http://localhost:4000/auth/reset-password"
+            link: "/auth/reset-password"
         },
         {
             title: "VERIFICAR AUTENTICAÇÃO",
             description: "Verifica se o usuário está autenticado. Requer o token de autenticação nos cookies.",
             requests: ["(Requer token no cookie)"],
-            link: "http://localhost:4000/auth/is-auth"
+            link: "/auth/is-auth"
         }
     ];
 
