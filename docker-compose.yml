@@ -1,29 +1,32 @@
 services:
-  server: 
-    build: ./server
+  server:
+    build:
+      context: ./server
+      dockerfile: docker/Dockerfile
     container_name: reactrack-server
     ports:
-    - "4000:4000"
+      - "4000:4000"
     volumes:
-    - ./server:/app
-    - /app/node_modules
-    command: npm run server
+      - ./server:/app
+      - /app/node_modules
+    command: npm run dev-server-with-all
     environment:
-    - NODE_ENV=development
-    - MONGODB_URL=your_mongodb_connection_string_here
-    - JWT_SECRET=your_jwt_secret_key_here
-    - SMTP_USER=your_smtp_service_user_identifier
-    - SMTP_PASS=your_smtp_service_password
-    - SENDER_EMAIL=your_authorized_sender_email_address
+      - NODE_ENV=development
+      - MONGODB_URL=your_mongodb_connection_string_here
+      - JWT_SECRET=your_jwt_secret_key_here
+      - SMTP_USER=your_smtp_service_user_identifier
+      - SMTP_PASS=your_smtp_service_password
+      - SENDER_EMAIL=your_authorized_sender_email_address
 
   client:
-    build: ./client
+    build:
+      context: ./client
     container_name: reactrack-client
     ports:
-    - "5173:5173"
+      - "5173:5173"
     volumes:
-    - ./client:/app
-    - /app/node_modules
+      - ./client:/app
+      - /app/node_modules
     command: npm run dev
     depends_on:
       - server
@@ -40,3 +43,47 @@ services:
       VITE_FIREBASE_MESSAGING_SENDER_ID: your_firebase_messaging_sender_id
       VITE_FIREBASE_APP_ID: your_firebase_app_id
       VITE_FIREBASE_MEASUREMENT_ID: your_firebase_measurement_id
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: reactrack-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: reactrack_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "123"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  server-csharp:
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    container_name: reactrack-server-csharp
+    working_dir: /src
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server-csharp:/src
+    command: /bin/sh -c "dotnet restore ReactRack/ReactRack.csproj && dotnet watch --project ReactRack/ReactRack.csproj run --urls http://0.0.0.0:5000"
+    depends_on:
+      - postgres
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__Postgres: Host=postgres;Port=5432;Database=reactrack_db;Username=postgres;Password=123
+
+  client-angular:
+    image: node:22-alpine
+    container_name: reactrack-client-angular
+    working_dir: /app
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./client-angular:/app
+      - /app/node_modules
+    command: /bin/sh -c "npm install && npm start"
+    depends_on:
+      - server
+      - server-csharp
+
+volumes:
+  postgres_data:
