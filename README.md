@@ -1,21 +1,26 @@
 # reactrack
 
+**Hub full-stack multi-stack** — um monorepo que reúne vários produtos de interface, duas APIs de backend e um contrato de autenticação compartilhado, pensado para demonstrar domínio de arquitetura, testes e entrega em produção.
+
+[![Produção — Render](https://img.shields.io/badge/Produção-Render-46E3B7?logo=render&logoColor=white)](https://render.com)
 ![Node.js](https://img.shields.io/badge/Node.js-22.x-339933?logo=node.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)
-![React](https://img.shields.io/badge/React-18.x-61DAFB?logo=react&logoColor=111827)
-![Angular](https://img.shields.io/badge/Angular-18.x-DD0031?logo=angular&logoColor=white)
-![CSharp](https://img.shields.io/badge/C%23-.NET%208-512BD4?logo=dotnet&logoColor=white)
+![React](https://img.shields.io/badge/React-19.x-61DAFB?logo=react&logoColor=111827)
+![Angular](https://img.shields.io/badge/Angular-21.x-DD0031?logo=angular&logoColor=white)
+![C#](https://img.shields.io/badge/C%23-.NET%208-512BD4?logo=dotnet&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-47A248?logo=mongodb&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-EF%20Core-4169E1?logo=postgresql&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
 ![JWT](https://img.shields.io/badge/Auth-JWT-black?logo=jsonwebtokens&logoColor=white)
 
-Ecossistema open source para desenvolvimento full-stack com múltiplas stacks interoperáveis: `React + Node.js`, `Angular + Node.js`, `React + ASP.NET Core` e `Angular + ASP.NET Core`.
+Ecossistema open source para desenvolvimento full-stack com stacks interoperáveis: **React + Node.js**, **Angular + Node.js**, **React + ASP.NET Core** e **Angular + ASP.NET Core**.
 
-<hr>
+---
 
 ## 📚 Índice
 
+- [Demo em produção (Render)](#demo-em-produção-render)
+- [Início rápido — cliente React](#início-rápido--cliente-react)
 - [Visão Geral](#visão-geral)
 - [Arquitetura Multi-Stack](#arquitetura-multi-stack)
 - [Diagrama de Arquitetura](#diagrama-de-arquitetura)
@@ -30,6 +35,38 @@ Ecossistema open source para desenvolvimento full-stack com múltiplas stacks in
 - [Galeria UI/UX dos Sistemas](#galeria-uiux-dos-sistemas)
 - [Architecture Decision Record (ADR) Simplificado](#architecture-decision-record-adr-simplified)
 - [Contribuições](#contribuições)
+
+<hr>
+
+## ☁️ Demo em produção (Render)
+
+O frontend (e o pipeline associado) está **publicado no Render** — plataforma que conecta o repositório ao deploy contínuo, com HTTPS e variáveis de ambiente gerenciadas. Isso permite validar o produto em um URL público, alinhado ao que times de engenharia esperam ver em um portfólio sênior.
+
+- **Plataforma:** [Render](https://render.com) (PaaS)
+- **Benefício:** demo acessível, logs e rebuilds a partir do Git — útil para apresentar o projeto em processos seletivos sem depender da sua máquina.
+
+**URL da demo (Render):** https://reactrack-server.onrender.com/.
+
+<hr>
+
+## ⚡ Início rápido — cliente React
+
+Na raiz do repositório:
+
+```bash
+cd client
+npm install
+```
+
+| Objetivo | Comando |
+|----------|---------|
+| Servidor de desenvolvimento (Vite, todas as interfaces) | `npm run dev` |
+| Build de produção (TypeScript + Vite) | `npm run build` |
+| Pré-visualizar o build localmente | `npm run preview` |
+| Lint (ESLint) | `npm run lint` |
+| Testes (Vitest) | `npm run test` |
+
+O Vite sobe em **`http://localhost:5173`** (com `--host 0.0.0.0` para acesso na rede local). Configure `client/.env` ou `client/.env.local` com `VITE_BACKEND_URL_NODEJS` e `VITE_BACKEND_URL_CSHARP` apontando para as APIs que você estiver usando.
 
 <hr>
 
@@ -181,9 +218,11 @@ Configurações chave já mapeadas:
 
 ### React (`client`)
 
-- Vite + React + TypeScript.
+- **Vite 7 + React 19 + TypeScript**, Tailwind 4, MUI, TanStack Query, React Router 7, Formik/Yup, i18next, Vitest.
 - Camada `src/api` com funções para autenticação, verificação de conta, reset de senha e `userData`.
-- Integração com TanStack Query, contextos de domínio e roteamento via React Router.
+- Integração com contextos de domínio e múltiplos “sistemas” (módulos) na mesma SPA.
+
+**Comandos:** veja a seção [Início rápido — cliente React](#início-rápido--cliente-react) e a tabela em [Scripts](#scripts) (`npm run dev`, `build`, `preview`, `lint`, `test`).
 
 ### Angular (`client-angular`)
 
@@ -280,6 +319,16 @@ docker compose up --build postgres server-csharp client-angular
 <hr>
 
 ## 🧪 Scripts
+
+### `client/package.json` (React + Vite)
+
+| Script | Descrição |
+|---|---|
+| `npm run dev` | Dev server Vite (`vite --host 0.0.0.0`) — porta padrão **5173** |
+| `npm run build` | `tsc -b` + `vite build` para produção |
+| `npm run preview` | Servir o build localmente |
+| `npm run lint` | ESLint no projeto |
+| `npm run test` | Vitest em modo `run` |
 
 ### `server/package.json`
 
