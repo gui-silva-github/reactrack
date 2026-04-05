@@ -8,5 +8,6 @@ server-csharp/Communication/bin
 server-csharp/Communication/obj
 server-csharp/Exceptions/bin
 server-csharp/Exceptions/obj
-server-csharp/ReactRack.Tests
+server-csharp/ReactRack.Tests/bin
+server-csharp/ReactRack.Tests/obj
 server-dotnet
