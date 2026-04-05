@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const connectDB = async () => {
     const mongodbUrl = process.env.MONGODB_URL
     if (!mongodbUrl) {
-        throw new Error("MONGODB_URL is not defined")
+        throw new Error("MONGODB_URL não está definida")
     }
 
     const dbName = process.env.MONGODB_DB_NAME?.trim()

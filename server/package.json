@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev-server": "nodemon --exec tsx server.ts",
+    "dev-server-with-all": "concurrently \"npm run dev-server\" \"npm run all\"",
     "opinly": "nodemon --exec tsx systems/opinly/app.js",
     "convene": "nodemon --exec tsx systems/convene/app.js",
     "test": "mocha --config tests/.mocharc.json",
