@@ -1,0 +1,18 @@
+<nav class="navbar-systems">
+  <div class="navbar-brand" routerLink="/">
+    <img src="/assets/jpg/icon.jpg" alt="Logo" class="logo" />
+    <span class="brand-name">AngularRack</span>
+  </div>
+  <div class="nav-links">
+    @for (link of navLinks(); track link.path) {
+      <a
+        [routerLink]="link.path"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: false }"
+        class="nav-link"
+      >
+        {{ link.name }}
+      </a>
+    }
+  </div>
+</nav>
