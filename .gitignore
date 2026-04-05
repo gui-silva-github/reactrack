@@ -1,4 +1,5 @@
 node_modules
+*.vscode
 angular-client
 server-csharp/ReactRack/bin
 server-csharp/ReactRack/obj
@@ -7,3 +8,5 @@ server-csharp/Communication/bin
 server-csharp/Communication/obj
 server-csharp/Exceptions/bin
 server-csharp/Exceptions/obj
+server-csharp/ReactRack.Tests
+server-dotnet
