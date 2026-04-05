@@ -14,7 +14,7 @@
     "importHelpers": true,
     "target": "ES2022",
     "lib": ["ES2022", "DOM"],
-    "module": "preserve",
+    "module": "ES2022",
     "moduleResolution": "bundler"
   },
   "angularCompilerOptions": {
