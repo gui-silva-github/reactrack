@@ -66,7 +66,7 @@ npm install
 | Lint (ESLint) | `npm run lint` |
 | Testes (Vitest) | `npm run test` |
 
-O Vite sobe em **`http://localhost:5173`** (com `--host 0.0.0.0` para acesso na rede local). Configure `client/.env` ou `client/.env.local` com `VITE_BACKEND_URL_NODEJS` e `VITE_BACKEND_URL_CSHARP` apontando para as APIs que você estiver usando.
+O Vite sobe em **`http://localhost:5173`** (com `--host 0.0.0.0` para acesso na rede local). Configure `client/.env` ou `client/.env.local` com `VITE_BACKEND_URL` apontando para a API que você estiver usando.
 
 <hr>
 
