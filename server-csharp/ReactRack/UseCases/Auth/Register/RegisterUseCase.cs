@@ -1,5 +1,7 @@
+using System.Net;
 using Communication.Requests.Register.Interfaces;
 using Communication.Responses.Auth.Interfaces;
+using ReactRack.Infrastructure.Email.Interfaces;
 using ReactRack.Infrastructure.Repositories.Interfaces;
 using ReactRack.UseCases.Auth.Interfaces.Register;
 using Exceptions.Validation;
@@ -8,7 +10,7 @@ using Communication.Responses.Auth;
 
 namespace ReactRack.UseCases.Auth.Register
 {
-    public sealed class RegisterUseCase(IUserRepository userRepository) : IRegisterUseCase
+    public sealed class RegisterUseCase(IUserRepository userRepository, IEmailSender emailSender) : IRegisterUseCase
     {
         public async Task<IAuthResponse> ExecuteAsync(IRegisterRequest request, CancellationToken cancellationToken)
         {
@@ -33,6 +35,14 @@ namespace ReactRack.UseCases.Auth.Register
             };
 
             await userRepository.CreateAsync(user, cancellationToken);
+
+            var safeEmail = WebUtility.HtmlEncode(user.Email);
+            await emailSender.SendAsync(
+                user.Email,
+                "Bem Vindo ao ReactRack",
+                $"<p>Bem Vindo ao ReactRack, sua conta foi criada com o email: {safeEmail}</p>",
+                cancellationToken);
+
             return new AuthResponse(true, "Cadastro realizado com sucesso!", user.Id, user.Name, user.Email);
         }
     }

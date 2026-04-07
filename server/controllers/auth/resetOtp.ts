@@ -31,7 +31,7 @@ export const resetOtpController = async (req: Request, res: Response) => {
         const mailOption = {
             from: process.env.SENDER_EMAIL,
             to: user.email,
-            subject: 'Refinição de Senha (OTP)',
+            subject: 'Redefinição de Senha (OTP)',
             html: PASSWORD_RESET_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", user.email)
         }
 

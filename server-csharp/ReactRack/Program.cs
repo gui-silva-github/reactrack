@@ -1,7 +1,7 @@
-using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using ReactRack.Infrastructure.Configuration;
 using ReactRack.Infrastructure.Email;
 using ReactRack.Filters;
 using ReactRack.Infrastructure.Middleware;
@@ -34,6 +34,34 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("Jwt"));
 builder.Services.Configure<SmtpOptions>(builder.Configuration.GetSection("Smtp"));
+builder.Services.PostConfigure<JwtOptions>(opts =>
+{
+    var secret = EnvVarHelper.Unquote(Environment.GetEnvironmentVariable("JWT_SECRET"));
+    if (!string.IsNullOrWhiteSpace(secret))
+    {
+        opts.SecretKey = secret;
+    }
+});
+builder.Services.PostConfigure<SmtpOptions>(opts =>
+{
+    var user = EnvVarHelper.Unquote(Environment.GetEnvironmentVariable("SMTP_USER"));
+    var pass = EnvVarHelper.Unquote(Environment.GetEnvironmentVariable("SMTP_PASS"));
+    var from = EnvVarHelper.Unquote(Environment.GetEnvironmentVariable("SENDER_EMAIL"));
+    if (!string.IsNullOrWhiteSpace(user))
+    {
+        opts.Username = user;
+    }
+
+    if (!string.IsNullOrWhiteSpace(pass))
+    {
+        opts.Password = pass;
+    }
+
+    if (!string.IsNullOrWhiteSpace(from))
+    {
+        opts.FromEmail = from;
+    }
+});
 builder.Services.AddDbContext<ReactRackDbContext>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("Postgres")
@@ -81,7 +109,13 @@ builder.Services.AddCors(options =>
 });
 
 var jwt = builder.Configuration.GetSection("Jwt").Get<JwtOptions>() ?? new JwtOptions();
-var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.SecretKey));
+var jwtSecret = EnvVarHelper.Unquote(Environment.GetEnvironmentVariable("JWT_SECRET"));
+if (!string.IsNullOrWhiteSpace(jwtSecret))
+{
+    jwt.SecretKey = jwtSecret;
+}
+
+var signingKey = JwtSigningKeyFactory.Create(jwt.SecretKey);
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -96,7 +130,8 @@ builder.Services
             ValidateIssuerSigningKey = true,
             ValidIssuer = jwt.Issuer,
             ValidAudience = jwt.Audience,
-            IssuerSigningKey = signingKey
+            IssuerSigningKey = signingKey,
+            IssuerSigningKeyResolver = (_, _, _, _) => new[] { signingKey }
         };
         options.Events = new JwtBearerEvents
         {
@@ -113,7 +148,7 @@ builder.Services
                 var logger = context.HttpContext.RequestServices
                     .GetRequiredService<ILoggerFactory>()
                     .CreateLogger("JwtAuth");
-                logger.LogError(
+                logger.LogDebug(
                     context.Exception,
                     "JWT authentication failed for {Path}",
                     context.HttpContext.Request.Path);

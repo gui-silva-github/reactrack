@@ -13,7 +13,7 @@ public sealed class RegisterUseCaseTests
     public async Task ExecuteAsync_WhenFieldsAreMissing_ShouldThrowValidationException()
     {
         var repository = new InMemoryUserRepository();
-        var useCase = new RegisterUseCase(repository);
+        var useCase = new RegisterUseCase(repository, new SpyEmailSender());
         var request = new RegisterRequest("", "   ", "");
 
         await Assert.ThrowsAsync<ValidationReactRackException>(() =>
@@ -31,7 +31,7 @@ public sealed class RegisterUseCaseTests
         };
 
         var repository = new InMemoryUserRepository([existingUser]);
-        var useCase = new RegisterUseCase(repository);
+        var useCase = new RegisterUseCase(repository, new SpyEmailSender());
         var request = new RegisterRequest("Gui Silva", "gui@reactrack.dev", "123456");
 
         await Assert.ThrowsAsync<ConflictReactRackException>(() =>
@@ -42,7 +42,8 @@ public sealed class RegisterUseCaseTests
     public async Task ExecuteAsync_WhenRequestIsValid_ShouldCreateUserAndReturnSuccess()
     {
         var repository = new InMemoryUserRepository();
-        var useCase = new RegisterUseCase(repository);
+        var spyEmail = new SpyEmailSender();
+        var useCase = new RegisterUseCase(repository, spyEmail);
         var request = new RegisterRequest("  Gui Silva  ", "GUI@REACTRACK.DEV", "123456");
 
         var response = await useCase.ExecuteAsync(request, CancellationToken.None);
@@ -53,5 +54,8 @@ public sealed class RegisterUseCaseTests
         Assert.Equal("Gui Silva", repository.LastCreatedUser!.Name);
         Assert.Equal("gui@reactrack.dev", repository.LastCreatedUser.Email);
         Assert.True(BCrypt.Net.BCrypt.Verify("123456", repository.LastCreatedUser.PasswordHash));
+        Assert.Equal(1, spyEmail.CallCount);
+        Assert.Equal("gui@reactrack.dev", spyEmail.LastToEmail);
+        Assert.Equal("Bem Vindo ao ReactRack", spyEmail.LastSubject);
     }
 }

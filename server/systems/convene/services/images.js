@@ -1,10 +1,15 @@
-import { readData } from "./jsonUtils.js";
+import { fileURLToPath } from "node:url"
+import { dirname, join } from "node:path"
+import { readData } from "./jsonUtils.js"
+
+const serverRoot = join(dirname(fileURLToPath(import.meta.url)), "../../..")
+const imagesPath = join(serverRoot, "json", "convene", "images.json")
 
 export async function getAllImages(){
-    const storedImages = await readData('./json/convene/images.json')
+    const storedImages = await readData(imagesPath)
 
-    if (!storedImages){
-        throw new Error({message: 'Não foi possível encontrar qualquer imagem.', status: 404})
+    if (storedImages == null){
+        throw Object.assign(new Error("Não foi possível carregar imagens."), { status: 404 })
     }
 
     return storedImages

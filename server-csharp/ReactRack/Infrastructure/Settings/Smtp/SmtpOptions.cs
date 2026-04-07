@@ -9,5 +9,6 @@
         public string FromEmail { get; set; } = string.Empty;
         public string FromName {  get; set; } = "ReactRack";
         public bool EnableSsl { get; set; } = true;
+        public bool SkipCertificateValidation { get; set; }
     }
 }

@@ -75,7 +75,7 @@ O Vite sobe em **`http://localhost:5173`** (com `--host 0.0.0.0` para acesso na 
 O `reactrack` foi organizado como um hub de sistemas front-end com uma camada de autenticação e dados compartilhada. A arquitetura suporta:
 
 - Backend Node.js com `Express`, `TypeScript`, `Mongoose`, `JWT`, `bcryptjs`, `Nodemailer/Brevo`.
-- Backend C# com `ASP.NET Core`, `EF Core`, `Npgsql`, `JWT`, `System.Net.Mail`.
+- Backend C# com `ASP.NET Core`, `EF Core`, `Npgsql`, `JWT`, `MailKit` (SMTP).
 - Frontend React (`client`) e frontend Angular (`client-angular`) consumindo a mesma superfície de API de autenticação e dados de usuário.
 - Camada GraphQL no backend Node para consultas flexíveis via Apollo Server.
 
@@ -86,7 +86,7 @@ O `reactrack` foi organizado como um hub de sistemas front-end com uma camada de
 | Stack | Runtime | ORM/ODM | Auth | Email |
 |---|---|---|---|---|
 | Node.js + Express | TypeScript | Mongoose (MongoDB) | JWT + bcryptjs | Nodemailer/Brevo |
-| C# + ASP.NET Core | .NET 8 | Entity Framework (PostgreSQL) | JWT (Issuer/Audience + assinatura simétrica) | System.Net.Mail |
+| C# + ASP.NET Core | .NET 8 | Entity Framework (PostgreSQL) | JWT (Issuer/Audience + assinatura simétrica) | MailKit (SMTP) |
 | Angular (frontend alternativo) | TypeScript | - | Consome mesma API JWT/cookie HTTP-only | - |
 
 ### Compatibilidade de consumo de API
@@ -94,6 +94,17 @@ O `reactrack` foi organizado como um hub de sistemas front-end com uma camada de
 - `client` (React) e `client-angular` compartilham o mesmo contrato de autenticação (`register`, `login`, `logout`, `verify`, `reset`, `userData`).
 - O backend C# foi estruturado para manter semântica de autenticação por JWT em cookie (`token`) e fluxo de verificação/reset equivalente ao backend Node.
 - Essa topologia permite comparar ou migrar stack de backend sem reescrever a camada de UX.
+
+### Matriz do hub (frontend × API principal)
+
+| Produto | Frontend | API de auth / utilizador | Base de dados | Configuração típica |
+|---|---|---|---|---|
+| **ReactRack + Node** | `client` (React) | Node `:4000` (`VITE_BACKEND_URL=http://localhost:4000`) | MongoDB (Atlas) | `server/.env` com `MONGODB_URL`, `JWT_SECRET`, SMTP |
+| **ReactRack + C#** | `client` (React) | ASP.NET Core `:5000` | PostgreSQL | `VITE_BACKEND_URL=http://localhost:5000`, `server-csharp` + `postgres` |
+| **AngularRack + Node** | `client-angular` | Node `:4000` | MongoDB | `environment.ts` → `backendUrl: 'http://localhost:4000'` |
+| **AngularRack + C#** | `client-angular` | ASP.NET Core `:5000` | PostgreSQL | `backendUrl: 'http://localhost:5000'` (compose Docker mapeia `environment.docker.ts`) |
+
+Os sistemas JSON (**Convene** `:3003`, **Opinly** `:3010`) correm no processo Node (`npm run all`) e leem ficheiros em `server/json/`. Os serviços resolvem caminhos com `import.meta.url` (sem módulo partilhado), para funcionar com `tsx`/Docker independentemente do diretório de trabalho.
 
 <hr>
 
@@ -242,6 +253,7 @@ Configurações chave já mapeadas:
 | `register` | Criação de conta e início de verificação |
 | `login` | Emissão de JWT com persistência em cookie |
 | `logout` | Revogação no cliente (remoção de sessão/cookie) |
+| `is-auth` | No backend C#, devolve `success` e `userData` (id, nome, email, estado de verificação), alinhado ao formato de `user/data` |
 | `sendVerifyOtp` / `verifyAccount` | Verificação de conta por OTP |
 | `sendResetOtp` / `validateResetOtp` / `resetPassword` | Recuperação de senha com OTP |
 | `userData` / `GetData` | Retorno de dados da conta autenticada |
@@ -298,10 +310,13 @@ SENDER_EMAIL=<sender-email>
 O `docker-compose.yml` suporta execução simultânea de:
 
 - `server` (Node/Express) em `http://localhost:4000`
-- `client` (React/Vite) em `http://localhost:5173`
+- **Convene** (API JSON de eventos) em `http://localhost:3003` e **Opinly** (API JSON de opiniões) em `http://localhost:3010` — serviços expostos no mesmo container do `server` (`npm run all`).
+- `client` (React/Vite) em `http://localhost:5173` — variável `VITE_BACKEND_URL` no compose aponta para o **ASP.NET Core** em `http://localhost:5000` (auth e dados de utilizador em PostgreSQL).
 - `server-csharp` (.NET) em `http://localhost:5000`
-- `client-angular` (Angular) em `http://localhost:4200`
-- `postgres` (suporte ao backend C#) em `localhost:5432`
+- `client-angular` (Angular) em `http://localhost:4200` (sobrescreve `environment.ts` via volume para alinhar `backendUrl` ao C# em Docker)
+- `postgres` (backend C#) em `localhost:5432`
+
+Os ficheiros JSON dos sistemas **Convene** e **Opinly** vivem em `server/json/`. O código em `systems/convene/services` e `systems/opinly/utils` calcula a raiz do pacote `server` com `import.meta.url` e `path.join`, para leitura fiável em qualquer CWD.
 
 ### Comandos
 

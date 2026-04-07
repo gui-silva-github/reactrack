@@ -9,6 +9,7 @@ using ReactRack.UseCases.Auth.Interfaces.VerifyAccount;
 using ReactRack.UseCases.Auth.Interfaces.SendResetOtp;
 using ReactRack.UseCases.Auth.Interfaces.ResetPassword;
 using ReactRack.UseCases.Auth.Interfaces.ValidateResetOtp;
+using ReactRack.UseCases.User.Interfaces;
 using Communication.Requests.Register;
 using Communication.Requests.Login;
 using Communication.Requests.ResetPassword;
@@ -30,7 +31,8 @@ namespace ReactRack.Controllers
         ISendResetOtpUseCase sendResetOtpUseCase,
         IValidateResetOtpUseCase validateResetOtpUseCase,
         IResetPasswordUseCase resetPasswordUseCase,
-        IJwtTokenService jwtTokenService
+        IJwtTokenService jwtTokenService,
+        IGetUserDataUseCase getUserDataUseCase
     ): ControllerBase
     {
         [HttpPost("register")]
@@ -51,9 +53,11 @@ namespace ReactRack.Controllers
 
         [Authorize]
         [HttpGet("is-auth")]
-        public IActionResult IsAuthenticated()
+        public async Task<IActionResult> IsAuthenticated(CancellationToken cancellationToken)
         {
-            return Ok(new APIResponse(true, "Usuário autenticado."));
+            var userId = GetCurrentUserId();
+            var response = await getUserDataUseCase.ExecuteAsync(userId, cancellationToken);
+            return Ok(response);
         }
 
         [Authorize]

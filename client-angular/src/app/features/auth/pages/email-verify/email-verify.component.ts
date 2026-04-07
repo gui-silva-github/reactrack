@@ -1,9 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../core/services/auth/auth.service';
 import { ToastService } from '../../../../shared/services/toast.service';
+import { AUTH_MESSAGES } from '../../../../core/constants/auth-messages';
+import { getApiErrorMessage } from '../../../../core/utils/api-error.util';
 
 @Component({
   selector: 'app-email-verify',
@@ -61,13 +63,14 @@ import { ToastService } from '../../../../shared/services/toast.service';
   styles: []
 })
 export class EmailVerifyComponent {
+  private authService = inject(AuthService);
+
   verifyForm: FormGroup;
   loading = signal(false);
   sendingOtp = signal(false);
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
     private toast: ToastService
@@ -77,25 +80,38 @@ export class EmailVerifyComponent {
       email: [email, [Validators.required, Validators.email]],
       otp: ['', [Validators.required]]
     });
+
+    effect(() => {
+      const u = this.authService.userData();
+      const current = this.verifyForm.get('email')?.value as string | undefined;
+      if (u?.email && (!current || String(current).trim() === '')) {
+        this.verifyForm.patchValue({ email: u.email });
+      }
+    });
   }
 
   onSubmit(): void {
     if (this.verifyForm.valid) {
-      this.loading.set(true);
       const { email, otp } = this.verifyForm.value;
+      if (!otp || String(otp).replace(/\D/g, '').length !== 6) {
+        this.toast.error(AUTH_MESSAGES.otpCompleteError);
+        return;
+      }
+
+      this.loading.set(true);
 
       this.authService.verifyEmail({ email, otp }).subscribe({
         next: (response) => {
           if (response.success) {
             this.toast.success(response.message || 'Email verificado com sucesso!');
-            this.router.navigate(['/login']);
+            this.router.navigate(['/']);
           } else {
             this.toast.error(response.message || 'Código inválido');
           }
           this.loading.set(false);
         },
-        error: () => {
-          this.toast.error('Erro ao verificar email. Tente novamente.');
+        error: (err) => {
+          this.toast.error(getApiErrorMessage(err, 'Erro ao verificar email. Tente novamente.'));
           this.loading.set(false);
         }
       });
@@ -115,8 +131,8 @@ export class EmailVerifyComponent {
           }
           this.sendingOtp.set(false);
         },
-        error: () => {
-          this.toast.error('Erro ao reenviar código. Tente novamente.');
+        error: (err) => {
+          this.toast.error(getApiErrorMessage(err, 'Erro ao reenviar código. Tente novamente.'));
           this.sendingOtp.set(false);
         }
       });

@@ -34,7 +34,9 @@ export const authQueries = {
         success: true,
         message: null,
         userData: {
+          id: String(user._id),
           name: user.name,
+          email: user.email,
           isAccountVerified: user.isAccountVerified ?? false,
         },
       }

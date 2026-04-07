@@ -38,7 +38,9 @@ type AuthSuccessPayload {
 }
 
 type UserData {
+  id: ID!
   name: String!
+  email: String!
   isAccountVerified: Boolean!
 }
 

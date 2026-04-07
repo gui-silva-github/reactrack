@@ -4,6 +4,8 @@ import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../core/services/auth/auth.service';
 import { ToastService } from '../../../../shared/services/toast.service';
+import { AUTH_MESSAGES } from '../../../../core/constants/auth-messages';
+import { getApiErrorMessage } from '../../../../core/utils/api-error.util';
 
 function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
   const password = control.get('password');
@@ -135,15 +137,17 @@ export class SignupComponent {
       this.authService.register({ name, email, password }).subscribe({
         next: (response) => {
           if (response.success) {
-            this.toast.success(response.message || 'Cadastro realizado com sucesso!');
-            this.router.navigate(['/email-verify'], { queryParams: { email } });
+            this.toast.success(AUTH_MESSAGES.signupSuccess);
+            this.router.navigate(['/']);
           } else {
             this.toast.error(response.message || 'Erro ao cadastrar');
           }
           this.loading.set(false);
         },
-        error: (error) => {
-          this.toast.error('Erro ao cadastrar. Tente novamente.');
+        error: (err) => {
+          this.toast.error(
+            getApiErrorMessage(err, 'Erro ao cadastrar. Tente novamente.')
+          );
           this.loading.set(false);
         }
       });

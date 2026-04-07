@@ -21,7 +21,7 @@ import { AuthService } from '../../../../core/services/auth/auth.service';
 
         @if (isLoggedIn()) {
           <a routerLink="/systems" class="border border-gray-500 rounded-full px-8 py-2.5 hover:bg-gray-100 transition-all">
-            Vamos lá!
+            Sistemas do ReactRack!
           </a>
         } @else {
           <a routerLink="/login" class="border border-gray-500 rounded-full px-8 py-2.5 hover:bg-gray-100 transition-all">

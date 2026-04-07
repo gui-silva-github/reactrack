@@ -1,5 +1,5 @@
 import { Injectable, signal, computed } from "@angular/core";
-import { Observable, tap } from "rxjs";
+import { Observable, of, switchMap, map, tap } from "rxjs";
 import { HttpService } from '../http/http.service';
 import { IGetResponse, IPostResponse } from "../../models/apiResponse/api-response.model";
 import {
@@ -7,6 +7,7 @@ import {
   IResetPasswordRequest, ISendResetOtpRequest, ISendVerifyOtpRequest
 } from "../../models/authRequest/auth-request.model";
 import { IUserData } from "../../models/userData/user-data.model";
+import { normalizeUserData } from "../../utils/user-data.util";
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,11 @@ export class AuthService {
 
   checkAuthState(): void {
     this.http.get<IGetResponse>('/auth/is-auth').subscribe({
-      next: (response) => {
-        if (response.success) {
+      next: (response: IGetResponse) => {
+        if (response.success && response.userData) {
+          this.isLoggedInSignal.set(true);
+          this.userDataSignal.set(normalizeUserData(response.userData));
+        } else if (response.success) {
           this.isLoggedInSignal.set(true);
           this.getUserData();
         } else {
@@ -42,9 +46,9 @@ export class AuthService {
 
   getUserData(): void {
     this.http.get<IGetResponse>('/user/data').subscribe({
-      next: (response) => {
+      next: (response: IGetResponse) => {
         if (response.success && response.userData) {
-          this.userDataSignal.set(response.userData);
+          this.userDataSignal.set(normalizeUserData(response.userData));
         } else {
           this.userDataSignal.set(null);
         }
@@ -55,19 +59,39 @@ export class AuthService {
     })
   }
 
+  private loadUserDataAfterAuth(): Observable<void> {
+    return this.http.get<IGetResponse>('/user/data').pipe(
+      tap((response: IGetResponse) => {
+        if (response.success && response.userData) {
+          this.userDataSignal.set(normalizeUserData(response.userData));
+        }
+      }),
+      map(() => undefined)
+    );
+  }
+
   login(payload: ILoginUserRequest): Observable<IPostResponse> {
     return this.http.post<IPostResponse>('/auth/login', payload).pipe(
-      tap((response) => {
-        if (response.success) {
-          this.isLoggedInSignal.set(true);
-          this.getUserData();
+      switchMap((response: IPostResponse) => {
+        if (!response.success) {
+          return of(response);
         }
+        this.isLoggedInSignal.set(true);
+        return this.loadUserDataAfterAuth().pipe(map(() => response));
       })
-    )
+    );
   }
 
   register(payload: IRegisterUserRequest): Observable<IPostResponse> {
-    return this.http.post<IPostResponse>('/auth/register', payload);
+    return this.http.post<IPostResponse>('/auth/register', payload).pipe(
+      switchMap((response: IPostResponse) => {
+        if (!response.success) {
+          return of(response);
+        }
+        this.isLoggedInSignal.set(true);
+        return this.loadUserDataAfterAuth().pipe(map(() => response));
+      })
+    );
   }
 
   logout(): Observable<IPostResponse> {
@@ -80,8 +104,8 @@ export class AuthService {
   }
 
   verifyEmail(payload: IVerifyEmailRequest): Observable<IPostResponse> {
-    return this.http.post<IPostResponse>('/auth/verify-account', payload).pipe(
-      tap((response) => {
+    return this.http.post<IPostResponse>('/auth/verify-account', { otp: payload.otp }).pipe(
+      tap((response: IPostResponse) => {
         if (response.success){
           this.getUserData();
         }

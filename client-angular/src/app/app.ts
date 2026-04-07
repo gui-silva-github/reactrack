@@ -11,7 +11,7 @@ import { filter } from 'rxjs';
   styleUrl: './app.css'
 })
 export class App {
-  title = 'AngularRack';
+  title = 'ReactRack';
 
   private currentUrl = signal<string>('/');
   isSystemsSection = computed(() => this.currentUrl().startsWith('/systems'));

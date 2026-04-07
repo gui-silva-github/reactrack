@@ -1,9 +1,10 @@
 <div class="systems-layout" [class.has-system]="isSystemRoute()">
   <app-navbar-systems />
   @if (!isSystemRoute()) {
-    <div class="header-systems">
-      <h1>Sistemas</h1>
-    </div>
+    <header class="header-systems">
+      <h1 class="welcome">Bem Vindo ao ReactRack</h1>
+      <p class="tagline">Vamos começar a usar os sistemas do ReactRack!</p>
+    </header>
   }
   <div class="content" [class.with-padding]="isSystemRoute()">
     <router-outlet />

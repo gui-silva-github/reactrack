@@ -1,6 +1,7 @@
-using System.Net;
-using System.Net.Mail;
+using MailKit.Net.Smtp;
+using MailKit.Security;
 using Microsoft.Extensions.Options;
+using MimeKit;
 using ReactRack.Infrastructure.Email.Interfaces;
 using ReactRack.Infrastructure.Settings.Smtp;
 using Exceptions.Validation;
@@ -24,27 +25,29 @@ namespace ReactRack.Infrastructure.Email
 
             ValidateConfiguration();
 
-            using var mailMessage = new MailMessage
-            {
-                From = new MailAddress(_smtpOptions.FromEmail, _smtpOptions.FromName, System.Text.Encoding.UTF8),
-                Subject = subject,
-                Body = htmlBody,
-                IsBodyHtml = true,
-                BodyEncoding = System.Text.Encoding.UTF8,
-                SubjectEncoding = System.Text.Encoding.UTF8
-            };
-            mailMessage.To.Add(new MailAddress(toEmail));
-
-            using var smtpClient = new SmtpClient(_smtpOptions.Host, _smtpOptions.Port)
-            {
-                EnableSsl = _smtpOptions.EnableSsl,
-                Credentials = new NetworkCredential(_smtpOptions.Username, _smtpOptions.Password)
-            };
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress(_smtpOptions.FromName, _smtpOptions.FromEmail));
+            message.To.Add(MailboxAddress.Parse(toEmail));
+            message.Subject = subject;
+            message.Body = new TextPart("html") { Text = htmlBody };
 
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                await smtpClient.SendMailAsync(mailMessage, cancellationToken);
+                using var client = new SmtpClient();
+                if (_smtpOptions.SkipCertificateValidation)
+                {
+                    client.ServerCertificateValidationCallback = (_, _, _, _) => true;
+                }
+
+                var socketOptions = _smtpOptions.EnableSsl
+                    ? SecureSocketOptions.StartTls
+                    : SecureSocketOptions.None;
+
+                await client.ConnectAsync(_smtpOptions.Host, _smtpOptions.Port, socketOptions, cancellationToken);
+                await client.AuthenticateAsync(_smtpOptions.Username, _smtpOptions.Password, cancellationToken);
+                await client.SendAsync(message, cancellationToken);
+                await client.DisconnectAsync(true, cancellationToken);
             }
             catch (OperationCanceledException)
             {

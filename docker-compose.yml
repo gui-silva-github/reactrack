@@ -6,6 +6,8 @@ services:
     container_name: reactrack-server
     ports:
       - "4000:4000"
+      - "3003:3003"
+      - "3010:3010"
     volumes:
       - ./server:/app
       - /app/node_modules
@@ -56,6 +58,8 @@ services:
     command: /bin/sh -c "dotnet restore ReactRack/ReactRack.csproj && dotnet watch --project ReactRack/ReactRack.csproj run --urls http://0.0.0.0:5000"
     depends_on:
       - postgres
+    env_file:
+      - ./server/.env
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__Postgres: Host=postgres;Port=5432;Database=reactrack_db;Username=postgres;Password=123

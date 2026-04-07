@@ -14,11 +14,13 @@ export const getDataController = async (req: Request, res: Response) => {
         }
 
         res.melt(200, {
-            success: true, 
+            success: true,
             userData: {
+                id: String(user._id),
                 name: user.name,
-                isAccountVerified: user.isAccountVerified
-            }
+                email: user.email,
+                isAccountVerified: user.isAccountVerified,
+            },
         })
     } catch (error: any){
         res.melt(500, {success: false, message: error.message})

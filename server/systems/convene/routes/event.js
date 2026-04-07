@@ -6,10 +6,15 @@ import { getAllImages } from "../services/images.js"
 
 export const router = express.Router()
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
+    let eventsFileContent
+    try {
+        eventsFileContent = await getAll()
+    } catch (err) {
+        return next(err)
+    }
+
     const query = req.query
-    
-    const eventsFileContent = await getAll()
     let events = eventsFileContent.events
 
     const search = query.search
@@ -51,10 +56,13 @@ router.get('/', async (req, res) => {
     })
 })
 
-router.get('/images', async (req, res) => {
-    const images = await getAllImages()
-
-    res.status(200).json({ images })
+router.get('/images', async (req, res, next) => {
+    try {
+        const images = await getAllImages()
+        res.status(200).json({ images })
+    } catch (err) {
+        next(err)
+    }
 })
 
 router.get('/:id', async (req, res) => {

@@ -4,6 +4,8 @@ import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../core/services/auth/auth.service';
 import { ToastService } from '../../../../shared/services/toast.service';
+import { AUTH_MESSAGES } from '../../../../core/constants/auth-messages';
+import { getApiErrorMessage } from '../../../../core/utils/api-error.util';
 
 function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
   const newPassword = control.get('newPassword');
@@ -103,15 +105,15 @@ export class ResetPasswordComponent {
       this.authService.resetPassword({ email, otp, newPassword }).subscribe({
         next: (response) => {
           if (response.success) {
-            this.toast.success(response.message || 'Senha redefinida com sucesso!');
+            this.toast.success(response.message || AUTH_MESSAGES.resetPasswordSuccess);
             this.router.navigate(['/login']);
           } else {
             this.toast.error(response.message || 'Erro ao redefinir senha');
           }
           this.loading.set(false);
         },
-        error: (error) => {
-          this.toast.error('Erro ao redefinir senha. Tente novamente.');
+        error: (err) => {
+          this.toast.error(getApiErrorMessage(err, 'Erro ao redefinir senha. Tente novamente.'));
           this.loading.set(false);
         }
       });
@@ -120,23 +122,25 @@ export class ResetPasswordComponent {
 
   sendOtp(): void {
     const email = this.resetForm.get('email')?.value;
-    if (email) {
-      this.sendingOtp.set(true);
-      this.authService.sendResetOtp({ email }).subscribe({
-        next: (response) => {
-          if (response.success) {
-            this.toast.success('Código enviado com sucesso!');
-          } else {
-            this.toast.error(response.message || 'Erro ao enviar código');
-          }
-          this.sendingOtp.set(false);
-        },
-        error: () => {
-          this.toast.error('Erro ao enviar código. Tente novamente.');
-          this.sendingOtp.set(false);
-        }
-      });
+    if (!email) {
+      this.toast.error(AUTH_MESSAGES.insertEmailError);
+      return;
     }
+    this.sendingOtp.set(true);
+    this.authService.sendResetOtp({ email }).subscribe({
+      next: (response) => {
+        if (response.success) {
+          this.toast.success(response.message || 'Código enviado com sucesso!');
+        } else {
+          this.toast.error(response.message || 'Erro ao enviar código');
+        }
+        this.sendingOtp.set(false);
+      },
+      error: (err) => {
+        this.toast.error(getApiErrorMessage(err, 'Erro ao enviar código. Tente novamente.'));
+        this.sendingOtp.set(false);
+      }
+    });
   }
 }
 

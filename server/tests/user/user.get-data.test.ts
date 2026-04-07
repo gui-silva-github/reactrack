@@ -11,7 +11,9 @@ describe("GET /user/data", () => {
   it("should return 200 with user data for an authenticated user", async () => {
     sinon.stub(jwt, "verify").returns({ id: authUserId } as never)
     sinon.stub(userModel, "findById").resolves({
+      _id: authUserId,
       name: "Test User",
+      email: "test@example.com",
       isAccountVerified: true,
     } as never)
 
@@ -21,7 +23,9 @@ describe("GET /user/data", () => {
     expect(res.body).to.have.property("success", true)
     expect(res.body).to.have.property("userData")
     expect(res.body.userData).to.deep.equal({
+      id: authUserId,
       name: "Test User",
+      email: "test@example.com",
       isAccountVerified: true,
     })
   })

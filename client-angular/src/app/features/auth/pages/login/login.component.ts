@@ -2,8 +2,11 @@ import { Component, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { IPostResponse } from '../../../../core/models/apiResponse/api-response.model';
 import { AuthService } from '../../../../core/services/auth/auth.service';
 import { ToastService } from '../../../../shared/services/toast.service';
+import { AUTH_MESSAGES } from '../../../../core/constants/auth-messages';
+import { getApiErrorMessage } from '../../../../core/utils/api-error.util';
 
 @Component({
   selector: 'app-login',
@@ -97,17 +100,19 @@ export class LoginComponent {
       const { email, password } = this.loginForm.value;
 
       this.authService.login({ email, password }).subscribe({
-        next: (response) => {
+        next: (response: IPostResponse) => {
           if (response.success) {
-            this.toast.success(response.message || 'Login realizado com sucesso!');
-            this.router.navigate(['/systems']);
+            this.toast.success(AUTH_MESSAGES.loginSuccess);
+            this.router.navigate(['/']);
           } else {
             this.toast.error(response.message || 'Erro ao fazer login');
           }
           this.loading.set(false);
         },
-        error: () => {
-          this.toast.error('Erro ao fazer login. Tente novamente.');
+        error: (err: unknown) => {
+          this.toast.error(
+            getApiErrorMessage(err, 'Erro ao fazer login. Tente novamente.')
+          );
           this.loading.set(false);
         }
       });

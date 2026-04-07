@@ -24,7 +24,7 @@ export class NavbarSystemsComponent {
       { name: 'Investimentos', path: '/systems/investments' },
       { name: 'Projetos', path: '/systems/projects' },
       { name: 'Academia', path: '/systems/fit' },
-      { name: 'Criptomoedas', path: '/systems/crypto' }
+      { name: 'Criptomoedas', path: '/systems/crypto' },
     ];
     return links;
   });

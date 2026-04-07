@@ -14,6 +14,21 @@
 .header-systems {
   margin-top: 5rem;
   text-align: center;
+  padding: 0 1rem;
+  max-width: 32rem;
+}
+
+.header-systems .welcome {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.header-systems .tagline {
+  margin: 0;
+  color: #374151;
+  line-height: 1.5;
 }
 
 .content {
