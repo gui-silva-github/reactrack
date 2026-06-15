@@ -1,0 +1,43 @@
+<form (ngSubmit)="submit()" id="event-form">
+  <p class="control margin">
+    <label class="label" for="title">{{ t.title }}</label>
+    <input class="input" id="title" name="title" [(ngModel)]="form.title" type="text" />
+  </p>
+
+  @if (loadingImages()) {
+    <p>{{ t.loadingImages }}</p>
+  } @else if (imagesError()) {
+    <p>{{ t.loadImagesError }}</p>
+  } @else if (images().length) {
+    <div class="control margin">
+      <app-image-picker
+        [images]="images()"
+        [selectedImage]="selectedImage()"
+        (select)="selectedImage.set($event)"
+      />
+    </div>
+  }
+
+  <p class="control margin">
+    <label class="label" for="description">{{ t.description }}</label>
+    <textarea class="textarea" id="description" name="description" [(ngModel)]="form.description"></textarea>
+  </p>
+
+  <div class="controls-row">
+    <p class="control">
+      <label class="label" for="date">{{ t.date }}</label>
+      <input class="input" id="date" name="date" [(ngModel)]="form.date" type="date" />
+    </p>
+    <p class="control">
+      <label class="label" for="time">{{ t.time }}</label>
+      <input class="input" id="time" name="time" [(ngModel)]="form.time" type="time" />
+    </p>
+  </div>
+
+  <p class="control margin">
+    <label class="label" for="location">{{ t.location }}</label>
+    <input class="input" id="location" name="location" [(ngModel)]="form.location" type="text" />
+  </p>
+
+  <div class="form-actions"><ng-content /></div>
+</form>

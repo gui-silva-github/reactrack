@@ -1,0 +1,16 @@
+<section class="content-section" id="new-events-section">
+  <header><h2>{{ t.upcomingEvents }}</h2></header>
+  @if (loading) {
+    <div class="center"><app-loading-indicator /></div>
+  } @else if (error) {
+    <app-error-block [title]="t.loadEventsError" [message]="t.tryAgainLater" />
+  } @else if (!events.length) {
+    <p>{{ t.noEventsFound }}</p>
+  } @else {
+    <ul class="events-list">
+      @for (event of events; track event.id) {
+        <li><app-event-item [event]="event" /></li>
+      }
+    </ul>
+  }
+</section>

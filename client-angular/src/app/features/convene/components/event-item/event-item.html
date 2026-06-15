@@ -1,0 +1,15 @@
+<article class="event-item">
+  <img class="img" [src]="imagesEndpoint + event().image" [alt]="event().title" title="Título do Evento" />
+  <div class="content">
+    <div>
+      <h2 class="h2">{{ event().title }}</h2>
+      <p class="date">{{ formatDate(event().date) }}</p>
+      <p class="location">{{ event().location }}</p>
+    </div>
+    <p class="button-wrap">
+      <a [routerLink]="['/systems/convene/events', event().id]" class="button">
+        {{ t.viewDetails }}
+      </a>
+    </p>
+  </div>
+</article>

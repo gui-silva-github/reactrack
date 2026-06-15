@@ -1,0 +1,28 @@
+.find .h2 {
+  margin-bottom: 1rem;
+}
+
+.input {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 0.5rem;
+}
+
+.button {
+  font: inherit;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  background-color: #e30d7c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.p {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.margin {
+  margin-bottom: 1rem;
+}

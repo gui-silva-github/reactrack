@@ -1,0 +1,14 @@
+<div id="image-picker">
+  <p class="p">{{ t.selectImage }}</p>
+  <ul class="ul">
+    @for (image of images(); track image.path) {
+      <li
+          class="li"
+          [class.selected]="selectedImage() === image.path"
+          (click)="select.emit(image.path)"
+      >
+        <img title="Imagem do Evento" class="img" [src]="imagesEndpoint + image.path" [alt]="image.caption" />
+      </li>
+    }
+  </ul>
+</div>

@@ -1,0 +1,13 @@
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 15%;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.header-title h1 {
+  font-size: 1.5rem;
+  color: white;
+  margin: 0;
+}
