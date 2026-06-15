@@ -21,7 +21,8 @@ const connectDB = async () => {
     })
 
     await mongoose.connect(mongodbUrl, {
-        dbName: dbName || undefined
+        dbName: dbName || undefined,
+        tlsAllowInvalidCertificates: true,
     })
 }
 
