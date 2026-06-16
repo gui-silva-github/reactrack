@@ -1,46 +1,33 @@
-import { Routes } from '@angular/router';
+import { Routes } from "@angular/router";
+import { ConveneLayout } from "./layout/convene-layout";
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'events',
-    pathMatch: 'full'
-  },
-  {
-    path: 'events',
-    loadComponent: () => import('./pages/events/events.component').then(m => m.EventsComponent),
+    component: ConveneLayout,
     children: [
+      { path: '', redirectTo: 'events', pathMatch: 'full' },
       {
-        path: 'new',
-        loadComponent: () => import('./pages/new-event/new-event.component').then(m => m.NewEventComponent)
-      }
-    ]
-  },
-  {
-    path: 'events/:id',
-    loadComponent: () => import('./pages/event-details/event-details.component').then(m => m.EventDetailsComponent),
-    children: [
+        path: 'events',
+        loadComponent: () => import('./pages/events/events').then((m) => m.Events),
+        children: [
+          {
+            path: 'new',
+            loadComponent: () => import('./pages/new-event/new-event').then((m) => m.NewEvent),
+          }
+        ]
+      },
       {
-        path: 'edit',
-        loadComponent: () => import('./pages/edit-event/edit-event.component').then(m => m.EditEventComponent)
+        path: 'events/:id',
+        loadComponent: () =>
+          import('./pages/event-details/event-details').then((m) => m.EventDetails),
+        children: [
+          {
+            path: 'edit',
+            loadComponent: () => import('./pages/edit-event/edit-event').then((m) => m.EditEvent),
+          }
+        ]
       }
     ]
   }
-];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+]

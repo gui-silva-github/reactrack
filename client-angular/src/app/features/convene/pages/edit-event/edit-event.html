@@ -1,0 +1,21 @@
+<app-modal (closed)="close()">
+  @if (loading) {
+    <app-loading-indicator />
+  } @else if (event) {
+    <app-event-form [inputData]="event" (submitForm)="update($event)">
+      @if (saving) {
+        {{ t.sending }}
+      } @else {
+        <a routerLink="../" class="button-text">
+          {{ t.cancel }}
+        </a>
+        <button type="submit" class="button">
+          {{ t.update }}
+        </button>
+      }
+    </app-event-form>
+  }
+  @if (error) {
+    <app-error-block [title]="t.updateError" [message]="t.tryAgainLater" />
+  }
+</app-modal>

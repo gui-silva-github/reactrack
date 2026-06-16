@@ -1,0 +1,56 @@
+<div class="margin">
+  @if (showDeleteModal) {
+    <app-modal (closed)="showDeleteModal = false">
+      <h2 class="modal-h2">{{ t.deleteConfirm }}</h2>
+      <p class="modal-h2">{{ t.deleteConfirmMsg }}</p>
+      <div class="form-actions">
+        @if (deleting) {
+          <p>{{ t.deleting }}</p>
+        } @else {
+          <button type="button" class="button-text" (click)="showDeleteModal = false">
+            {{ t.cancel }}
+          </button>
+          <button type="button" class="button" (click)="deleteEvent()">
+            {{ t.exclude }}
+          </button>
+        }
+      </div>
+
+      @if (deleteError) {
+        <app-error-block [title]="t.deleteError" [message]="t.deleteErrorMsg" />
+      }
+    </app-modal>
+  }
+
+  <router-outlet />
+
+  <app-header>
+    <a routerLink="/systems/convene/events" class="nav-item all-events">{{ t.allEvents }}</a>
+  </app-header>
+
+  <article id="event-details" class="margin-details">
+    @if (loading) {
+      <div class="event-details-content center">
+        <p>{{ t.loadingEvent }}</p>
+      </div>
+    } @else if (event) {
+      <header class="header">
+        <h1>{{ event.title }}</h1>
+        <nav class="nav">
+          <button type="button" class="button" (click)="showDeleteModal = true">{{ t.delete }}</button>
+          <a [routerLink]="['/systems/convene/events', event.id, 'edit']" class="nav-item">{{ t.edit }}</a>
+        </nav>
+      </header>
+      <div class="event-details-content">
+        <img title="Imagem do Evento" class="img" [src]="imagesEndpoint + event.image" [alt]="event.title" />
+        <div class="info">
+          <div>
+            <p class="location">{{ event.location }}</p>
+            <time class="time">{{ formatDate(event.date) }} | {{ event.time }}</time>
+          </div>
+          <p class="description">{{ event.description }}</p>
+        </div>
+      </div>
+    }
+  </article>
+</div>

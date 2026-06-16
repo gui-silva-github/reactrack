@@ -1,0 +1,97 @@
+.header {
+  width: 40rem;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  color: white;
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav .button,
+.nav .nav-item {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: #b6cad5;
+  border-radius: 4px;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 0.25rem;
+}
+
+.nav .button:hover,
+.nav .nav-item:hover {
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+
+.event-details-content {
+  width: 40rem;
+  margin: 2rem auto;
+  background-color: #343b3f;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.event-details-content.center {
+  text-align: center;
+  color: white;
+  padding: 2rem;
+}
+
+.img {
+  width: 100%;
+  height: 22rem;
+  object-fit: cover;
+  margin-bottom: 2rem;
+}
+
+.info {
+  padding: 0 3rem 3rem 3rem;
+}
+
+.location {
+  font-size: 1.15rem;
+  color: #b6cad5;
+  font-weight: bold;
+  margin: 0;
+}
+
+.time {
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+  color: white;
+}
+
+.description {
+  font-size: 1.25rem;
+  line-height: 2rem;
+  color: #b6cad5;
+}
+
+.margin {
+  margin-top: -0.5rem;
+}
+
+.margin-details {
+  margin-top: -1.5rem;
+}
+
+.modal-h2 {
+  margin-bottom: 1rem;
+}
+
+.all-events:hover {
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
