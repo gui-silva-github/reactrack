@@ -1,0 +1,90 @@
+.investments-page {
+  padding: 6rem 1rem 2rem;
+}
+
+#header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#header img {
+  width: 5rem;
+  height: 5rem;
+}
+
+#user-input {
+  padding: 1rem;
+  max-width: 30rem;
+  margin: 2rem auto;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #307e6c, #2b996d);
+}
+
+.input-group {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+}
+
+.mt {
+  margin-top: 1rem;
+}
+
+#user-input p {
+  width: 100%;
+}
+
+#user-input label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: .7rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#user-input input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #76c0ae;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  color: #eafff9;
+  font-size: 1rem;
+}
+
+#result {
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: right;
+  background-color: #1a1f1d;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+#result thead th {
+  font-size: 0.75rem;
+  color: #83e6c0;
+  text-transform: uppercase;
+  padding: 14px 10px;
+  background-color: #242b28;
+}
+
+#result tbody td {
+  color: #c2e9e0;
+  padding: 12px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#result th:first-child, #result td:first-child {
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+}

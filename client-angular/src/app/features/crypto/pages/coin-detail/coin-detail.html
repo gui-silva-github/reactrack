@@ -1,0 +1,34 @@
+@if (!coin() || !chart()) {
+  <div class="spinner">
+    <div class="spin"></div>
+  </div>
+} @else {
+  <div class="coin">
+      <app-crypto-navbar />
+      <div class="coin-name">
+        <img title="Imagem da Moeda" [src]="coin()!.image.large" [alt]="t.coinAlt" />
+        <p><strong>{{ coin()!.name }} ({{ coin()!.symbol.toUpperCase() }})</strong></p>
+      </div>
+      <div class="coin-chart">
+        <app-line-chart [historicalData]="chart()!" />
+      </div>
+      <div class="coin-info">
+        <ul>
+          <li>{{ t.marketRank }}</li>
+          <li>{{ coin()!.market_cap_rank }}</li>
+        </ul>
+        <ul>
+          <li>{{ t.currentPrice }}</li>
+          <li>{{ cryptoState.currency().symbol }} {{ coin()!.market_data.current_price[currencyName].toLocaleString() }}</li>
+        </ul>
+        <ul>
+          <li>{{ t.high24h }}</li>
+          <li>{{ cryptoState.currency().symbol }} {{ coin()!.market_data.high_24h[currencyName].toLocaleString() }}</li>
+        </ul>
+        <ul>
+          <li>{{ t.low24h }}</li>
+          <li>{{ cryptoState.currency().symbol }} {{ coin()!.market_data.low_24h[currencyName].toLocaleString() }}</li>
+        </ul>
+      </div>
+  </div>
+}

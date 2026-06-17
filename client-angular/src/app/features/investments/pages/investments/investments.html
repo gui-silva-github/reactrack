@@ -1,0 +1,59 @@
+<section class="investments-page">
+  <header id="header">
+    <img src="/assets/investments/investment-calculator-logo.png" alt="Logo Investimentos" />
+    <h1>Calculadora de Investimentos</h1>
+  </header>
+
+  <section id="user-input">
+    <div class="input-group">
+      <p>
+        <label for="initialInvestment">Investimento Inicial</label>
+        <input id="initialInvestment" type="number"
+          [ngModel]="investmentsState.form().initialInvestment" (ngModelChange)="investmentsState.setValue('initialInvestment', +$event)"
+        />
+      </p>
+      <p>
+        <label for="annualInvestment">Investimento Anual</label>
+        <input id="annualInvestment" type="number" [ngModel]="investmentsState.form().annualInvestment" (ngModelChange)="investmentsState.setValue('annualInvestment', +$event)" />
+      </p>
+    </div>
+    <div class="input-group mt">
+      <p>
+        <label for="expectedReturn">Retorno Esperado</label>
+        <input id="expectedReturn" type="number" [ngModel]="investmentsState.form().expectedReturn" (ngModelChange)="investmentsState.setValue('expectedReturn', +$event)" />
+      </p>
+      <p>
+        <label for="duration">Duração (anos)</label>
+        <input id="duration" type="number" [ngModel]="investmentsState.form().duration" (ngModelChange)="investmentsState.setValue('duration', +$event)" />
+      </p>
+    </div>
+  </section>
+
+  @if (!investmentsState.inputIsValid()) {
+    <p class="center">Por favor, coloque uma duração maior ou igual a 1 ano.</p>
+  } @else {
+    <table id="result">
+      <thead>
+        <tr>
+          <th>Ano</th>
+          <th>Investimento</th>
+          <th>Interesse (Ano)</th>
+          <th>Total de Interesse</th>
+          <th>Capital Investido</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of investmentsState.results(); track row.year) {
+          <tr>
+            <td>{{ row.year }}</td>
+            <td>{{ formatCurrency(row.valueEndOfYear) }}</td>
+            <td>{{ formatCurrency(row.interest) }}</td>
+            <td>{{ formatCurrency(investmentsState.totalInterest(row)) }}</td>
+            <td>{{ formatCurrency(investmentsState.totalInvested(row)) }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+
+</section>

@@ -1,0 +1,25 @@
+<section class="movies-page">
+  <header class="navbar">
+    <h1>🎬 Filmes</h1>
+    <a routerLink="/systems/movies/search" class="search-link">Buscar filme</a>
+  </header>
+  <h2 class="title">Top Filmes</h2>
+  @if (moviesState.loading()) {
+    <p class="loading">Carregando...</p>
+  } @else {
+    <div class="movies-grid">
+      @for (movie of moviesState.movies(); track movie.id) {
+        <article class="movie-card">
+          <img
+            title="Poster do Filme"
+            [src]="movie.poster_path ? moviesState.imgApi + movie.poster_path : fallbackPoster"
+            [alt]="movie.title"
+          />
+          <h3>{{ movie.title }}</h3>
+          <p>⭐ {{ movie.vote_average.toFixed(1) }}</p>
+          <a [routerLink]="['/systems/movies/movie', movie.id]">Detalhes</a>
+        </article>
+      }
+    </div>
+  }
+</section>

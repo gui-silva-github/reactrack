@@ -1,0 +1,48 @@
+<div class="home">
+  <app-crypto-navbar />
+  <div class="hero">
+    <h1>{{ t.title }}</h1>
+    <p>{{ t.subtitle }}</p>
+    <form (ngSubmit)="cryptoState.searchCoins()">
+      <input
+        list="coinlist"
+        [ngModel]="cryptoState.searchTerm()"
+        (ngModelChange)="cryptoState.setSearchTerm($event)"
+        name="search"
+        type="text"
+        [placeholder]="t.searchPlaceholder"
+        required
+      />
+      <datalist id="coinlist">
+        @for (coin of cryptoState.allCoin(); track coin.id) {
+          <option [value]="coin.name"></option>
+        }
+      </datalist>
+      <button type="submit">{{ t.search }}</button>
+    </form>
+  </div>
+
+  <div class="crypto-table">
+    <div class="table-layout">
+      <p>{{ t.rank }}</p>
+      <p>{{ t.coins }}</p>
+      <p>{{ t.price }}</p>
+      <p class="change-header">{{ t.change24h }}</p>
+      <p class="market-cap">{{ t.marketCap }}</p>
+    </div>
+    @for (coin of cryptoState.filteredCoins(); track coin.id) {
+      <a [routerLink]="['/systems/crypto/coin', coin.id]" class="table-layout">
+        <p>{{ coin.market_cap_rank }}</p>
+        <div class="coin-cell">
+          <img title="Imagem da Moeda" [src]="coin.image" [alt]="t.logoAlt" />
+          <p>{{ coin.name }} - {{ coin.symbol }}</p>
+        </div>
+        <p>{{ cryptoState.currency().symbol }} {{ coin.current_price.toLocaleString() }}</p>
+        <p [class.green]="coin.price_change_percentage_24h > 0" [class.red]="coin.price_change_percentage_24h <= 0">
+          {{ (coin.price_change_percentage_24h * 100 / 100).toFixed(2) }}
+        </p>
+        <p class="market-cap">{{ cryptoState.currency().symbol }} {{ coin.market_cap.toLocaleString() }}</p>
+      </a>
+    }
+  </div>
+</div>

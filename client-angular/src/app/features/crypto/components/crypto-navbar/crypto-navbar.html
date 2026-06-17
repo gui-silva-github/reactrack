@@ -1,0 +1,17 @@
+<div class="navbar">
+  <ul>
+    <li>
+      <a routerLink="/systems/crypto">
+        <img class="logo" src="/assets/png/crypto/logo.png" alt="Mercado de Crypto" />
+      </a>
+    </li>
+  </ul>
+  <div class="nav-right">
+    <select title="Opção de Moeda" [value]="cryptoState.currency().name" (change)="onCurrencyChange($event)">
+      <option value="usd">USD ($)</option>
+      <option value="eur">EUR (€)</option>
+      <option value="brl">BRL (R$)</option>
+      <option value="inr">INR (₹)</option>
+    </select>
+  </div>
+</div>

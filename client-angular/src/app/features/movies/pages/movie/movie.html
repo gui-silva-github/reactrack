@@ -1,0 +1,28 @@
+<section class="movie-page">
+  <a routerLink="/systems/movies" class="back">← Voltar</a>
+
+  @if (moviesState.loading()) {
+    <p>Carregando...</p>
+  } @else if (moviesState.selectedMovie(); as movie) {
+    <article class="movie-card">
+      <img
+        title="Poster do Filme"
+        [src]="movie.poster_path ? moviesState.imgApi + movie.poster_path : fallbackPoster"
+        [alt]="movie.title"
+      />
+      <h1>{{ movie.title }}</h1>
+      <p class="tagline">{{ movie.tagline || 'Sem tagline' }}</p>
+      <div class="info"><strong>⭐ Nota:</strong> {{ movie.vote_average.toFixed(1) }}</div>
+      <div class="info"><strong>Orçamento:</strong> {{ formatCurrency(movie.budget || 0) }}</div>
+      <div class="info"><strong>Receita:</strong> {{ formatCurrency(movie.revenue || 0) }}</div>
+      <div class="info"><strong>Duração:</strong> {{ movie.runtime || 0 }} minutos</div>
+      <div class="info"><strong>Lançamento:</strong> {{ movie.release_date }}</div>
+      <div class="info description">
+        <strong>Descrição:</strong>
+        <p>{{ movie.overview || 'Sem descrição.' }}</p>
+      </div>
+    </article>
+  } @else {
+    <p>Filme não encontrado.</p>
+  }
+</section>
