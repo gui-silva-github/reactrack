@@ -1,0 +1,9 @@
+<div>
+  <app-projects-search />
+  @if (projectsState.user(); as user) {
+    <app-projects-user [user]="user" />
+  }
+  @if (projectsState.error()) {
+    <app-projects-error />
+  }
+</div>

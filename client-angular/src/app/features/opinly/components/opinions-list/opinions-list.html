@@ -1,0 +1,14 @@
+<div class="opinions">
+  @if (opinlyState.opinions().length) {
+    <ul>
+      @for (opinion of opinlyState.opinions(); track opinion.id) {
+        <li>
+          <app-opinion-card [opinion]="opinion" />
+        </li>
+      }
+    </ul>
+  }
+  @if (!opinlyState.opinions().length) {
+    <p class="none">{{ t.noOpinions }}</p>
+  }
+</div>

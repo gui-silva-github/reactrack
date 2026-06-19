@@ -1,0 +1,30 @@
+<div class="new-opinion">
+  <form class="form" (ngSubmit)="submit()">
+    <div class="control-row">
+      <p class="control">
+        <label for="userName">{{ t.yourName }}</label>
+        <input id="userName" name="userName" type="text" [(ngModel)]="userName" />
+      </p>
+      <p class="control">
+        <label for="title">{{ t.titleLabel }}</label>
+        <input id="title" name="title" type="text" [(ngModel)]="title" />
+      </p>
+    </div>
+    <p class="control top">
+      <label for="body">{{ t.yourOpinion }}</label>
+      <textarea name="body" id="body" rows="5" [(ngModel)]="body"></textarea>
+    </p>
+    @if (errors().length) {
+      <ul class="errors">
+        @for (error of errors(); track error) {
+          <li>{{ error }}</li>
+        }
+      </ul>
+    }
+    <p class="actions">
+      <button type="submit" [disabled]="submitting()">
+        {{ submitting() ? t.sending : t.submit }}
+      </button>
+    </p>
+  </form>
+</div>

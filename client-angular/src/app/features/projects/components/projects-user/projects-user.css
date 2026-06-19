@@ -1,0 +1,81 @@
+.user {
+  background-color: #111a2e;
+  padding: 2.5rem;
+  border-radius: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+  max-width: 420px;
+  margin: 0 auto;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+
+.user img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #6366f1;
+}
+
+.user h2 {
+  font-size: 1.4rem;
+  color: #e5e7eb;
+  margin: 0;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #9ca3af;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.location-icon {
+  color: #22d3ee;
+  flex-shrink: 0;
+}
+
+.stats {
+  display: flex;
+  gap: 2rem;
+}
+
+.stats div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.stats p {
+  color: #9ca3af;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.number {
+  background-color: rgba(99, 102, 241, 0.15);
+  color: #c7d2fe;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.4rem;
+  font-weight: 600;
+}
+
+.user a {
+  margin-top: 0.8rem;
+  background-color: #6366f1;
+  color: white;
+  padding: 0.7rem 1.2rem;
+  border-radius: 0.6rem;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.user a:hover {
+  background-color: #4f46e5;
+  transform: translateY(-1px);
+}
