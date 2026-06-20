@@ -1,58 +1,57 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
+import { CONVENE_URL, CONVENE_URLS } from '../../constants/api-urls';
+import { IConveneEventPayload } from '../../models';
+import { ConveneImage } from '../../models';
 
-const CONVENE_ENDPOINT = 'http://localhost:3003/events';
-const CONVENE_IMAGES_ENDPOINT = 'http://localhost:3003/'
-
-export interface IConveneEvent {
-  id?: string;
-  title: string;
-  description: string;
-  date: string;
-  location: string;
-  image?: string;
-  [key: string]: any;
+interface FetchEventsOptions {
+  searchTerm?: string;
+  max?: number;
 }
 
-export interface IConveneImage {
-  id: string;
-  url: string;
-  [key: string]: any;
-}
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class ConveneService {
-  readonly eventsEndpoint = CONVENE_ENDPOINT;
-  readonly imagesEndpoint = CONVENE_IMAGES_ENDPOINT;
+  readonly eventsEndpoint = CONVENE_URLS.events;
+  readonly imagesEndpoint = `${CONVENE_URL}/`;
 
   constructor(private http: HttpClient) {}
 
-  getEvents(): Observable<IConveneEvent[]> {
-    return this.http.get<IConveneEvent[]>(CONVENE_ENDPOINT);
+  getEvents(options: FetchEventsOptions = {}): Observable<IConveneEventPayload[]> {
+    let params = new HttpParams();
+    if (options.searchTerm) params = params.set('search', options.searchTerm);
+    if (options.max !== undefined) params = params.set('max', options.max.toString());
+
+    return this.http
+      .get<{ events: IConveneEventPayload[] }>(CONVENE_URLS.events, { params })
+      .pipe(map((response) => response.events ?? []));
   }
 
-  getEvent(id: string): Observable<IConveneEvent> {
-    return this.http.get<IConveneEvent>(`${CONVENE_ENDPOINT}/${id}`)
+  getEvent(id: string): Observable<IConveneEventPayload> {
+    return this.http
+      .get<{ event: IConveneEventPayload }>(CONVENE_URLS.event(id))
+      .pipe((map((response) => response.event)));
   }
 
-  createEvent(event: IConveneEvent): Observable<IConveneEvent> {
-    return this.http.post<IConveneEvent>(CONVENE_ENDPOINT, event);
+  createEvent(event: IConveneEventPayload): Observable<IConveneEventPayload> {
+    return this.http
+      .post<{ event: IConveneEventPayload }>(CONVENE_URLS.events, { event })
+      .pipe(map((response) => response.event));
   }
 
-  updateEvent(id: string, event: IConveneEvent): Observable<IConveneEvent> {
-    return this.http.put<IConveneEvent>(`${CONVENE_ENDPOINT}/${id}`, event);
+  updateEvent(id: string, event: IConveneEventPayload): Observable<IConveneEventPayload> {
+    return this.http
+      .put<{ event: IConveneEventPayload }>(CONVENE_URLS.event(id), { event })
+      .pipe(map((response) => response.event));
   }
 
   deleteEvent(id: string): Observable<void> {
-    return this.http.delete<void>(`${CONVENE_ENDPOINT}/${id}`);
+    return this.http.delete<void>(CONVENE_URLS.event(id));
   }
 
-  getImages(): Observable<IConveneImage[]> {
-    return this.http.get<IConveneImage[]>(`${CONVENE_IMAGES_ENDPOINT}images`);
+  getImages(): Observable<ConveneImage[]> {
+    return this.http
+      .get<{ images: ConveneImage[] }>(CONVENE_URLS.images)
+      .pipe(map((response) => response.images ?? []));
   }
 }
-
-

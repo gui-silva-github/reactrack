@@ -1,40 +1,12 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { GITHUB_API, GITHUB_PROFILE_URL } from '../../constants/api-urls';
+import { IGitHubRepo, IGitHubUser } from '../../models';
 
-const GITHUB_API = 'https://api.github.com/users';
-
-export interface IGitHubUser {
-  login: string;
-  id: number;
-  avatar_url: string;
-  html_url: string;
-  name: string;
-  bio: string;
-  public_repos: number;
-  followers: number;
-  following: number;
-  [key: string]: any;
-}
-
-export interface IGitHubRepo {
-  id: number;
-  name: string;
-  full_name: string;
-  description: string;
-  html_url: string;
-  language: string;
-  stargazers_count: number;
-  forks_count: number;
-  updated_at: string;
-  [key: string]: any;
-}
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class ProjectsService {
-  readonly githubUrl = 'https://github.com/';
+  readonly githubUrl = GITHUB_PROFILE_URL;
 
   constructor(private http: HttpClient) {}
 

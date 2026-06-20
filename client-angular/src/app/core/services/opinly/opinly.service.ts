@@ -1,40 +1,26 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { OPINLY_URLS } from "../../constants/api-urls";
+import { IOpinionData } from "../../models";
 
-const OPINLY_URL = 'http://localhost:3010';
-
-export interface IOpinion {
-  id?: string;
-  text: string;
-  author: string;
-  upvotes: number;
-  downvotes: number;
-  createdAt?: string;
-  [key: string]: any;
-}
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class OpinlyService {
-  private readonly baseUrl = OPINLY_URL;
-
   constructor(private http: HttpClient) {}
 
-  loadOpinions(): Observable<IOpinion[]> {
-    return this.http.get<IOpinion[]>(`${this.baseUrl}/opinions`);
+  loadOpinions(): Observable<IOpinionData[]> {
+    return this.http.get<IOpinionData[]>(OPINLY_URLS.loadOpinions);
   }
 
-  saveOpinion(opinion: IOpinion): Observable<IOpinion> {
-    return this.http.post<IOpinion>(`${this.baseUrl}/opinions`, opinion)
+  saveOpinion(opinion: Omit<IOpinionData, 'id'> & { id?: string }): Observable<IOpinionData> {
+    return this.http.post<IOpinionData>(OPINLY_URLS.saveOpinions, opinion);
   }
 
-  upvoteOpinion(id: string): Observable<IOpinion> {
-    return this.http.post<IOpinion>(`${this.baseUrl}/opinions/${id}/upvote`, {});
+  upvoteOpinion(id: string): Observable<void> {
+    return this.http.post<void>(OPINLY_URLS.upvote(id), {});
   }
 
-  downvoteOpinion(id: string): Observable<IOpinion> {
-    return this.http.post<IOpinion>(`${this.baseUrl}/opinions/${id}/downvote`, {});
+  downvoteOpinion(id: string): Observable<void> {
+    return this.http.post<void>(OPINLY_URLS.downvote(id), {});
   }
 }
