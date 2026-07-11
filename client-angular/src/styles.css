@@ -56,9 +56,11 @@ button, .pointer, a {
 
 app-navbar-systems,
 app-navbar,
-app-theme-toggle {
+app-theme-toggle,
+app-events-intro {
   display: block;
   width: 100%;
+  max-width: 100%;
 }
 
 app-theme-toggle {
