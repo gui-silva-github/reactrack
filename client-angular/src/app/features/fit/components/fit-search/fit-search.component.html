@@ -1,0 +1,30 @@
+<section class="fit-search">
+  <h2 class="fit-search-title">{{ i18n.t('fit.amazingExercises') }}</h2>
+  <div class="search-box">
+    <input
+      [(ngModel)]="search"
+      [placeholder]="i18n.t('fit.searchPlaceholder')"
+      type="text"
+    />
+    <button class="search-btn" type="button" (click)="handleSearch()">
+      {{ i18n.t('fit.search') }}
+    </button>
+  </div>
+  <div class="scroll-wrapper">
+    <button type="button" class="left-arrow" (click)="scrollLeft()" [attr.aria-label]="i18n.t('fit.leftArrow')">
+      <img src="/assets/icons/left-arrow.png" width="20" height="20" alt="" />
+    </button>
+    <div class="scroll-container" #scrollContainer>
+      @for (part of fitState.bodyParts(); track part.name) {
+        <app-fit-body-part
+          [item]="part"
+          [active]="fitState.bodyPart().name === part.name"
+          (selectPart)="fitState.setBodyPart($event)"
+        />
+      }
+    </div>
+    <button type="button" class="right-arrow" (click)="scrollRight()" [attr.aria-label]="i18n.t('fit.rightArrow')">
+      <img src="/assets/icons/right-arrow.png" width="20" height="20" alt="" />
+    </button>
+  </div>
+</section>

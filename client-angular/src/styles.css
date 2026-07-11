@@ -2,8 +2,36 @@
 
 @import 'tailwindcss';
 
+@import './app/features/fit/styles/fit.css';
+@import './app/features/convene/styles/convene.css';
+@import './app/features/talkive/styles/talkive-chat.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source './**/*.ts';
 @source './**/*.html';
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #888 transparent;
+}
 
 html {
   scroll-behavior: smooth;
@@ -26,7 +54,18 @@ button, .pointer, a {
   cursor: pointer;
 }
 
-a {
-  text-decoration: none;
+app-navbar-systems,
+app-navbar,
+app-theme-toggle {
+  display: block;
+  width: 100%;
 }
 
+app-theme-toggle {
+  display: inline-flex;
+  width: auto;
+}
+
+dialog:not([open]) {
+  display: none;
+}

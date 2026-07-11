@@ -1,7 +1,7 @@
 <article>
   <header>
     <h3>{{ opinion().title }}</h3>
-    <p>{{ t.sharedBy(opinion().userName) }}</p>
+    <p>{{ i18n.t('opinly.sharedBy', { name: opinion().userName }) }}</p>
   </header>
   <p class="body-text">{{ opinion().body }}</p>
   <form class="votes" (submit)="$event.preventDefault()">

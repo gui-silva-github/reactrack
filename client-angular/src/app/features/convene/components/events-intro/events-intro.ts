@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterLink } from "@angular/router";
-import { PT } from '../../../../core/constants/i18n-pt';
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { ConveneI18n } from '../../convene-i18n';
 
 @Component({
   selector: 'app-events-intro',
@@ -9,5 +9,5 @@ import { PT } from '../../../../core/constants/i18n-pt';
   styleUrl: './events-intro.css',
 })
 export class EventsIntro {
-  readonly t = PT.convene;
+  readonly t = inject(ConveneI18n);
 }

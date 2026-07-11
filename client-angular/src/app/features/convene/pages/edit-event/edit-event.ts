@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { PT } from '../../../../core/constants/i18n-pt';
+import { ConveneI18n } from '../../convene-i18n';
 import { IConveneEventPayload } from '../../../../core/models';
 import { ConveneService } from '../../../../core/services/convene/convene.service';
 import { ErrorBlock } from '../../components/error-block/error-block';
@@ -20,7 +20,7 @@ export class EditEvent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly conveneService = inject(ConveneService);
-  readonly t = PT.convene;
+  readonly t = inject(ConveneI18n);
 
   event: IConveneEventPayload | null = null;
   loading = true;

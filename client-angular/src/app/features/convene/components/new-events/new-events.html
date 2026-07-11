@@ -1,13 +1,13 @@
 <section class="content-section" id="new-events-section">
-  <header><h2>{{ t.upcomingEvents }}</h2></header>
+  <header><h2>{{ t.t('upcomingEvents') }}</h2></header>
   @if (loading) {
     <div class="center"><app-loading-indicator /></div>
   } @else if (error) {
-    <app-error-block [title]="t.loadEventsError" [message]="t.tryAgainLater" />
+    <app-error-block [title]="t.t('loadEventsError')" [message]="t.t('tryAgainLater')" />
   } @else if (!events.length) {
-    <p>{{ t.noEventsFound }}</p>
+    <p>{{ t.t('noEventsFound') }}</p>
   } @else {
-    <ul class="events-list">
+    <ul class="eventsList">
       @for (event of events; track event.id) {
         <li><app-event-item [event]="event" /></li>
       }

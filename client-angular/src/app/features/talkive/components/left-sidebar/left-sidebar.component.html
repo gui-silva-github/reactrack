@@ -1,0 +1,50 @@
+<div class="ls" [class.ls-collapsed]="talkiveState.chatVisible()">
+  <div class="ls-top">
+    <div class="ls-nav">
+      <img [src]="assets.logoT" [alt]="i18n.t('common.logo')" class="logo" />
+      <div class="menu" [class.open]="menuOpen()">
+        <img [src]="assets.menu_icon" [alt]="i18n.t('common.iconAlt')" (click)="toggleMenu()" />
+        <div class="sub-menu">
+          <p (click)="goToProfile()">{{ i18n.t('talkive.chat.editProfile') }}</p>
+          <hr />
+          <p (click)="logout()">{{ i18n.t('common.logout') }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="ls-search">
+      <img [src]="assets.search_icon" [alt]="i18n.t('talkive.chat.search')" />
+      <input
+        type="text"
+        [placeholder]="i18n.t('talkive.chat.search')"
+        (input)="onSearchInput($event)"
+      />
+    </div>
+  </div>
+
+  <div class="ls-list">
+    @if (showSearch() && searchUser(); as user) {
+      <div class="friends add-user" (click)="addChat()">
+        <img [src]="user.avatar || assets.avatar_icon" [alt]="i18n.t('talkive.userAlt')" />
+        <p>{{ user.name }}</p>
+      </div>
+    } @else if (talkiveState.chatData().length > 0) {
+      @for (item of talkiveState.chatData(); track item.messageId) {
+        <div
+          class="friends"
+          [class.border]="!item.messageSeen && item.messageId !== talkiveState.messagesId()"
+          (click)="selectChat(item)"
+        >
+          <img [src]="item.userData?.avatar || assets.avatar_icon" [alt]="i18n.t('talkive.profileAlt')" />
+          <div>
+            <p>{{ item.userData?.name || '' }}</p>
+            <span>{{ item.lastMessage }}</span>
+          </div>
+        </div>
+      }
+    } @else {
+      <div class="no-chats">
+        <p>{{ i18n.t('talkive.chat.noMessageFound') }}</p>
+      </div>
+    }
+  </div>
+</div>

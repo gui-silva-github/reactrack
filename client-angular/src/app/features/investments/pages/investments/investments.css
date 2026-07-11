@@ -1,5 +1,6 @@
 .investments-page {
-  padding: 6rem 1rem 2rem;
+  padding: 1rem 1rem 2rem;
+  width: 100%;
 }
 
 #header {
@@ -10,6 +11,7 @@
 }
 
 #header img {
+  margin-top: 0.3rem;
   width: 5rem;
   height: 5rem;
 }
@@ -25,7 +27,7 @@
 .input-group {
   display: flex;
   justify-content: space-evenly;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .mt {
@@ -39,9 +41,11 @@
 #user-input label {
   display: block;
   margin-bottom: 0.25rem;
-  font-size: .7rem;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 0.7rem;
   font-weight: bold;
   text-transform: uppercase;
+  color: #fff;
 }
 
 #user-input input {
@@ -50,13 +54,13 @@
   border: 1px solid #76c0ae;
   border-radius: 0.25rem;
   background-color: transparent;
-  color: #eafff9;
+  color: #c2e9e0;
   font-size: 1rem;
 }
 
 #result {
   width: 100%;
-  max-width: 900px;
+  max-width: 800px;
   margin: 2rem auto;
   border-collapse: separate;
   border-spacing: 0;
@@ -71,20 +75,49 @@
   font-size: 0.75rem;
   color: #83e6c0;
   text-transform: uppercase;
-  padding: 14px 10px;
+  letter-spacing: 0.05rem;
+  padding: 15px 10px;
   background-color: #242b28;
+  border-bottom: 2px solid #333;
 }
 
 #result tbody td {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 0.9rem;
   color: #c2e9e0;
   padding: 12px 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-#result th:first-child, #result td:first-child {
+#result tbody tr:last-child td {
+  border-bottom: none;
+}
+
+#result th:first-child,
+#result td:first-child {
   text-align: center;
+}
+
+#result tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+#result tbody tr:hover {
+  background-color: rgba(131, 230, 192, 0.08);
+  transition: background-color 0.2s ease;
 }
 
 .center {
   text-align: center;
+}
+
+.chart {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 2rem auto;
+  height: 340px;
+  background-color: #1a1f1d;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }

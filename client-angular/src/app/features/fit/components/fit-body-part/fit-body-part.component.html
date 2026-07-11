@@ -1,0 +1,10 @@
+<button
+  type="button"
+  class="bodyPart-card"
+  [class.active]="active()"
+  (click)="openWiki()"
+  (mouseleave)="selectPart.emit(item())"
+>
+  <img src="/assets/icons/gym.png" width="50" height="50" [alt]="i18n.t('fit.dumbbellAlt')" />
+  <span class="body-part-name">{{ item().name }}</span>
+</button>

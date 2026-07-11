@@ -1,47 +1,73 @@
-<nav class="fixed top-0 left-0 w-full z-50">
-  <div class="mx-auto w-full max-w-screen-xl flex justify-between items-center px-4 py-4 sm:px-24 sm:py-6 gap-4">
+<nav class="absolute top-0 left-0 w-full z-50">
+  <div class="w-full flex justify-between items-center p-4 sm:p-6 sm:px-24">
     <a routerLink="/" class="pointer shrink-0">
       <img
         src="/assets/jpg/icon.jpg"
-        alt="Logo"
-        class="w-20 h-20 sm:w-32 sm:h-32 border border-gray-500 rounded-full object-cover shrink-0"
+        [alt]="i18n.t('common.logo')"
+        class="w-28 sm:w-32 border border-gray-500 dark:border-gray-400 rounded-full h-32 object-cover shrink-0"
       />
     </a>
 
-    @if (userData(); as user) {
-      <div class="w-10 h-10 flex justify-center items-center rounded-full bg-black text-white relative shrink-0" (click)="toggleMenu()">
-        <div>{{ user.name[0].toUpperCase() }}</div>
-        @if (showMenu()) {
-          <div class="absolute top-0 right-0 z-10 text-black rounded pt-10 w-40">
-            <ul class="bg-white rounded shadow">
-              @if (!user.isAccountVerified) {
-                <li (click)="sendVerificationOtp()" class="py-1 px-2 hover:bg-gray-200 cursor-pointer">
-                  Verificar email
+    <div class="flex items-center gap-2 shrink-0">
+      <button
+        type="button"
+        (click)="toggleLanguage()"
+        class="text-sm font-semibold px-3 py-2 rounded-full transition duration-200 text-black dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 min-w-[2.5rem] border border-black dark:border-gray-400"
+        [attr.title]="i18n.isEn() ? i18n.t('common.portugues') : i18n.t('common.ingles')"
+      >
+        {{ i18n.isEn() ? 'PT' : 'EN' }}
+      </button>
+      <app-theme-toggle />
+
+      @if (userData(); as user) {
+        <div class="w-10 h-10 flex justify-center items-center rounded-full bg-black dark:bg-gray-700 text-white relative shrink-0" (click)="toggleMenu()">
+          <div>{{ user.name[0].toUpperCase() }}</div>
+          @if (showMenu) {
+            <div class="absolute hidden group-hover:block top-full right-0 z-10 mt-0.8 w-40 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 overflow-hidden !block">
+              <ul class="py-1 list-none m-0">
+                @if (!user.isAccountVerified) {
+                  <li>
+                    <button type="button" (click)="sendVerificationOtp()" class="w-full text-left py-2 px-3 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                      {{ i18n.t('common.verifyEmail') }}
+                    </button>
+                  </li>
+                }
+                <li>
+                  <button type="button" (click)="logout()" class="w-full text-left py-2 px-3 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                    {{ i18n.t('common.logout') }}
+                  </button>
                 </li>
-              }
-              <li (click)="logout()" class="py-1 px-2 hover:bg-gray-200 cursor-pointer pr-10">
-                Logout
-              </li>
-            </ul>
-          </div>
-        }
-      </div>
-    } @else {
-      @if (isLoginPage()) {
-        <a
-          routerLink="/signup"
-          class="flex items-center gap-2 border border-gray-500 rounded-full px-4 sm:px-6 py-2 text-gray-800 hover:bg-gray-100 transition-all shrink-0"
-        >
-          Cadastro <img src="/assets/svg/arrow.svg" alt="Cadastro" />
-        </a>
+              </ul>
+            </div>
+          }
+        </div>
       } @else {
-        <a
-          routerLink="/login"
-          class="flex items-center gap-2 border border-gray-500 rounded-full px-4 sm:px-6 py-2 text-gray-800 hover:bg-gray-100 transition-all shrink-0"
-        >
-          Login <img src="/assets/svg/arrow.svg" alt="Login" />
-        </a>
+        @if (isHomePage()) {
+          <a
+            routerLink="/login"
+            class="flex items-center gap-2 border border-black dark:border-gray-400 rounded-full px-6 py-2 text-sm font-semibold text-black dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all"
+          >
+            {{ i18n.t('common.login') }}
+            <img src="/assets/svg/arrow.svg" [alt]="i18n.t('common.iconAlt')" class="brightness-0 dark:brightness-100 dark:invert" />
+          </a>
+        } @else if (isLoginPage()) {
+          <a
+            routerLink="/signup"
+            class="flex items-center gap-2 border border-black dark:border-gray-400 rounded-full px-6 py-2 text-sm font-semibold text-black dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all"
+          >
+            {{ i18n.t('common.signup') }}
+            <img src="/assets/svg/arrow.svg" [alt]="i18n.t('common.cadastroAlt')" class="brightness-0 dark:brightness-100 dark:invert" />
+          </a>
+        } @else {
+          <a
+            routerLink="/login"
+            class="flex items-center gap-2 border border-black dark:border-gray-400 rounded-full px-6 py-2 text-sm font-semibold text-black dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all"
+          >
+            {{ i18n.t('common.login') }}
+            <img src="/assets/svg/arrow.svg" [alt]="i18n.t('common.iconAlt')" class="brightness-0 dark:brightness-100 dark:invert" />
+          </a>
+        }
       }
-    }
+    </div>
   </div>
 </nav>

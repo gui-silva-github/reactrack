@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { PT } from '../../../../core/constants/i18n-pt';
+import { Component, inject } from '@angular/core';
+import { I18nService } from '../../../../core/services/i18n/i18n.service';
 
 @Component({
   selector: 'app-opinly-header',
@@ -8,5 +8,5 @@ import { PT } from '../../../../core/constants/i18n-pt';
   styleUrl: './opinly-header.css',
 })
 export class OpinlyHeader {
-  readonly t = PT.opinly;
+  readonly i18n = inject(I18nService);
 }

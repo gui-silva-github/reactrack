@@ -1,14 +1,14 @@
 <app-modal (closed)="close()">
   <app-event-form (submitForm)="create($event)">
     @if (saving) {
-      {{ t.sending }}
+      {{ t.t('sending') }}
     } @else {
-      <a routerLink="../" class="button-text">{{ t.cancel }}</a>
-      <button type="submit" class="button">{{ t.create }}</button>
+      <a routerLink="../" class="button-text">{{ t.t('cancel') }}</a>
+      <button type="submit" class="button">{{ t.t('create') }}</button>
     }
   </app-event-form>
 
   @if (error) {
-    <app-error-block [title]="t.createError" [message]="t.tryAgainLater" />
+    <app-error-block [title]="t.t('createError')" [message]="t.t('tryAgainLater')" />
   }
 </app-modal>

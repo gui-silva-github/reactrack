@@ -1,7 +1,7 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CONVENE_URL } from '../../../../core/constants/api-urls';
-import { PT } from '../../../../core/constants/i18n-pt';
+import { ConveneI18n } from '../../convene-i18n';
 import { IConveneEventPayload } from '../../../../core/models';
 import { addDay } from '../../../../core/utils/convene.util';
 
@@ -13,7 +13,7 @@ import { addDay } from '../../../../core/utils/convene.util';
 })
 export class EventItem {
   readonly event = input.required<IConveneEventPayload>();
-  readonly t = PT.convene;
+  readonly t = inject(ConveneI18n);
   readonly imagesEndpoint = `${CONVENE_URL}/`;
 
   formatDate(date: string): string {

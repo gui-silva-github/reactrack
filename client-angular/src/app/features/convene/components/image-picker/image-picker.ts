@@ -1,6 +1,6 @@
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { CONVENE_URL } from '../../../../core/constants/api-urls';
-import { PT } from '../../../../core/constants/i18n-pt';
+import { ConveneI18n } from '../../convene-i18n';
 import { ConveneImage } from '../../../../core/models';
 
 @Component({
@@ -13,6 +13,6 @@ export class ImagePicker {
   readonly images = input.required<ConveneImage[]>();
   readonly selectedImage = input('');
   readonly select = output<string>();
-  readonly t = PT.convene;
+  readonly t = inject(ConveneI18n);
   readonly imagesEndpoint = `${CONVENE_URL}/`;
 }

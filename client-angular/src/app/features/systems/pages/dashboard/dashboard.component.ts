@@ -1,86 +1,38 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-
-interface SystemCard {
-  title: string;
-  path: string;
-}
+import { SYSTEM_NAV_LINKS } from '../../../../core/constants/navigation/systems';
+import { I18nService } from '../../../../core/services/i18n/i18n.service';
 
 @Component({
   selector: 'app-systems-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [RouterLink],
   template: `
-    <section class="dashboard">
-      <h1>Dashboard</h1>
-      <p class="subtitle">Escolha um sistema para começar</p>
+    <section class="mx-auto w-full max-w-5xl px-4 py-8">
+      <h1 class="mb-2 text-center text-2xl font-bold text-gray-800 sm:text-3xl">
+        {{ i18n.t('dashboard.title') }}
+      </h1>
+      <p class="mb-8 text-center text-gray-600">
+        {{ i18n.t('dashboard.subtitle') }}
+      </p>
 
-      <div class="grid">
+      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         @for (system of systems; track system.path) {
-          <a [routerLink]="system.path" class="card">
-            <span class="title">{{ system.title }}</span>
+          <a
+            [routerLink]="system.path"
+            class="flex min-h-[7.5rem] flex-col items-center justify-center rounded-xl border border-gray-200 bg-white p-8 text-gray-800 shadow-sm transition-all hover:border-gray-300 hover:bg-gray-50 hover:shadow-md dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-500 dark:hover:bg-gray-700"
+          >
+            <span class="text-xl font-semibold">{{ i18n.t('dashboard.' + system.dashboardKey) }}</span>
+            <span class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+              {{ i18n.t('shortcuts.pressAlt') }} {{ system.shortcutDigit }}
+            </span>
           </a>
         }
       </div>
     </section>
   `,
-  styles: [`
-    .dashboard {
-      width: min(1100px, 100%);
-      margin: 0 auto;
-      padding: 6rem 1rem 2rem;
-      text-align: center;
-    }
-    .subtitle {
-      color: #4b5563;
-      margin: 0 0 2rem;
-    }
-    .grid {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-    .card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 5rem;
-      text-decoration: none;
-      color: #111827;
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 1.5rem 1rem;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-    }
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-      border-color: #d1d5db;
-    }
-    .title {
-      font-weight: 600;
-      font-size: 1.125rem;
-    }
-    h1 {
-      margin: 0 0 0.5rem;
-      font-size: clamp(1.5rem, 2vw, 1.875rem);
-      font-weight: 700;
-      color: #1f2937;
-    }
-  `]
 })
 export class SystemsDashboardComponent {
-  readonly systems: SystemCard[] = [
-    { title: 'Talkive', path: '/systems/talkive' },
-    { title: 'Opiniões', path: '/systems/opinly' },
-    { title: 'Eventos', path: '/systems/convene' },
-    { title: 'Filmes', path: '/systems/movies' },
-    { title: 'Investimentos', path: '/systems/investments' },
-    { title: 'Projetos', path: '/systems/projects' },
-    { title: 'Academia', path: '/systems/fit' },
-    { title: 'Criptomoedas', path: '/systems/crypto' },
-  ];
+  readonly i18n = inject(I18nService);
+  readonly systems = SYSTEM_NAV_LINKS;
 }

@@ -1,47 +1,66 @@
-import { Component, computed, input } from '@angular/core';
+import { afterRenderEffect, Component, ElementRef, inject, input, viewChild } from '@angular/core';
 import { IPricesCoinData } from '../../../../core/models';
-import { PT } from '../../../../core/constants/i18n-pt';
+import { I18nService } from '../../../../core/services/i18n/i18n.service';
+import { ensureGoogleCharts } from '../../../../core/utils/google-charts.util';
 
 @Component({
   selector: 'app-line-chart',
   imports: [],
-  templateUrl: './line-chart.html',
+  template: `<div #chartContainer class="chart-inner"></div>`,
   styleUrl: './line-chart.css',
 })
 export class LineChart {
   readonly historicalData = input.required<IPricesCoinData>();
-  readonly t = PT.crypto;
+  readonly refreshKey = input<string>('');
+  readonly i18n = inject(I18nService);
+  private readonly chartContainer = viewChild<ElementRef<HTMLDivElement>>('chartContainer');
 
-  readonly points = computed(() => {
-    const prices = this.historicalData().prices;
-    if (!prices.length) return '';
-    const values = prices.map((p) => p[1]);
-    const min = Math.min(...values);
-    const max = Math.max(...values);
-    const range = max - min || 1;
-    return prices
-      .map((point, index) => {
-        const x = 50 + (index / (prices.length - 1 || 1)) * 530;
-        const y = 240 - ((point[1] - min) / range) * 200;
-        return `${x},${y}`;
-      })
-      .join(' ');
-  });
+  constructor() {
+    afterRenderEffect(() => {
+      const data = this.historicalData();
+      const container = this.chartContainer()?.nativeElement;
+      this.refreshKey();
 
-  readonly yTicks = computed(() => [40, 90, 140, 190, 240]);
+      if (!container || !data?.prices?.length) {
+        return;
+      }
 
-  readonly xTicks = computed(() => {
-    const prices = this.historicalData().prices;
-    if (!prices.length) return [];
-    const step = Math.max(1, Math.floor(prices.length / 6));
-    return prices
-      .filter((_, index) => index % step === 0 || index === prices.length - 1)
-      .map((point, _, arr) => {
-        const index = prices.indexOf(point);
-        return {
-          x: 50 + (index / (prices.length - 1 || 1)) * 530,
-          label: new Date(point[0]).toLocaleDateString('pt-BR').slice(0, -5),
-        };
+      ensureGoogleCharts(() => {
+        requestAnimationFrame(() => this.draw(data, container));
       });
-  });
+    });
+  }
+
+  private draw(historicalData: IPricesCoinData, container: HTMLElement): void {
+    const visualization = window.google?.visualization;
+    if (!visualization) {
+      return;
+    }
+
+    container.innerHTML = '';
+
+    const dataLabel = this.i18n.t('crypto.chartDataLabel');
+    const priceLabel = this.i18n.t('crypto.chartPriceLabel');
+    const tableData: Array<Array<string | number>> = [
+      [dataLabel, priceLabel],
+      ...historicalData.prices.map((item) => [
+        new Date(item[0]).toLocaleDateString().slice(0, -5),
+        item[1],
+      ]),
+    ];
+
+    const width = container.clientWidth || container.offsetWidth || 600;
+    const dataTable = visualization.arrayToDataTable(tableData);
+    const chart = new visualization.LineChart(container);
+    chart.draw(dataTable, {
+      width,
+      height: 250,
+      title: this.i18n.t('crypto.chartTitle'),
+      curveType: 'function',
+      legend: { position: 'bottom' },
+      chartArea: { width: '85%', height: '65%' },
+      backgroundColor: 'transparent',
+      colors: ['#7927ff'],
+    });
+  }
 }

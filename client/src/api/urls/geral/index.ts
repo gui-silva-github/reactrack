@@ -11,6 +11,6 @@ export const options = {
 
 // apis
 
-export const exerciseDbUrl: string = 'https://www.exercisedb.dev/api/v1'
+export const exerciseDbUrl: string = 'https://oss.exercisedb.dev/api/v1'
 
 export const coinGeckoUrl: string = 'https://api.coingecko.com/api/v3'

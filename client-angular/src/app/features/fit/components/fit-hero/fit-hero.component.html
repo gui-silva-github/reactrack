@@ -1,0 +1,17 @@
+<section class="fit-hero-section">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-club">{{ i18n.t('fit.fitnessClub') }}</p>
+      <h1 class="hero-title">{{ i18n.t('fit.sweatSmileRepeat') }}</h1>
+      <p class="hero-subtitle">{{ i18n.t('fit.checkExercises') }}</p>
+      <a href="#exercises" class="hero-btn">{{ i18n.t('fit.exploreExercises') }}</a>
+    </div>
+    <p class="hero-decor">{{ i18n.t('fit.exercise') }}</p>
+    <img
+      (click)="toggleGender()"
+      class="hero-banner-img"
+      [src]="gender ? manImg : womanImg"
+      [alt]="i18n.t('fit.bannerAlt')"
+    />
+  </div>
+</section>

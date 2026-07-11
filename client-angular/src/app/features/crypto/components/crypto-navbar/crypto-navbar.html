@@ -7,7 +7,11 @@
     </li>
   </ul>
   <div class="nav-right">
-    <select title="Opção de Moeda" [value]="cryptoState.currency().name" (change)="onCurrencyChange($event)">
+    <select
+      title="Opção de Moeda"
+      [value]="cryptoState.currency().name"
+      (change)="onCurrencyChange($event)"
+    >
       <option value="usd">USD ($)</option>
       <option value="eur">EUR (€)</option>
       <option value="brl">BRL (R$)</option>

@@ -1,24 +1,29 @@
-import { Component, computed, signal, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { ToastService } from '../../services/toast.service';
 import { AUTH_MESSAGES } from '../../../core/constants/auth-messages';
 import { getApiErrorMessage } from '../../../core/utils/api-error.util';
+import { I18nService } from '../../../core/services/i18n/i18n.service';
+import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, ThemeToggleComponent],
   templateUrl: './navbar.html',
+  host: {
+    class: 'block w-full',
+  },
 })
 export class NavbarComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
   private toast = inject(ToastService);
+  readonly i18n = inject(I18nService);
 
   userData = this.authService.userData;
-  private menuOpen = signal(false);
-  showMenu = computed(() => this.menuOpen());
+  showMenu = false;
 
   isHomePage(): boolean {
     return this.router.url === '/';
@@ -29,7 +34,11 @@ export class NavbarComponent {
   }
 
   toggleMenu(): void {
-    this.menuOpen.update(value => !value);
+    this.showMenu = !this.showMenu;
+  }
+
+  toggleLanguage(): void {
+    this.i18n.toggleLanguage();
   }
 
   sendVerificationOtp(): void {
@@ -49,7 +58,7 @@ export class NavbarComponent {
         }
       })
     }
-    this.menuOpen.set(false);
+    this.showMenu = false;
   }
 
   logout(): void {
@@ -62,6 +71,6 @@ export class NavbarComponent {
         this.toast.error(getApiErrorMessage(err, 'Erro ao fazer logout'));
       }
     });
-    this.menuOpen.set(false);
+    this.showMenu = false;
   }
 }

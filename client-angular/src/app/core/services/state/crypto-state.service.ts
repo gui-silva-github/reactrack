@@ -25,6 +25,7 @@ export class CryptoStateService {
   }
 
   setCurrency(currency: ICurrency): void {
+    if (this.currencySignal().name === currency.name) return;
     this.currencySignal.set(currency);
     this.loadCoins();
   }

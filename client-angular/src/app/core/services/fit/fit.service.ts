@@ -1,65 +1,67 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
+import { FIT_URLS } from '../../constants/api-urls';
+import {
+  IBodyPartData,
+  IBodyPartsDataAPI,
+  IExerciseSearchData,
+  IExerciseSearchDataAPI,
+  IExercisesData,
+  IExercisesDataAPI,
+} from '../../models/systems/fit/fit.model';
 
-const EXERCISE_DB_URL = 'https://www.exercisedb.dev/api/v1';
-const MUSCLE_WIKI_URL = 'https://musclewiki.com/exercises/male';
-
-export interface IExercise {
-  id: string;
-  name: string;
-  bodyPart: string;
-  target: string;
-  equipment: string;
-  gifUrl: string;
-  instructions: string[];
-  [key: string]: any;
-}
-
-export interface IBodyPart {
-  id: string;
-  name: string;
-}
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class FitService {
-  readonly muscleWikiUrl = MUSCLE_WIKI_URL;
+  readonly muscleWikiUrl = FIT_URLS.muscleWikiUrl;
 
   constructor(private http: HttpClient) {}
 
-  getBodyParts(): Observable<IBodyPart[]> {
-    return this.http.get<IBodyPart[]>(`${EXERCISE_DB_URL}/bodyparts`);
+  getBodyParts(): Observable<IBodyPartData[]> {
+    return this.http
+      .get<IBodyPartsDataAPI>(FIT_URLS.bodyPartList)
+      .pipe(map((response) => response.data ?? []));
   }
 
-  getExercises(): Observable<IExercise[]> {
-    return this.http.get<IExercise[]>(`${EXERCISE_DB_URL}/exercises`);
+  getExercises(): Observable<IExercisesData[]> {
+    return this.http
+      .get<IExercisesDataAPI>(FIT_URLS.exercisesList)
+      .pipe(map((response) => response.data ?? []));
   }
 
-  getExercisesByBodyPart(bodyPart: string): Observable<IExercise[]> {
-    return this.http.get<IExercise[]>(`${EXERCISE_DB_URL}/bodyparts/${bodyPart}`);
+  getExercisesByBodyPart(bodyPart: string): Observable<IExercisesData[]> {
+    return this.http
+      .get<IExercisesDataAPI>(`${FIT_URLS.bodyPartSpecific}${bodyPart}`)
+      .pipe(map((response) => response.data ?? []));
   }
 
-  searchExercises(query: string): Observable<IExercise[]> {
+  searchExercises(query: string): Observable<IExerciseSearchData[]> {
     const params = new HttpParams().set('search', query);
-    return this.http.get<IExercise[]>(`${EXERCISE_DB_URL}/exercises`, { params });
+    return this.http
+      .get<IExerciseSearchDataAPI>(FIT_URLS.exercisesList, { params })
+      .pipe(map((response) => response.data ?? []));
   }
 
-  getExercise(id: string): Observable<IExercise> {
-    return this.http.get<IExercise>(`${EXERCISE_DB_URL}/exercises/${id}`);
+  getExercise(id: string): Observable<IExercisesData> {
+    return this.http.get<IExercisesData>(`${FIT_URLS.exerciseSpecific}${id}`);
   }
 
-  getExercisesByTarget(target: string): Observable<IExercise[]> {
-    return this.http.get<IExercise[]>(`${EXERCISE_DB_URL}/muscles/${target}`);
+  getExercisesByTarget(target: string): Observable<IExercisesData[]> {
+    return this.http
+      .get<IExercisesDataAPI>(`${FIT_URLS.targetMuscle}${target}`)
+      .pipe(map((response) => response.data ?? []));
   }
 
-  getExercisesByEquipment(equipment: string): Observable<IExercise[]> {
-    return this.http.get<IExercise[]>(`${EXERCISE_DB_URL}/equipments/${equipment}`);
+  getExercisesByEquipment(equipment: string): Observable<IExercisesData[]> {
+    return this.http
+      .get<IExercisesDataAPI>(`${FIT_URLS.equipment}${equipment}`)
+      .pipe(map((response) => response.data ?? []));
   }
 
-  getSimilarExercises(query: string): Observable<IExercise[]> {
+  getSimilarExercises(query: string): Observable<IExerciseSearchData[]> {
     const params = new HttpParams().set('q', query);
-    return this.http.get<IExercise[]>(`${EXERCISE_DB_URL}/exercises/search`, { params });
+    return this.http
+      .get<IExerciseSearchDataAPI>(FIT_URLS.similarExercises, { params })
+      .pipe(map((response) => response.data ?? []));
   }
 }

@@ -1,0 +1,22 @@
+.fit-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 2rem;
+}
+
+.fit-loader-spin {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #e5e5e5;
+  border-top-color: #888;
+  border-radius: 50%;
+  animation: fit-spin 1s linear infinite;
+}
+
+@keyframes fit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

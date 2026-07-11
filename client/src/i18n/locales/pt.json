@@ -292,5 +292,24 @@
   "theme": {
     "light": "Claro",
     "dark": "Escuro"
+  },
+  "shortcuts": {
+    "title": "Atalhos de teclado",
+    "close": "Fechar",
+    "hint": "Pressione Shift + ? para abrir esta janela a qualquer momento.",
+    "categories": {
+      "general": "Geral",
+      "navigation": "Navegação",
+      "systems": "Sistemas ReactRack",
+      "appearance": "Aparência"
+    },
+    "pressAlt": "Alt +",
+    "goDashboard": "Ir para o dashboard",
+    "showShortcuts": "Mostrar atalhos",
+    "closeModal": "Fechar janela",
+    "goHome": "Ir para a página inicial",
+    "goLogin": "Ir para o login",
+    "toggleLanguage": "Alternar idioma",
+    "toggleTheme": "Alternar tema"
   }
 }

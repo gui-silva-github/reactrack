@@ -5,8 +5,5 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-convene-layout',
   imports: [RouterOutlet],
   templateUrl: './convene-layout.html',
-  styleUrls: ['../styles/convene.css'],
 })
-export class ConveneLayout {
-
-}
+export class ConveneLayout {}

@@ -1,4 +1,4 @@
-export const EXERCISE_DB_URL = 'https://www.exercisedb.dev/api/v1';
+export const EXERCISE_DB_URL = 'https://oss.exercisedb.dev/api/v1';
 export const MUSCLE_WIKI_URL = 'https://musclewiki.com/exercises/male';
 
 export const FIT_URLS = {
@@ -43,7 +43,7 @@ export const CONVENE_URL = 'http://localhost:3003';
 export const CONVENE_URLS = {
   events: `${CONVENE_URL}/events`,
   event: (id: string) => `${CONVENE_URL}/events/${id}`,
-  images: `${CONVENE_URL}/images`,
+  images: `${CONVENE_URL}/events/images`,
 } as const;
 
 export const GITHUB_API = 'https://api.github.com/users';

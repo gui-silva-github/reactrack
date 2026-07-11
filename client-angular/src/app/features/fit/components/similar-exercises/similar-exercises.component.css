@@ -1,0 +1,12 @@
+.section-title {
+  font-size: 1.8rem;
+  margin: 24px 0 24px 16px;
+}
+
+.section-title--spaced {
+  margin-top: 48px;
+}
+
+.similar-exercises {
+  padding-bottom: 2rem;
+}

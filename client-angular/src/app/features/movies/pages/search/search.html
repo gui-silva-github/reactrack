@@ -1,37 +1,25 @@
-<section class="search-page">
-  <header class="navbar">
-    <h1>🎬 Buscar Filmes</h1>
-    <a routerLink="/systems/movies">Top Filmes</a>
-  </header>
-
-  <form class="search-form" (ngSubmit)="search()">
-    <input
-      type="text"
-      name="query"
-      [ngModel]="query"
-      (ngModelChange)="query = $event"
-      placeholder="Busque um filme"
-      required
-    />
-    <button type="submit" [disabled]="moviesState.loading()">Procurar</button>
-  </form>
-
-  @if (moviesState.loading()) {
-    <p class="loading">Carregando...</p>
-  } @else {
-    <div class="movies-grid">
-      @for (movie of moviesState.searchResults(); track movie.id) {
-        <article class="movie-card">
-          <img
-            title="Poster do Filme"
-            [src]="movie.poster_path ? moviesState.imgApi + movie.poster_path : fallbackPoster"
-            [alt]="movie.title"
-          />
-          <h3>{{ movie.title }}</h3>
-          <p>⭐ {{ movie.vote_average.toFixed(1) }}</p>
-          <a [routerLink]="['/systems/movies/movie', movie.id]">Detalhes</a>
-        </article>
-      }
-    </div>
-  }
-</section>
+<div class="align">
+  <div class="container">
+    <h2 class="title">
+      {{ i18n.t('movies.resultsFor') }}
+      <span class="query-text">{{ query }}</span>
+    </h2>
+    @if (moviesState.loading()) {
+      <p class="loading">{{ i18n.t('movies.loading') }}</p>
+    } @else {
+      <div class="movies-container">
+        @for (movie of moviesState.searchResults(); track movie.id) {
+          <div class="movie-card">
+            <img
+              [src]="movie.poster_path ? moviesState.imgApi + movie.poster_path : fallbackPoster"
+              [alt]="movie.title"
+            />
+            <h3>{{ movie.title }}</h3>
+            <p>⭐ {{ movie.vote_average.toFixed(1) }}</p>
+            <a [routerLink]="['/systems/movies/movie', movie.id]">{{ i18n.t('movies.details') }}</a>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

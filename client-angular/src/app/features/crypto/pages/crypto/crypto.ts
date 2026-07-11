@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { PT } from '../../../../core/constants/i18n-pt';
 import { CryptoStateService } from '../../../../core/services/state/crypto-state.service';
-import { CryptoNavbar } from "../../components/crypto-navbar/crypto-navbar";
+import { I18nService } from '../../../../core/services/i18n/i18n.service';
+import { CryptoNavbar } from '../../components/crypto-navbar/crypto-navbar';
 
 @Component({
   selector: 'app-crypto',
@@ -13,5 +13,5 @@ import { CryptoNavbar } from "../../components/crypto-navbar/crypto-navbar";
 })
 export class Crypto {
   readonly cryptoState = inject(CryptoStateService);
-  readonly t = PT.crypto;
+  readonly i18n = inject(I18nService);
 }

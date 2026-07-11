@@ -1,6 +1,6 @@
 import { Component, inject, input, OnInit, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PT } from '../../../../core/constants/i18n-pt';
+import { ConveneI18n } from '../../convene-i18n';
 import { IConveneEventPayload } from '../../../../core/models';
 import { ConveneImage } from '../../../../core/models';
 import { ConveneService } from '../../../../core/services/convene/convene.service';
@@ -16,7 +16,7 @@ export class EventForm implements OnInit {
   private readonly conveneService = inject(ConveneService);
   readonly inputData = input<IConveneEventPayload | null>(null);
   readonly submitForm = output<IConveneEventPayload>();
-  readonly t = PT.convene;
+  readonly t = inject(ConveneI18n);
 
   images = signal<ConveneImage[]>([]);
   loadingImages = signal(true);

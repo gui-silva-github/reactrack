@@ -1,10 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { ErrorBlock } from "../error-block/error-block";
 import { FormsModule } from '@angular/forms';
 import { EventItem } from '../event-item/event-item';
 import { LoadingIndicator } from '../loading-indicator/loading-indicator';
 import { ConveneService } from '../../../../core/services/convene/convene.service';
-import { PT } from '../../../../core/constants/i18n-pt';
+import { ConveneI18n } from '../../convene-i18n';
 import { IConveneEventPayload } from '../../../../core/models';
 
 @Component({
@@ -12,10 +12,11 @@ import { IConveneEventPayload } from '../../../../core/models';
   imports: [FormsModule, EventItem, LoadingIndicator, ErrorBlock],
   templateUrl: './find-event.html',
   styleUrl: './find-event.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class FindEvent {
   private readonly conveneService = inject(ConveneService);
-  readonly t = PT.convene;
+  readonly t = inject(ConveneI18n);
   searchTerm = '';
   submitted = false;
   loading = false;

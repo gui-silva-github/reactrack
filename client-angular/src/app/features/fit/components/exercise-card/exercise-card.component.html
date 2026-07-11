@@ -1,0 +1,8 @@
+<a class="exercise-card" [routerLink]="['/systems/fit/exercise', exercise().exerciseId]">
+  <img [src]="exercise().gifUrl" [alt]="exercise().name" loading="lazy" />
+  <div class="exercise-card-tags">
+    <span class="exercise-tag exercise-tag--body">{{ exercise().bodyParts }}</span>
+    <span class="exercise-tag exercise-tag--target">{{ exercise().targetMuscles }}</span>
+  </div>
+  <h3 class="exercise-card-title">{{ exercise().name }}</h3>
+</a>

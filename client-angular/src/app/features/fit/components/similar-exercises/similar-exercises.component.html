@@ -1,0 +1,39 @@
+<section class="similar-exercises">
+  <h3 class="section-title">{{ i18n.t('fit.sameMuscleGroup') }}</h3>
+  <div class="scroll-wrapper">
+    <button type="button" class="left-arrow" (click)="scrollMuscle(-300)" [attr.aria-label]="i18n.t('fit.leftArrow')">
+      <img src="/assets/icons/left-arrow.png" width="20" height="20" alt="" />
+    </button>
+    <div class="scroll-container" #muscleScroll>
+      @if (targetMuscleExercises().length) {
+        @for (exercise of targetMuscleExercises(); track exercise.exerciseId) {
+          <app-exercise-card [exercise]="exercise" />
+        }
+      } @else {
+        <app-fit-loader />
+      }
+    </div>
+    <button type="button" class="right-arrow" (click)="scrollMuscle(300)" [attr.aria-label]="i18n.t('fit.rightArrow')">
+      <img src="/assets/icons/right-arrow.png" width="20" height="20" alt="" />
+    </button>
+  </div>
+
+  <h3 class="section-title section-title--spaced">{{ i18n.t('fit.sameEquipment') }}</h3>
+  <div class="scroll-wrapper">
+    <button type="button" class="left-arrow" (click)="scrollEquipment(-300)" [attr.aria-label]="i18n.t('fit.leftArrow')">
+      <img src="/assets/icons/left-arrow.png" width="20" height="20" alt="" />
+    </button>
+    <div class="scroll-container" #equipmentScroll>
+      @if (equipmentExercises().length) {
+        @for (exercise of equipmentExercises(); track exercise.exerciseId) {
+          <app-exercise-card [exercise]="exercise" />
+        }
+      } @else {
+        <app-fit-loader />
+      }
+    </div>
+    <button type="button" class="right-arrow" (click)="scrollEquipment(300)" [attr.aria-label]="i18n.t('fit.rightArrow')">
+      <img src="/assets/icons/right-arrow.png" width="20" height="20" alt="" />
+    </button>
+  </div>
+</section>

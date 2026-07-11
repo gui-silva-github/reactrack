@@ -1,34 +1,54 @@
-@if (!coin() || !chart()) {
+@if (coinLoading() && !coin()) {
   <div class="spinner">
     <div class="spin"></div>
   </div>
+} @else if (!coin()) {
+  <div class="spinner">
+    <p>{{ i18n.t('crypto.coinAlt') }}</p>
+  </div>
 } @else {
   <div class="coin">
-      <app-crypto-navbar />
-      <div class="coin-name">
-        <img title="Imagem da Moeda" [src]="coin()!.image.large" [alt]="t.coinAlt" />
-        <p><strong>{{ coin()!.name }} ({{ coin()!.symbol.toUpperCase() }})</strong></p>
-      </div>
-      <div class="coin-chart">
-        <app-line-chart [historicalData]="chart()!" />
-      </div>
-      <div class="coin-info">
-        <ul>
-          <li>{{ t.marketRank }}</li>
-          <li>{{ coin()!.market_cap_rank }}</li>
-        </ul>
-        <ul>
-          <li>{{ t.currentPrice }}</li>
-          <li>{{ cryptoState.currency().symbol }} {{ coin()!.market_data.current_price[currencyName].toLocaleString() }}</li>
-        </ul>
-        <ul>
-          <li>{{ t.high24h }}</li>
-          <li>{{ cryptoState.currency().symbol }} {{ coin()!.market_data.high_24h[currencyName].toLocaleString() }}</li>
-        </ul>
-        <ul>
-          <li>{{ t.low24h }}</li>
-          <li>{{ cryptoState.currency().symbol }} {{ coin()!.market_data.low_24h[currencyName].toLocaleString() }}</li>
-        </ul>
-      </div>
+    <app-crypto-navbar />
+
+    <div class="coin-name">
+      <img [src]="coin()!.image.large" [alt]="i18n.t('crypto.coinAlt')" />
+      <p><strong>{{ coin()!.name }} ({{ coin()!.symbol.toUpperCase() }})</strong></p>
+    </div>
+
+    <div class="coin-chart">
+      @if (chartLoading()) {
+        <div class="chart-spinner">
+          <div class="spin"></div>
+        </div>
+      } @else if (chart()?.prices?.length) {
+        @for (version of [chartVersion()]; track version) {
+          <app-line-chart
+            [historicalData]="chart()!"
+            [refreshKey]="currencyName + '-' + version"
+          />
+        }
+      } @else {
+        <p class="chart-empty">{{ i18n.t('crypto.chartLoadError') }}</p>
+      }
+    </div>
+
+    <div class="coin-info">
+      <ul>
+        <li>{{ i18n.t('crypto.marketRank') }}</li>
+        <li>{{ coin()!.market_cap_rank }}</li>
+      </ul>
+      <ul>
+        <li>{{ i18n.t('crypto.currentPrice') }}</li>
+        <li>{{ formatPrice(coin()!.market_data.current_price[currencyName]) }}</li>
+      </ul>
+      <ul>
+        <li>{{ i18n.t('crypto.high24h') }}</li>
+        <li>{{ formatPrice(coin()!.market_data.high_24h[currencyName]) }}</li>
+      </ul>
+      <ul>
+        <li>{{ i18n.t('crypto.low24h') }}</li>
+        <li>{{ formatPrice(coin()!.market_data.low_24h[currencyName]) }}</li>
+      </ul>
+    </div>
   </div>
 }

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { PT } from '../../../../core/constants/i18n-pt';
+import { I18nService } from '../../../../core/services/i18n/i18n.service';
 import { OpinlyStateService } from '../../../../core/services/state/opinly-state.service';
-import { OpinionCard } from "../opinion-card/opinion-card";
+import { OpinionCard } from '../opinion-card/opinion-card';
 
 @Component({
   selector: 'app-opinions-list',
@@ -11,5 +11,5 @@ import { OpinionCard } from "../opinion-card/opinion-card";
 })
 export class OpinionsList {
   readonly opinlyState = inject(OpinlyStateService);
-  readonly t = PT.opinly;
+  readonly i18n = inject(I18nService);
 }

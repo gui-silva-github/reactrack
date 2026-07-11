@@ -1,0 +1,24 @@
+<div class="rs">
+  @if (talkiveState.chatUser(); as chatUser) {
+    <div class="rs-profile">
+      <img [src]="chatUser.avatar || assets.avatar_icon" [alt]="i18n.t('talkive.profileAlt')" />
+      <h3>
+        @if (isOnline(chatUser.lastSeen)) {
+          <img [src]="assets.green_dot" class="dot" [alt]="i18n.t('talkive.onlineAlt')" />
+        }
+        {{ chatUser.name }}
+      </h3>
+      <p>{{ chatUser.bio }}</p>
+    </div>
+    <hr />
+    <div class="rs-media">
+      <p>{{ i18n.t('talkive.chat.media') }}</p>
+      <div>
+        @for (url of mediaImages(); track url) {
+          <img [src]="url" [alt]="i18n.t('talkive.imageAlt')" (click)="openImage(url)" />
+        }
+      </div>
+    </div>
+  }
+  <button type="button" (click)="logout()">{{ i18n.t('common.logout') }}</button>
+</div>

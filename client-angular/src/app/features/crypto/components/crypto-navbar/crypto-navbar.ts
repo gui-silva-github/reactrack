@@ -13,7 +13,9 @@ export class CryptoNavbar {
   readonly cryptoState = inject(CryptoStateService);
 
   onCurrencyChange(event: Event): void {
-    const value = (event?.target as HTMLSelectElement).value;
+    event.preventDefault();
+    event.stopPropagation();
+    const value = (event.target as HTMLSelectElement).value;
     const map: Record<string, ICurrency> = {
       usd: { name: 'usd', symbol: '$' },
       eur: { name: 'eur', symbol: '€' },

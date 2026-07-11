@@ -1,23 +1,13 @@
 import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { SYSTEM_NAV_LINKS } from "@/constants/navigation/systems";
 import useNavigateSPA from "@/hooks/routes/useNavigateSPA";
 import { AppContext } from "@/context/AppContext";
 import icon from "@/assets/jpg/icon.jpg"
 import Div from "@/components/Html/Div/Div";
 import Image from "@/components/Html/Image/Image";
 import ThemeToggle from "@/components/ThemeToggle/ThemeToggle";
-
-const navLinkKeys: { key: string; path: string }[] = [
-    { key: "talkive", path: "/systems/talkive" },
-    { key: "opinions", path: "/systems/opinly" },
-    { key: "events", path: "/systems/convene" },
-    { key: "movies", path: "/systems/movies" },
-    { key: "investments", path: "/systems/investments" },
-    { key: "projects", path: "/systems/projects" },
-    { key: "gym", path: "/systems/fit" },
-    { key: "crypto", path: "/systems/crypto" },
-];
 
 const NavbarSystems: React.FC = () => {
 
@@ -44,7 +34,7 @@ const NavbarSystems: React.FC = () => {
             : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'}`;
     }; 
     
-    const filteredNavLinks = navLinkKeys.filter(link => {
+    const filteredNavLinks = SYSTEM_NAV_LINKS.filter(link => {
         if (!userData && link.path === '/systems') {
             return false;
         }
@@ -55,13 +45,13 @@ const NavbarSystems: React.FC = () => {
         <Div className="w-full flex justify-between items-center px-4 sm:px-12 py-3 bg-white dark:bg-gray-900 shadow-lg fixed top-0 z-50 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center space-x-4 cursor-pointer" onClick={() => navigate('/')}>
                 <Image src={icon} alt={t('common.logoReactRack')} className="w-8 h-8 rounded-full border border-gray-200 dark:border-gray-600" />
-                <span className="text-xl font-bold text-gray-800 dark:text-gray-50 hidden sm:block">{t('common.reactRack')}</span>
+                <span className="text-xl font-bold text-gray-800 dark:text-gray-50">{t('common.reactRack')}</span>
             </div>
             <div className="hidden md:flex items-center space-x-1">
                 <button
                     type="button"
                     onClick={toggleLang}
-                    className="text-sm font-medium px-3 py-2 rounded-md transition duration-200 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 min-w-[2.5rem]"
+                    className="text-sm font-semibold px-3 py-2 rounded-full transition duration-200 text-black dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 min-w-[2.5rem] border border-black dark:border-gray-400"
                     title={isEn ? t('common.portugues') : t('common.ingles')}
                     aria-label={isEn ? t('common.portugues') : t('common.ingles')}
                 >
@@ -74,7 +64,7 @@ const NavbarSystems: React.FC = () => {
                         onClick={() => navigate(link.path)}
                         className={linkClasses(link.path)}
                     >
-                        {t(`nav.${link.key}`)}
+                        {t(`nav.${link.navKey}`)}
                     </a>
                 ))}
             </div>

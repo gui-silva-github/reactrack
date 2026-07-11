@@ -24,7 +24,10 @@ export interface IMessage {
   sId: string;
   text?: string;
   image?: string;
-  createdAt: Date | { seconds: number; nanoseconds: number };
+  createdAt:
+    | Date
+    | { seconds: number; nanoseconds?: number }
+    | { toDate: () => Date };
 }
 
 export interface ISignupFirebase {

@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { CONVENE_URL } from '../../../../core/constants/api-urls';
-import { PT } from '../../../../core/constants/i18n-pt';
+import { ConveneI18n } from '../../convene-i18n';
 import { IConveneEventPayload } from '../../../../core/models';
 import { ConveneService } from '../../../../core/services/convene/convene.service';
 import { addDay } from '../../../../core/utils/convene.util';
@@ -21,7 +21,7 @@ export class EventDetails {
   private readonly route = inject(ActivatedRoute)
   private readonly router = inject(Router)
   private readonly conveneService = inject(ConveneService);
-  readonly t = PT.convene;
+  readonly t = inject(ConveneI18n);
   readonly imagesEndpoint = `${CONVENE_URL}/`;
 
   event: IConveneEventPayload | null = null;

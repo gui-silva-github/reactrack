@@ -1,5 +1,5 @@
 import { Component, effect, inject, input, signal } from '@angular/core';
-import { PT } from '../../../../core/constants/i18n-pt';
+import { I18nService } from '../../../../core/services/i18n/i18n.service';
 import { IOpinionData } from '../../../../core/models';
 import { OpinlyStateService } from '../../../../core/services/state/opinly-state.service';
 
@@ -11,7 +11,7 @@ import { OpinlyStateService } from '../../../../core/services/state/opinly-state
 })
 export class OpinionCard {
   private readonly opinlyState = inject(OpinlyStateService);
-  readonly t = PT.opinly;
+  readonly i18n = inject(I18nService);
   readonly opinion = input.required<IOpinionData>();
 
   optimisticVotes = signal(0);

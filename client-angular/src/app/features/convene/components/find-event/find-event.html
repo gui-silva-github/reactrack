@@ -1,20 +1,27 @@
 <section class="content-section find" id="all-events-section">
-  <header class="margin">
-    <h2 class="h2">{{ t.findNextEvent }}</h2>
-    <form (ngSubmit)="search()">
-      <input title="Pesquisa" class="input" type="search" [(ngModel)]="searchTerm" name="search" [placeholder]="t.searchPlaceholder" />
-      <button class="button" type="submit">{{ t.search }}</button>
+  <header class="find-header">
+    <h2 class="find-title">{{ t.t('findNextEvent') }}</h2>
+    <form class="find-form" (ngSubmit)="search()">
+      <input
+        title="Pesquisa"
+        class="find-input"
+        type="search"
+        [(ngModel)]="searchTerm"
+        name="search"
+        [placeholder]="t.t('searchPlaceholder')"
+      />
+      <button class="find-button" type="submit">{{ t.t('search') }}</button>
     </form>
   </header>
 
   @if (!submitted) {
-    <p class="p">{{ t.insertSearchTerm }}</p>
+    <p class="find-message">{{ t.t('insertSearchTerm') }}</p>
   } @else if (loading) {
     <div class="center"><app-loading-indicator /></div>
   } @else if (error) {
-    <app-error-block [title]="t.loadEventsError" [message]="t.tryAgainLater" />
+    <app-error-block [title]="t.t('loadEventsError')" [message]="t.t('tryAgainLater')" />
   } @else if (!results.length) {
-    <p class="p">{{ t.noEventsFound }}</p>
+    <p class="find-message">{{ t.t('noEventsFound') }}</p>
   } @else {
     <ul class="events-list">
       @for (event of results; track event.id) {

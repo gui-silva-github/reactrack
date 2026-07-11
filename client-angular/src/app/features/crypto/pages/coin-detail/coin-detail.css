@@ -41,7 +41,7 @@
   margin: 0;
 }
 
-.coin-name p b {
+.coin-name p strong {
   font-size: 44px;
   font-weight: 500;
 }
@@ -50,6 +50,26 @@
   max-width: 600px;
   height: 250px;
   margin: auto;
+}
+
+.chart-spinner {
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
+
+.chart-spinner .spin {
+  width: 40px;
+  height: 40px;
+  border-width: 4px;
+}
+
+.chart-empty {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  color: #666;
+  margin: 0;
 }
 
 .coin-info {
@@ -74,6 +94,10 @@
 
 @media (max-width: 700px) {
   .coin-name {
+    font-size: 2rem;
+  }
+
+  .coin-name p strong {
     font-size: 2rem;
   }
 }

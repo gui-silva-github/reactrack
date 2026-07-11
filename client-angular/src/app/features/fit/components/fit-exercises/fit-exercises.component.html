@@ -1,0 +1,25 @@
+<section id="exercises" class="exercises-section">
+  @if (fitState.loading()) {
+    <app-fit-loader />
+  } @else {
+    <div class="exercises-grid">
+      @for (exercise of currentExercises(); track exercise.exerciseId) {
+        <app-exercise-card [exercise]="exercise" />
+      }
+    </div>
+    @if (fitState.exercises().length > exercisesPerPage) {
+      <div class="pagination">
+        @for (page of pages(); track page) {
+          <button
+            type="button"
+            class="pagination-btn"
+            [class.pagination-btn--active]="currentPage() === page"
+            (click)="goToPage(page)"
+          >
+            {{ page }}
+          </button>
+        }
+      </div>
+    }
+  }
+</section>

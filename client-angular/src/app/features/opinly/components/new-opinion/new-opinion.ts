@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PT } from '../../../../core/constants/i18n-pt';
+import { I18nService } from '../../../../core/services/i18n/i18n.service';
 import { OpinlyStateService } from '../../../../core/services/state/opinly-state.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { OpinlyStateService } from '../../../../core/services/state/opinly-state
 })
 export class NewOpinion {
   private readonly opinlyState = inject(OpinlyStateService);
-  readonly t = PT.opinly;
+  readonly i18n = inject(I18nService);
 
   userName = '';
   title = '';
@@ -21,9 +21,9 @@ export class NewOpinion {
 
   submit(): void {
     const errors: string[] = [];
-    if (this.title.trim().length < 5) errors.push(this.t.titleMinLength);
-    if (this.body.trim().length < 10 || this.body.trim().length > 300) errors.push(this.t.bodyLength);
-    if (!this.userName.trim()) errors.push(this.t.nameRequired);
+    if (this.title.trim().length < 5) errors.push(this.i18n.t('opinly.titleMinLength'));
+    if (this.body.trim().length < 10 || this.body.trim().length > 300) errors.push(this.i18n.t('opinly.bodyLength'));
+    if (!this.userName.trim()) errors.push(this.i18n.t('opinly.nameRequired'));
 
     this.errors.set(errors);
     if (errors.length) return;

@@ -1,0 +1,56 @@
+<div class="login">
+  <form (ngSubmit)="submit()" class="login-form">
+    @if (mode() === 'signup') {
+      <input
+        [(ngModel)]="username"
+        name="username"
+        required
+        type="text"
+        [placeholder]="i18n.t('talkive.signup.name')"
+        class="form-input"
+      />
+    }
+    <input
+      [(ngModel)]="email"
+      name="email"
+      required
+      type="email"
+      [placeholder]="i18n.t('talkive.login.email')"
+      class="form-input"
+    />
+    <input
+      [(ngModel)]="password"
+      name="password"
+      required
+      type="password"
+      [placeholder]="i18n.t('talkive.login.password')"
+      class="form-input"
+    />
+    <button type="submit">
+      {{ mode() === 'signup' ? i18n.t('talkive.signup.createAccount') : i18n.t('talkive.login.title') }}
+    </button>
+
+    <div class="login-term">
+      <input type="checkbox" />
+      <p>{{ i18n.t('talkive.login.agree') }}</p>
+    </div>
+
+    <div class="login-forgot">
+      @if (mode() === 'signup') {
+        <p class="login-toggle">
+          {{ i18n.t('talkive.signup.alreadyHaveAccount') }}
+          <span (click)="mode.set('login')">{{ i18n.t('talkive.signup.alreadyHaveAccountLink') }}</span>
+        </p>
+      } @else {
+        <p class="login-toggle">
+          {{ i18n.t('talkive.login.createAccount') }}
+          <span (click)="mode.set('signup')">{{ i18n.t('talkive.login.createAccountLink') }}</span>
+        </p>
+        <p class="login-toggle">
+          {{ i18n.t('talkive.login.forgotPassword') }}
+          <span (click)="forgotPassword()">{{ i18n.t('talkive.login.resetPassword') }}</span>
+        </p>
+      }
+    </div>
+  </form>
+</div>

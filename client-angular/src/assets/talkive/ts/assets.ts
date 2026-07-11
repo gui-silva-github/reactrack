@@ -1,0 +1,15 @@
+export const TALKIVE_ASSETS = {
+  avatar_icon: '/assets/talkive/avatar_icon.png',
+  gallery_icon: '/assets/talkive/gallery_icon.png',
+  help_icon: '/assets/talkive/help_icon.png',
+  logo_icon: '/assets/talkive/logo_icon.png',
+  logo_big: '/assets/talkive/logo_big.png',
+  logo: '/assets/talkive/logo.png',
+  search_icon: '/assets/talkive/search_icon.png',
+  send_button: '/assets/talkive/send_button.png',
+  menu_icon: '/assets/talkive/menu_icon.png',
+  arrow_icon: '/assets/talkive/arrow_icon.png',
+  green_dot: '/assets/talkive/green_dot.png',
+  bg_talknet: '/assets/talkive/bg_talknet.jpg',
+  logoT: '/assets/talkive/logoT.png',
+} as const;

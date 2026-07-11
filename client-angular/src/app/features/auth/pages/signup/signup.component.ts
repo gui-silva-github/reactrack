@@ -1,117 +1,91 @@
-import { Component, signal } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl, ValidationErrors } from '@angular/forms';
+import { Component, inject, signal } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../core/services/auth/auth.service';
 import { ToastService } from '../../../../shared/services/toast.service';
 import { AUTH_MESSAGES } from '../../../../core/constants/auth-messages';
 import { getApiErrorMessage } from '../../../../core/utils/api-error.util';
-
-function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
-  const password = control.get('password');
-  const confirmPassword = control.get('confirmPassword');
-
-  if (!password || !confirmPassword) {
-    return null;
-  }
-
-  return password.value === confirmPassword.value ? null : { passwordMismatch: true };
-}
+import { I18nService } from '../../../../core/services/i18n/i18n.service';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, RouterLink],
   template: `
-    <div class="min-h-screen px-6 sm:px-0 pt-24 pb-10 bg-gradient-to-br from-blue-200 to-purple-400 flex items-center justify-center text-indigo-300">
-      <div class="bg-slate-900 p-10 rounded-lg shadow-lg w-full sm:w-96 text-sm border border-slate-700">
-          <h2 class="text-3xl font-semibold text-white text-center mb-3">Cadastre-se</h2>
-          <p class="text-center text-sm mb-6 text-indigo-200">Crie sua conta</p>
+    <div class="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-200 to-purple-400 px-6 sm:px-0">
+      <div class="w-full rounded-lg bg-slate-900 p-10 text-sm text-indigo-300 shadow-lg sm:w-96">
+        <h2 class="mb-3 text-center text-3xl font-semibold text-white">{{ i18n.t('auth.signup') }}</h2>
+        <p class="mb-6 text-center text-sm">{{ i18n.t('auth.signupSubtitle') }}</p>
 
-          <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-            <div class="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
-              <img src="/assets/svg/person.svg" alt="Pessoa" class="w-5 h-5" />
-              <input
-                id="name"
-                type="text"
-                formControlName="name"
-                class="bg-transparent outline-none flex-1 text-sm placeholder-indigo-200/70"
-                placeholder="Nome completo"
-                required
-              />
-            </div>
-            @if (signupForm.get('name')?.invalid && signupForm.get('name')?.touched) {
-              <span class="text-xs text-red-400 mb-2 block">Nome é obrigatório</span>
-            }
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+          <div class="mb-4 flex w-full items-center gap-3 rounded-full bg-[#333A5C] px-5 py-2.5">
+            <img src="/assets/svg/person.svg" [alt]="i18n.t('common.iconAlt')" class="h-5 w-5" />
+            <input
+              id="name"
+              type="text"
+              formControlName="name"
+              class="flex-1 bg-transparent text-sm outline-none"
+              [placeholder]="i18n.t('auth.fullName')"
+              required
+            />
+          </div>
 
-            <div class="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
-              <img src="/assets/svg/mail.svg" alt="Email" class="w-5 h-5" />
-              <input
-                id="email"
-                type="email"
-                formControlName="email"
-                class="bg-transparent outline-none flex-1 text-sm placeholder-indigo-200/70"
-                placeholder="E-mail"
-                required
-              />
-            </div>
-            @if (signupForm.get('email')?.invalid && signupForm.get('email')?.touched) {
-              <span class="text-xs text-red-400 mb-2 block">Email inválido</span>
-            }
+          <div class="mb-4 flex w-full items-center gap-3 rounded-full bg-[#333A5C] px-5 py-2.5">
+            <img src="/assets/svg/mail.svg" [alt]="i18n.t('auth.email')" class="h-5 w-5" />
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              class="flex-1 bg-transparent text-sm outline-none"
+              [placeholder]="i18n.t('auth.email')"
+              required
+            />
+          </div>
 
-            <div class="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
-              <img src="/assets/svg/lock.svg" alt="Senha" class="w-5 h-5" />
-              <input
-                id="password"
-                type="password"
-                formControlName="password"
-                class="bg-transparent outline-none flex-1 text-sm placeholder-indigo-200/70"
-                placeholder="Senha"
-                required
-              />
-            </div>
-            @if (signupForm.get('password')?.invalid && signupForm.get('password')?.touched) {
-              <span class="text-xs text-red-400 mb-2 block">Senha deve ter pelo menos 6 caracteres</span>
-            }
+          <div class="mb-4 flex w-full items-center gap-3 rounded-full bg-[#333A5C] px-5 py-2.5">
+            <img src="/assets/svg/lock.svg" [alt]="i18n.t('auth.password')" class="h-5 w-5" />
+            <input
+              id="password"
+              type="password"
+              formControlName="password"
+              class="flex-1 bg-transparent text-sm outline-none"
+              [placeholder]="i18n.t('auth.password')"
+              required
+            />
+          </div>
 
-            <div class="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
-              <img src="/assets/svg/lock.svg" alt="Confirmar senha" class="w-5 h-5" />
-              <input
-                id="confirmPassword"
-                type="password"
-                formControlName="confirmPassword"
-                class="bg-transparent outline-none flex-1 text-sm placeholder-indigo-200/70"
-                placeholder="Confirmar senha"
-                required
-              />
-            </div>
-            @if (signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched) {
-              <span class="text-xs text-red-400 mb-2 block">Senhas não coincidem</span>
-            }
-
-            <button
-              type="submit"
-              class="w-full py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-indigo-900 text-white font-medium disabled:opacity-60 disabled:cursor-not-allowed"
-              [disabled]="signupForm.invalid || loading()"
-            >
-              @if (loading()) {
-                Cadastrando...
-              } @else {
-                Cadastrar
-              }
-            </button>
-          </form>
-
-          <p class="text-gray-400 text-center text-xs mt-4">
-            Já tem uma conta?
-            <a routerLink="/login" class="text-blue-400 cursor-pointer hover:underline">Login</a>
+          <p
+            class="mb-4 cursor-pointer text-indigo-500"
+            (click)="goToResetPassword()"
+          >
+            {{ i18n.t('auth.forgotPassword') }}
           </p>
+
+          <button
+            type="submit"
+            class="w-full rounded-full bg-gradient-to-r from-indigo-500 to-indigo-900 py-2.5 font-medium text-white disabled:cursor-not-allowed disabled:opacity-60"
+            [disabled]="signupForm.invalid || loading()"
+          >
+            @if (loading()) {
+              {{ i18n.t('common.loading') }}
+            } @else {
+              {{ i18n.t('auth.register') }}
+            }
+          </button>
+        </form>
+
+        <p class="mt-4 text-center text-xs text-gray-400">
+          {{ i18n.t('auth.alreadyHaveAccount') }}
+          <a routerLink="/login" class="cursor-pointer text-blue-400">{{ i18n.t('auth.login') }}</a>
+        </p>
       </div>
     </div>
   `,
-  styles: []
+  styles: [],
 })
 export class SignupComponent {
+  readonly i18n = inject(I18nService);
   signupForm: FormGroup;
   loading = signal(false);
 
@@ -125,8 +99,7 @@ export class SignupComponent {
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required]]
-    }, { validators: passwordMatchValidator });
+    });
   }
 
   onSubmit(): void {
@@ -145,13 +118,14 @@ export class SignupComponent {
           this.loading.set(false);
         },
         error: (err) => {
-          this.toast.error(
-            getApiErrorMessage(err, 'Erro ao cadastrar. Tente novamente.')
-          );
+          this.toast.error(getApiErrorMessage(err, 'Erro ao cadastrar. Tente novamente.'));
           this.loading.set(false);
-        }
+        },
       });
     }
   }
-}
 
+  goToResetPassword(): void {
+    this.router.navigate(['/reset-password']);
+  }
+}

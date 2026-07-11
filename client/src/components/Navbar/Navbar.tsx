@@ -77,7 +77,7 @@ const Navbar: React.FC = () => {
                 <button
                     type="button"
                     onClick={toggleLang}
-                    className="text-sm font-medium px-3 py-2 rounded-full px-3 py-2 transition duration-200 text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 min-w-[2.5rem] border border-gray-500 dark:border-gray-400"
+                    className="text-sm font-semibold px-3 py-2 rounded-full transition duration-200 text-black dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 min-w-[2.5rem] border border-black dark:border-gray-400"
                     title={isEn ? t('common.portugues') : t('common.ingles')}
                     aria-label={isEn ? t('common.portugues') : t('common.ingles')}
                 >
@@ -109,18 +109,18 @@ const Navbar: React.FC = () => {
             ) : (
                 <>
                     {location.pathname === '/' &&  (
-                        <button onClick={() => navigate('/login')} className="flex items-center gap-2 border border-gray-500 dark:border-gray-400 rounded-full px-6 py-2 text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all">
-                            {t('common.login')} <img src={arrow} alt={t('common.iconAlt')} />
+                        <button onClick={() => navigate('/login')} className="flex items-center gap-2 border border-black dark:border-gray-400 rounded-full px-6 py-2 text-sm font-semibold text-black dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all">
+                            {t('common.login')} <img src={arrow} alt={t('common.iconAlt')} className="brightness-0 dark:brightness-100 dark:invert" />
                         </button>
                     )}
                     {location.pathname.includes('login') && (
-                        <button onClick={() => navigate('/signup')} className="flex items-center gap-2 border border-gray-500 dark:border-gray-400 rounded-full px-6 py-2 text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all">
-                            {t('common.signup')} <img src={arrow} alt={t('common.cadastroAlt')} />
+                        <button onClick={() => navigate('/signup')} className="flex items-center gap-2 border border-black dark:border-gray-400 rounded-full px-6 py-2 text-sm font-semibold text-black dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all">
+                            {t('common.signup')} <img src={arrow} alt={t('common.cadastroAlt')} className="brightness-0 dark:brightness-100 dark:invert" />
                         </button>
                     )}
                     {!location.pathname.includes('login') && location.pathname !== '/' && (
-                        <button onClick={() => navigate('/login')} className="flex items-center gap-2 border border-gray-500 dark:border-gray-400 rounded-full px-6 py-2 text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all">
-                            {t('common.login')} <img src={arrow} alt={t('common.iconAlt')} />
+                        <button onClick={() => navigate('/login')} className="flex items-center gap-2 border border-black dark:border-gray-400 rounded-full px-6 py-2 text-sm font-semibold text-black dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all">
+                            {t('common.login')} <img src={arrow} alt={t('common.iconAlt')} className="brightness-0 dark:brightness-100 dark:invert" />
                         </button>
                     )}
                 </>

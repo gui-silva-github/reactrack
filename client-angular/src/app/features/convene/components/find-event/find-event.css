@@ -1,28 +1,47 @@
-.find .h2 {
+#all-events-section.find {
+  margin-bottom: 0 !important;
+}
+
+#all-events-section .find-header {
+  margin-top: -5rem;
   margin-bottom: 1rem;
 }
 
-.input {
-  padding: 0.5rem;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  margin-right: 0.5rem;
-}
-
-.button {
-  font: inherit;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  background-color: #e30d7c;
-  color: white;
-  border: none;
-  border-radius: 4px;
-}
-
-.p {
+#all-events-section .find-title {
+  margin-bottom: 1rem;
+  font-size: 2rem;
   font-family: 'Quicksand', sans-serif;
+  color: white;
 }
 
-.margin {
-  margin-bottom: 1rem;
+#all-events-section .find-form {
+  display: block;
+}
+
+#all-events-section .find-input {
+  font: inherit;
+  padding: 0.5rem 1rem;
+  border-radius: 4px 0 0 4px;
+  border: none;
+  background: white;
+  color: #1d161a;
+  vertical-align: top;
+}
+
+#all-events-section .find-button {
+  font: inherit;
+  padding: 0.5rem 1rem;
+  border-radius: 0 4px 4px 0;
+  border: none;
+  background: #b6cad5;
+  color: #1d161a;
+  font-weight: bold;
+  cursor: pointer;
+  vertical-align: top;
+}
+
+#all-events-section .find-message {
+  margin-top: 1rem;
+  font-size: 1em;
+  font-family: 'Quicksand', sans-serif;
 }

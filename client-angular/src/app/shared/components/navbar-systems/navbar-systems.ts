@@ -1,36 +1,32 @@
-import { Component, computed } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { AuthService } from '../../../core/services/auth/auth.service';
-
-interface NavLink {
-  name: string;
-  path: string;
-}
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { SYSTEM_NAV_LINKS } from '../../../core/constants/navigation/systems';
+import { I18nService } from '../../../core/services/i18n/i18n.service';
+import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 
 @Component({
   selector: 'app-navbar-systems',
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  standalone: true,
+  imports: [CommonModule, RouterLink, RouterLinkActive, ThemeToggleComponent],
   templateUrl: './navbar-systems.html',
-  styleUrl: './navbar-systems.css',
+  host: {
+    class: 'block w-full',
+  },
 })
 export class NavbarSystemsComponent {
-  navLinks = computed<NavLink[]>(() => {
-    const links: NavLink[] = [
-      { name: 'Talkive', path: '/systems/talkive' },
-      { name: 'Opiniões', path: '/systems/opinly' },
-      { name: 'Eventos', path: '/systems/convene' },
-      { name: 'Filmes', path: '/systems/movies' },
-      { name: 'Investimentos', path: '/systems/investments' },
-      { name: 'Projetos', path: '/systems/projects' },
-      { name: 'Academia', path: '/systems/fit' },
-      { name: 'Criptomoedas', path: '/systems/crypto' },
-    ];
-    return links;
-  });
+  readonly i18n = inject(I18nService);
+  readonly navLinks = computed(() => SYSTEM_NAV_LINKS);
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  toggleLanguage(): void {
+    this.i18n.toggleLanguage();
+  }
+
+  linkClasses(isActive: boolean): string {
+    return `text-sm font-medium px-3 py-2 rounded-md transition duration-200 ${
+      isActive
+        ? 'bg-blue-600 text-white'
+        : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'
+    }`;
+  }
 }

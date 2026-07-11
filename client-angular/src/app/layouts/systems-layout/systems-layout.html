@@ -1,12 +1,16 @@
-<div class="systems-layout" [class.has-system]="isSystemRoute()">
+<div
+  class="flex min-h-screen w-full flex-col bg-[url('/bg_img.png')] bg-cover bg-center bg-gray-50"
+  [class.items-center]="!isSystemRoute()"
+  [class.items-stretch]="isSystemRoute()"
+  [class.justify-center]="!isSystemRoute()"
+>
   <app-navbar-systems />
+
   @if (!isSystemRoute()) {
-    <header class="header-systems">
-      <h1 class="welcome">Bem Vindo ao ReactRack</h1>
-      <p class="tagline">Vamos começar a usar os sistemas do ReactRack!</p>
-    </header>
+    <app-header-systems />
   }
-  <div class="content" [class.with-padding]="isSystemRoute()">
+
+  <div class="w-full" [class.pt-16]="isSystemRoute()">
     <router-outlet />
   </div>
 </div>

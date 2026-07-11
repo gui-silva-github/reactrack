@@ -1,8 +1,8 @@
 <router-outlet />
-<app-header>
-  <a routerLink="/systems/convene/events/new" class="button">{{ t.newEvent }}</a>
-</app-header>
-<main>
+<main class="convene-main">
+  <app-header>
+    <a routerLink="/systems/convene/events/new" class="button">{{ t.t('newEvent') }}</a>
+  </app-header>
   <app-events-intro />
   <app-new-events />
   <app-find-event />

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { PT } from '../../../../core/constants/i18n-pt';
+import { Component, inject } from '@angular/core';
+import { ConveneI18n } from '../../convene-i18n';
 
 @Component({
   selector: 'app-header',
@@ -8,5 +8,5 @@ import { PT } from '../../../../core/constants/i18n-pt';
   styleUrl: './header.css',
 })
 export class Header {
-  readonly t = PT.convene;
+  readonly t = inject(ConveneI18n);
 }

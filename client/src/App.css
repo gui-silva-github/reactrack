@@ -92,10 +92,10 @@
 .hero-banner-img {
     position: absolute;
     right: 40px;
-    top: 0px;
+    top: 90px;
     width: 700px;
     height: 900px;
-    margin-top: -330px;
+    margin-top: -370px;
 }
 
 .exercise-card {

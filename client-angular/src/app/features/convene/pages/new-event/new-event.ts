@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { PT } from '../../../../core/constants/i18n-pt';
+import { ConveneI18n } from '../../convene-i18n';
 import { EventForm } from "../../components/event-form/event-form";
 import { IConveneEventPayload } from '../../../../core/models';
 import { ConveneService } from '../../../../core/services/convene/convene.service';
@@ -18,7 +18,7 @@ import { Modal } from '../../components/modal/modal';
 export class NewEvent {
   private readonly conveneService = inject(ConveneService);
   private readonly router = inject(Router);
-  readonly t = PT.convene;
+  readonly t = inject(ConveneI18n);
   saving = false;
   error = false;
 

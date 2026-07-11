@@ -293,5 +293,24 @@
   "theme": {
     "light": "Light",
     "dark": "Dark"
+  },
+  "shortcuts": {
+    "title": "Keyboard shortcuts",
+    "close": "Close",
+    "hint": "Press Shift + ? to open this panel anytime.",
+    "categories": {
+      "general": "General",
+      "navigation": "Navigation",
+      "systems": "ReactRack systems",
+      "appearance": "Appearance"
+    },
+    "pressAlt": "Alt +",
+    "goDashboard": "Go to dashboard",
+    "showShortcuts": "Show shortcuts",
+    "closeModal": "Close panel",
+    "goHome": "Go to home page",
+    "goLogin": "Go to login",
+    "toggleLanguage": "Toggle language",
+    "toggleTheme": "Toggle theme"
   }
 }
